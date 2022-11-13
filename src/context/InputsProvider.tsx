@@ -6,7 +6,10 @@ type InputsProviderProps = {
   children?: ReactNode;
 };
 
-const initialState = {} as AppState;
+const initialState = {
+  input: '',
+  output: '',
+} as AppState;
 const InputsContext = createContext({} as InputsContextType);
 
 const InputsProvider: FC<InputsProviderProps> = ({ children }) => {
