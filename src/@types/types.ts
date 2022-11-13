@@ -26,7 +26,7 @@ export type InputsReducer = {
   dispatch: Dispatch<InputsReducerActions>;
 };
 
-export type InputsContext = {
+export type InputsContextType = {
   state: AppState;
   dispatch: Dispatch<InputsReducerActions>;
 };

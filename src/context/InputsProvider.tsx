@@ -1,5 +1,5 @@
-import React, { FC, createContext, ReactNode, useReducer } from 'react';
-import { AppState, InputsContext } from 'src/@types/types';
+import React, { createContext, FC, ReactNode, useReducer } from 'react';
+import { AppState, InputsContextType } from 'src/@types/types';
 import reducer from 'src/context/reducer';
 
 type InputsProviderProps = {
@@ -7,7 +7,7 @@ type InputsProviderProps = {
 };
 
 const initialState = {} as AppState;
-const InputsContext = createContext({} as InputsContext);
+const InputsContext = createContext({} as InputsContextType);
 
 const InputsProvider: FC<InputsProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);

@@ -1,11 +1,15 @@
-import Input from 'src/components/Input';
-import Output from 'src/components/Output';
+import React from 'react';
+import FieldsContainer from 'src/components/FieldsContainer/FieldsContainer';
+import InputField from 'src/components/InputField/InputField';
+import OutputField from 'src/components/OutputField/OutputField';
 
 function App() {
   return (
     <div className="App">
-      <Input />
-      <Output />
+      <FieldsContainer>
+        <InputField />
+        <OutputField />
+      </FieldsContainer>
     </div>
   );
 }

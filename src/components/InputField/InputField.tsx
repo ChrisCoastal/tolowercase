@@ -1,11 +1,14 @@
+import Box from '@mui/joy/Box';
+import FormControl from '@mui/joy/FormControl';
+import FormHelperText from '@mui/joy/FormHelperText';
+import FormLabel from '@mui/joy/FormLabel';
 import Textarea from '@mui/joy/Textarea';
-import React, { ChangeEvent, useContext, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { InputsReducerTypes } from 'src/@types/types';
 import useInputsContext from 'src/hooks/useInputsContext';
+import { inputBoxSx } from 'src/utils/muiSx';
 
-type Props = {};
-
-const Output = (props: Props) => {
+const InputField = () => {
   const { state, dispatch } = useInputsContext();
   const [isFocus, setIsFocus] = useState();
   const [isTouched, setIsTouched] = useState();
@@ -23,14 +26,19 @@ const Output = (props: Props) => {
   }
 
   return (
-    <div>
-      <Textarea
-        placeholder="enter text"
-        onChange={handleInputChange}
-        value={state.input}
-      />
-    </div>
+    <Box sx={inputBoxSx}>
+      <FormControl>
+        <FormLabel>Input</FormLabel>
+        <Textarea
+          placeholder="enter text"
+          onChange={handleInputChange}
+          value={state.input}
+          minRows={3}
+          maxRows={3}
+        />
+      </FormControl>
+    </Box>
   );
 };
 
-export default Output;
+export default InputField;
