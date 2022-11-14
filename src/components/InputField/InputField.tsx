@@ -21,6 +21,7 @@ const InputField = () => {
   const [placeholder, setPlaceholder] = useState('enter text');
 
   const inputConst = highlightUpperCase(state.input);
+  const numUppercase = state.input.match(/[A-Z]/g)?.length;
 
   function validate(condition: (input: string) => boolean) {
     return condition(inputValue);
@@ -58,35 +59,33 @@ const InputField = () => {
     <Box sx={inputBoxSx}>
       <FormControl>
         <FormLabel>Input</FormLabel>
-        <Box sx={{ position: 'relative' }}>
-          <InputDiv
-            contentEditable={true}
-            suppressContentEditableWarning={true}
-            onInput={handleContent}
-            onFocus={() => setPlaceholder('')}
-            dangerouslySetInnerHTML={{ __html: inputConst }}
-          >
-            {/* {inputConst} */}
-          </InputDiv>
-
-          <Textarea
-            placeholder="enter text"
-            onChange={handleInputChange}
-            value={state.input}
-            minRows={3}
-            maxRows={3}
-            // startDecorator={}
-            sx={{ color: `` }}
-            endDecorator={
-              <Box sx={{ display: 'flex', gap: 0.5 }}>
-                <Typography level="body3" sx={{ ml: 'auto' }}>
-                  {state.input.length} character
-                  {state.input.length !== 1 ? 's' : ' '}
-                </Typography>
-              </Box>
-            }
-          />
-        </Box>
+        <Textarea
+          placeholder="enter text"
+          onChange={handleInputChange}
+          value={state.input}
+          minRows={3}
+          maxRows={3}
+          // startDecorator={}
+          sx={{ color: `` }}
+          endDecorator={
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+                gap: 0.2,
+              }}
+            >
+              <Typography level="body3" sx={{ ml: '4px' }}>
+                {state.input.length} character
+                {state.input.length !== 1 ? 's' : ' '}
+              </Typography>
+              <Typography level="body3" sx={{ mr: '4px' }}>
+                {numUppercase || 0} uppercase
+              </Typography>
+            </Box>
+          }
+        />
       </FormControl>
     </Box>
   );

@@ -6,7 +6,9 @@ export const InputDiv = styled.div`
   top: 0;
   margin: 8px 13px;
   max-width: 186px;
-  max-height: 120px;
+  max-height: 70px;
+  overflow-y: scroll;
+  // set scroll to textarea pos TODO:ß
   pointer-events: none;
   z-index: 100;
 `;

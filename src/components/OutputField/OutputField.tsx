@@ -7,9 +7,8 @@ import Textarea from '@mui/joy/Textarea';
 import Typography from '@mui/joy/Typography';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { InputsReducerTypes } from 'src/@types/types';
-import { ReactComponent as CheckIcon } from 'src/assets/check.svg';
-import { ReactComponent as CopyIcon } from 'src/assets/copy.svg';
-import { ReactComponent as SaveIcon } from 'src/assets/save.svg';
+import CheckIcon from 'src/components/CheckIcon/CheckIcon';
+import CopyIcon from 'src/components/CopyIcon/CopyIcon';
 import useInputsContext from 'src/hooks/useInputsContext';
 
 const OutputField = () => {
@@ -69,31 +68,36 @@ const OutputField = () => {
       <FormControl>
         <FormLabel>lowercase</FormLabel>
         <Textarea
-          placeholder="enter text"
           onChange={handleInputChange}
           value={state.output}
           readOnly={true}
           minRows={3}
           maxRows={3}
           endDecorator={
-            <Box sx={{ display: 'flex', gap: 0.5 }}>
-              <Typography level="body3" sx={{ ml: 'auto' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'baseline',
+                justifyContent: 'space-between',
+                width: '100%',
+                gap: 0.2,
+              }}
+            >
+              <Typography level="body3" sx={{ ml: '4px' }}>
                 {state.input.length} character
                 {state.input.length !== 1 ? 's' : ' '}
               </Typography>
               <IconButton
-                variant="outlined"
+                variant="soft"
                 color="neutral"
+                size="sm"
                 onClick={copyOutput}
               >
-                {!copied ? <CopyIcon /> : <CheckIcon />}
-              </IconButton>
-              <IconButton
-                variant="outlined"
-                color="neutral"
-                onClick={saveOutput}
-              >
-                {!saved ? <SaveIcon /> : <CheckIcon />}
+                {!copied ? (
+                  <CopyIcon height="24" width="24" />
+                ) : (
+                  <CheckIcon height="24" width="24" />
+                )}
               </IconButton>
             </Box>
           }

@@ -15,8 +15,7 @@
     "@mui/joy": "^5.0.0-alpha.53",
     "eslint-plugin-import": "^2.26.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "vite-plugin-svgr": "^2.2.2"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.24",
