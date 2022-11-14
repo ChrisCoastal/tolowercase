@@ -8,7 +8,8 @@ import Typography from '@mui/joy/Typography';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { InputsReducerTypes } from 'src/@types/types';
 import { ReactComponent as CheckIcon } from 'src/assets/check.svg';
-import { ReactComponent as CopyIcon } from 'src/assets/content_copy.svg';
+import { ReactComponent as CopyIcon } from 'src/assets/copy.svg';
+import { ReactComponent as SaveIcon } from 'src/assets/save.svg';
 import useInputsContext from 'src/hooks/useInputsContext';
 
 const OutputField = () => {
@@ -18,6 +19,7 @@ const OutputField = () => {
   const [isError, setIsError] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [copied, setCopied] = useState<boolean>(false);
+  const [saved, setSaved] = useState<boolean>(false);
 
   function validate(condition: (input: string) => boolean) {
     return condition(inputValue);
@@ -29,9 +31,14 @@ const OutputField = () => {
     console.log(value);
   }
 
-  function copyText() {
+  function copyOutput() {
     setCopied(true);
     navigator.clipboard.writeText(state.output);
+  }
+
+  function saveOutput() {
+    setSaved(true);
+    console.log(state.output);
   }
 
   useEffect(() => {
@@ -40,6 +47,13 @@ const OutputField = () => {
     }, 1800);
     return () => clearTimeout(copiedTimer);
   }, [copied]);
+
+  useEffect(() => {
+    const savedTimer = setTimeout(() => {
+      setSaved(false);
+    }, 1800);
+    return () => clearTimeout(savedTimer);
+  }, [saved]);
 
   return (
     <Box
@@ -64,10 +78,22 @@ const OutputField = () => {
           endDecorator={
             <Box sx={{ display: 'flex', gap: 0.5 }}>
               <Typography level="body3" sx={{ ml: 'auto' }}>
-                {state.output.length} character(s)
+                {state.input.length} character
+                {state.input.length !== 1 ? 's' : ' '}
               </Typography>
-              <IconButton variant="outlined" color="neutral" onClick={copyText}>
+              <IconButton
+                variant="outlined"
+                color="neutral"
+                onClick={copyOutput}
+              >
                 {!copied ? <CopyIcon /> : <CheckIcon />}
+              </IconButton>
+              <IconButton
+                variant="outlined"
+                color="neutral"
+                onClick={saveOutput}
+              >
+                {!saved ? <SaveIcon /> : <CheckIcon />}
               </IconButton>
             </Box>
           }
