@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 
-type CopyIconProps = {
+type CheckIconProps = {
   height: string;
   width: string;
 };
 
-const CopyIcon: FC<CopyIconProps> = ({ height, width }) => {
+const CheckIcon: FC<CheckIconProps> = ({ height, width }) => {
   return (
     <span>
       <svg
@@ -20,4 +20,4 @@ const CopyIcon: FC<CopyIconProps> = ({ height, width }) => {
   );
 };
 
-export default CopyIcon;
+export default CheckIcon;

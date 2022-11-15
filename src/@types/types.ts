@@ -10,6 +10,7 @@ export type AppState = {
   }[];
 };
 
+// Inputs Context
 export enum InputsReducerTypes {
   INPUT = 'input',
   REMOVE = 'remove',
@@ -29,4 +30,29 @@ export type InputsReducer = {
 export type InputsContextType = {
   state: AppState;
   dispatch: Dispatch<InputsReducerActions>;
+};
+
+// Settings Context
+export type SettingsState = {
+  invisibleChar: boolean;
+  uriReserved: boolean;
+  uriUnsafe: boolean;
+  stringLength: null | number;
+  trimEnd: boolean;
+  customWarn: { inputChar: string }[];
+  replace: { inputChar: string; replaceChar: string }[];
+};
+
+export enum SettingsReducerTypes {
+  UPDATE = 'update',
+}
+
+export type SettingsReducerActions = {
+  type: SettingsReducerTypes;
+  payload: boolean | number;
+};
+
+export type SettingsContextType = {
+  state: SettingsState;
+  dispatch: Dispatch<SettingsReducerActions>;
 };

@@ -1,6 +1,6 @@
 import React, { createContext, FC, ReactNode, useReducer } from 'react';
 import { AppState, InputsContextType } from 'src/@types/types';
-import reducer from 'src/context/reducer';
+import reducer from 'src/context/InputsProvider/inputsReducer';
 
 type InputsProviderProps = {
   children?: ReactNode;

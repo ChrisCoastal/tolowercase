@@ -4,5 +4,6 @@ export const inputBoxSx = {
   gap: 2,
   alignItems: 'center',
   flexWrap: 'wrap',
+  width: '100%',
   maxWidth: 600,
 };
