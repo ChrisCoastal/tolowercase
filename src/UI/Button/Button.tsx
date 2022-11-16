@@ -3,7 +3,7 @@ import ToolTip from '@mui/joy/Tooltip';
 import React, { FC } from 'react';
 
 type ButtonProps = {
-  Icon: FC<any>;
+  Icon: FC;
   buttonHandler: () => void;
   tooltipText?: string;
 };
