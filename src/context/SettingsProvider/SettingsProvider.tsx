@@ -1,5 +1,9 @@
 import React, { createContext, FC, ReactNode, useReducer } from 'react';
-import { SettingsContextType, SettingsState } from 'src/@types/types';
+import {
+  SettingsContextType,
+  SettingsState,
+  ThemeSetting,
+} from 'src/@types/types';
 import reducer from 'src/context/SettingsProvider/settingsReducer';
 
 type SettingsProviderProps = {
@@ -7,6 +11,7 @@ type SettingsProviderProps = {
 };
 
 const initialState = {
+  theme: ThemeSetting.LIGHT,
   invisibleChar: true,
   uriReserved: false,
   uriUnsafe: false,
