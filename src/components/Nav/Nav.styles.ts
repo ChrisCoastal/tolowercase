@@ -6,7 +6,7 @@ export const NavBar = styled.nav`
   margin-bottom: 1rem;
   width: 100vw;
   height: 4rem;
-  border-bottom: solid 1px #999;
+  border-bottom: solid 1px #ddd;
 `;
 
 export const NavItemsList = styled.ul`

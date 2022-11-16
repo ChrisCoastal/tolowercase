@@ -5,9 +5,13 @@ import SettingsIcon from 'src/icons/SettingsIcon/SettingsIcon';
 
 import { NavBar, NavItem, NavItemsList } from './Nav.styles';
 
-const Nav: FC = () => {
-  function handleSettings() {
-    console.log('open settings');
+type NavProps = {
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const Nav: FC<NavProps> = ({ setIsVisible }) => {
+  function openDrawer() {
+    setIsVisible(true);
   }
 
   return (
@@ -21,7 +25,7 @@ const Nav: FC = () => {
             variant="soft"
             color="neutral"
             size="sm"
-            onClick={handleSettings}
+            onClick={openDrawer}
           >
             <SettingsIcon height="24px" width="24px" />
           </IconButton>

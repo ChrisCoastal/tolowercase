@@ -5,9 +5,10 @@ import FormLabel from '@mui/joy/FormLabel';
 import IconButton from '@mui/joy/IconButton';
 import Textarea from '@mui/joy/Textarea';
 import Typography from '@mui/joy/Typography';
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { InputsReducerTypes } from 'src/@types/types';
 import useInputsContext from 'src/hooks/useInputsContext';
+import { BAD_WORDS } from 'src/utils/constants';
 import { inputBoxSx } from 'src/utils/muiSx';
 
 import InputActions from '../InputActions/InputActions';
@@ -15,9 +16,12 @@ import { InputDiv } from './InputField.styles';
 
 const InputField = () => {
   const { state, dispatch } = useInputsContext();
+  // const [prevInputLength, setPrevInputLength] = useState<number | null>(0);
+  // const [adj, setAdj] = useState<string>('');
   // const inputConst = highlightUpperCase(state.input);
   const numUppercase = state.input.match(/[A-Z]/g)?.length;
-
+  // if (state.input.length === 0 && state.input.length !== prevInputLength)
+  //   setAdj(selectAdj());
   // function highlightUpperCase(input: string) {
   //   let highlighted = ``;
   //   for (const char of input) {
@@ -28,6 +32,16 @@ const InputField = () => {
 
   //   return highlighted;
   // }
+
+  // useEffect(() => {
+  //   setAdj(selectAdj())
+  // }, [])
+
+  function selectAdj() {
+    const random = Math.floor(Math.random() * BAD_WORDS.length);
+    const adj = BAD_WORDS[random];
+    return adj;
+  }
 
   function handleInputChange(event: ChangeEvent<HTMLTextAreaElement>) {
     const value = event.currentTarget.value;
@@ -47,7 +61,7 @@ const InputField = () => {
             marginBottom: '4px',
           }}
         >
-          <FormLabel sx={{ alignSelf: 'baseline' }}>Input</FormLabel>
+          <FormLabel sx={{ alignSelf: 'baseline' }}>input</FormLabel>
           <InputActions />
         </Box>
         <Textarea

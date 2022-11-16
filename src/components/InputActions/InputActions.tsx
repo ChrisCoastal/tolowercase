@@ -19,7 +19,7 @@ const InputActions = () => {
 
   return (
     <Box sx={{ display: 'flex', gap: '8px' }}>
-      <Tooltip title="add to history" size="sm" placement="top">
+      <Tooltip title="save" size="sm" placement="top">
         <IconButton
           variant="soft"
           color="neutral"
