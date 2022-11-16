@@ -1,19 +1,23 @@
 import { Box, IconButton, Tooltip } from '@mui/joy';
-import React from 'react';
+import React, { FC, ReducerAction } from 'react';
 import { InputsReducerTypes } from 'src/@types/types';
 import useInputsContext from 'src/hooks/useInputsContext';
 import ClearIcon from 'src/icons/ClearIcon/ClearIcon';
 import SaveIcon from 'src/icons/SaveIcon/SaveIcon';
 import Button from 'src/UI/Button/Button';
 
-const InputActions = () => {
+type InputActionsProps = {
+  setDescUppercase: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const InputActions: FC<InputActionsProps> = ({ setDescUppercase }) => {
   const { state, dispatch } = useInputsContext();
 
   function handleSave() {
     console.log('save');
   }
   function handleClear() {
-    console.log('clear');
+    setDescUppercase('');
     dispatch({ type: InputsReducerTypes.INPUT, payload: '' });
   }
 
@@ -21,7 +25,7 @@ const InputActions = () => {
     <Box sx={{ display: 'flex', gap: '8px' }}>
       <Tooltip title="save" size="sm" placement="top">
         <IconButton
-          variant="soft"
+          variant="plain"
           color="neutral"
           size="sm"
           onClick={handleSave}
@@ -31,7 +35,7 @@ const InputActions = () => {
       </Tooltip>
       <Tooltip title="clear" size="sm" placement="top">
         <IconButton
-          variant="soft"
+          variant="plain"
           color="neutral"
           size="sm"
           onClick={handleClear}

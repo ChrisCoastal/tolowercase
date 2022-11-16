@@ -29,6 +29,12 @@ export const Drawer = styled.ul<DrawerProps>`
     `}
 `;
 
+export const CloseDrawer = styled.li`
+  align-self: start;
+  justify-self: end;
+  list-style: none;
+`;
+
 export const DrawerBackground = styled.div`
   position: absolute;
   top: 0;

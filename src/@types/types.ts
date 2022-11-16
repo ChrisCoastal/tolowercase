@@ -34,6 +34,7 @@ export type InputsContextType = {
 
 // Settings Context
 export type SettingsState = {
+  theme: ThemeSetting;
   invisibleChar: boolean;
   uriReserved: boolean;
   uriUnsafe: boolean;
@@ -42,6 +43,12 @@ export type SettingsState = {
   customWarn: { inputChar: string }[];
   replace: { inputChar: string; replaceChar: string }[];
 };
+
+export enum ThemeSetting {
+  LIGHT = 'light',
+  DARK = 'dark',
+  FOUNTAIN = 'fountain',
+}
 
 export enum SettingsReducerTypes {
   UPDATE = 'update',
@@ -56,3 +63,5 @@ export type SettingsContextType = {
   state: SettingsState;
   dispatch: Dispatch<SettingsReducerActions>;
 };
+
+// Theme

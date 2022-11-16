@@ -13,7 +13,7 @@ const Button: FC<ButtonProps> = ({ Icon, buttonHandler, tooltipText }) => {
     <div>
       <ToolTip title={tooltipText}>
         <IconButton
-          variant="soft"
+          variant="plain"
           color="neutral"
           size="sm"
           onClick={buttonHandler}

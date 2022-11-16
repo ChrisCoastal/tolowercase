@@ -17,7 +17,7 @@ import { InputDiv } from './InputField.styles';
 const InputField = () => {
   const { state, dispatch } = useInputsContext();
   // const [prevInputLength, setPrevInputLength] = useState<number | null>(0);
-  // const [adj, setAdj] = useState<string>('');
+  const [descUppercase, setDescUppercase] = useState<string>('');
   // const inputConst = highlightUpperCase(state.input);
   const numUppercase = state.input.match(/[A-Z]/g)?.length;
   // if (state.input.length === 0 && state.input.length !== prevInputLength)
@@ -37,10 +37,10 @@ const InputField = () => {
   //   setAdj(selectAdj())
   // }, [])
 
-  function selectAdj() {
+  function selectDesc() {
     const random = Math.floor(Math.random() * BAD_WORDS.length);
-    const adj = BAD_WORDS[random];
-    return adj;
+    const desc = BAD_WORDS[random];
+    return desc;
   }
 
   function handleInputChange(event: ChangeEvent<HTMLTextAreaElement>) {
@@ -58,11 +58,12 @@ const InputField = () => {
             display: 'flex',
             alignItems: 'baseline',
             justifyContent: 'space-between',
-            marginBottom: '4px',
           }}
         >
-          <FormLabel sx={{ alignSelf: 'baseline' }}>input</FormLabel>
-          <InputActions />
+          <FormLabel sx={{ alignSelf: 'baseline', paddingLeft: '0.5rem' }}>
+            input
+          </FormLabel>
+          <InputActions setDescUppercase={setDescUppercase} />
         </Box>
         <Textarea
           placeholder="enter text"

@@ -67,7 +67,7 @@ const OutputField = () => {
       }}
     >
       <FormControl>
-        <FormLabel>lowercase</FormLabel>
+        <FormLabel sx={{ paddingLeft: '0.5rem' }}>lowercase</FormLabel>
         <Textarea
           onChange={handleInputChange}
           value={state.output}
@@ -90,7 +90,7 @@ const OutputField = () => {
               </Typography>
               <Tooltip title="copy" size="sm" placement="top">
                 <IconButton
-                  variant="soft"
+                  variant="plain"
                   color="neutral"
                   size="sm"
                   onClick={copyOutput}
