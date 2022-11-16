@@ -4,6 +4,7 @@ import FormHelperText from '@mui/joy/FormHelperText';
 import FormLabel from '@mui/joy/FormLabel';
 import IconButton from '@mui/joy/IconButton';
 import Textarea from '@mui/joy/Textarea';
+import Tooltip from '@mui/joy/Tooltip';
 import Typography from '@mui/joy/Typography';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { InputsReducerTypes } from 'src/@types/types';
@@ -56,7 +57,15 @@ const OutputField = () => {
   }, [saved]);
 
   return (
-    <Box sx={inputBoxSx}>
+    <Box
+      sx={{
+        paddingTop: 2,
+        paddingBottom: 1,
+        flexWrap: 'wrap',
+        width: '100%',
+        maxWidth: '48rem',
+      }}
+    >
       <FormControl>
         <FormLabel>lowercase</FormLabel>
         <Textarea
@@ -79,18 +88,20 @@ const OutputField = () => {
                 {state.input.length} character
                 {state.input.length !== 1 ? 's' : ' '}
               </Typography>
-              <IconButton
-                variant="soft"
-                color="neutral"
-                size="sm"
-                onClick={copyOutput}
-              >
-                {!copied ? (
-                  <CopyIcon height="24" width="24" />
-                ) : (
-                  <CheckIcon height="24" width="24" />
-                )}
-              </IconButton>
+              <Tooltip title="copy" size="sm" placement="top">
+                <IconButton
+                  variant="soft"
+                  color="neutral"
+                  size="sm"
+                  onClick={copyOutput}
+                >
+                  {!copied ? (
+                    <CopyIcon height="24" width="24" />
+                  ) : (
+                    <CheckIcon height="24" width="24" />
+                  )}
+                </IconButton>
+              </Tooltip>
             </Box>
           }
         />

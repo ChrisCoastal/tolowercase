@@ -1,3 +1,4 @@
+import { Typography } from '@mui/joy';
 import IconButton from '@mui/joy/IconButton';
 import React, { FC } from 'react';
 import SettingsIcon from 'src/icons/SettingsIcon/SettingsIcon';
@@ -12,7 +13,9 @@ const Nav: FC = () => {
   return (
     <NavBar>
       <NavItemsList>
-        <NavItem>tolowercase</NavItem>
+        <NavItem>
+          <Typography>tolowercase</Typography>
+        </NavItem>
         <NavItem>
           <IconButton
             variant="soft"

@@ -10,44 +10,24 @@ import { InputsReducerTypes } from 'src/@types/types';
 import useInputsContext from 'src/hooks/useInputsContext';
 import { inputBoxSx } from 'src/utils/muiSx';
 
+import InputActions from '../InputActions/InputActions';
 import { InputDiv } from './InputField.styles';
 
 const InputField = () => {
   const { state, dispatch } = useInputsContext();
-  const [isFocus, setIsFocus] = useState();
-  const [isTouched, setIsTouched] = useState();
-  const [isError, setIsError] = useState(false);
-  const [inputValue, setInputValue] = useState('');
-  const [placeholder, setPlaceholder] = useState('enter text');
-
-  const inputConst = highlightUpperCase(state.input);
+  // const inputConst = highlightUpperCase(state.input);
   const numUppercase = state.input.match(/[A-Z]/g)?.length;
 
-  function validate(condition: (input: string) => boolean) {
-    return condition(inputValue);
-  }
+  // function highlightUpperCase(input: string) {
+  //   let highlighted = ``;
+  //   for (const char of input) {
+  //     if (char.match(/[A-Z]/))
+  //       highlighted += `<span style="color: #eb2929 !important">${char}</span>`;
+  //     else highlighted += `${char}`;
+  //   }
 
-  function highlightUpperCase(input: string) {
-    let highlighted = ``;
-    for (const char of input) {
-      if (char.match(/[A-Z]/))
-        highlighted += `<span style="color: #eb2929 !important">${char}</span>`;
-      else highlighted += `${char}`;
-    }
-
-    return highlighted;
-  }
-
-  function removePlaceholder() {
-    setPlaceholder;
-  }
-
-  function handleContent(event: ChangeEvent<HTMLDivElement>) {
-    console.log(event);
-
-    const value = event.currentTarget.innerText;
-    dispatch({ type: InputsReducerTypes.INPUT, payload: value });
-  }
+  //   return highlighted;
+  // }
 
   function handleInputChange(event: ChangeEvent<HTMLTextAreaElement>) {
     const value = event.currentTarget.value;
@@ -56,9 +36,20 @@ const InputField = () => {
   }
 
   return (
-    <Box sx={inputBoxSx}>
+    <Box sx={{ py: 2, flexWrap: 'wrap', width: '100%', maxWidth: '48rem' }}>
       <FormControl>
-        <FormLabel>Input</FormLabel>
+        <Box
+          sx={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'baseline',
+            justifyContent: 'space-between',
+            marginBottom: '4px',
+          }}
+        >
+          <FormLabel sx={{ alignSelf: 'baseline' }}>Input</FormLabel>
+          <InputActions />
+        </Box>
         <Textarea
           placeholder="enter text"
           onChange={handleInputChange}
@@ -71,9 +62,9 @@ const InputField = () => {
             <Box
               sx={{
                 display: 'flex',
-                justifyContent: 'space-between',
+                // justifyContent: 'space-between',
                 width: '100%',
-                gap: 0.2,
+                gap: 2,
               }}
             >
               <Typography level="body3" sx={{ ml: '4px' }}>

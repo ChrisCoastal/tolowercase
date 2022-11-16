@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 
-type CheckIconProps = {
+type CloseIconProps = {
   height: string;
   width: string;
 };
 
-const CheckIcon: FC<CheckIconProps> = ({ height, width }) => {
+const CloseIcon: FC<CloseIconProps> = ({ height, width }) => {
   return (
     <>
       <svg
@@ -14,10 +14,10 @@ const CheckIcon: FC<CheckIconProps> = ({ height, width }) => {
         width={width}
         viewBox="0 0 48 48"
       >
-        <path d="M18.9 35.7 7.7 24.5l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Z" />
+        <path d="m12.45 37.65-2.1-2.1L21.9 24 10.35 12.45l2.1-2.1L24 21.9l11.55-11.55 2.1 2.1L26.1 24l11.55 11.55-2.1 2.1L24 26.1Z" />{' '}
       </svg>
     </>
   );
 };
 
-export default CheckIcon;
+export default CloseIcon;
