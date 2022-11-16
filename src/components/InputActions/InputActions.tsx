@@ -1,23 +1,17 @@
 import { Box, IconButton, Tooltip } from '@mui/joy';
-import React, { FC, ReducerAction } from 'react';
+import React, { FC } from 'react';
 import { InputsReducerTypes } from 'src/@types/types';
 import useInputsContext from 'src/hooks/useInputsContext';
 import ClearIcon from 'src/icons/ClearIcon/ClearIcon';
 import SaveIcon from 'src/icons/SaveIcon/SaveIcon';
-import Button from 'src/UI/Button/Button';
 
-type InputActionsProps = {
-  setDescUppercase: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const InputActions: FC<InputActionsProps> = ({ setDescUppercase }) => {
-  const { state, dispatch } = useInputsContext();
+const InputActions: FC = () => {
+  const { dispatch } = useInputsContext();
 
   function handleSave() {
     console.log('save');
   }
   function handleClear() {
-    setDescUppercase('');
     dispatch({ type: InputsReducerTypes.INPUT, payload: '' });
   }
 
