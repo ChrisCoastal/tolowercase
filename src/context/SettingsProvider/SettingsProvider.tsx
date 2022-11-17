@@ -1,35 +1,21 @@
 import React, { createContext, FC, ReactNode, useReducer } from 'react';
-import {
-  SettingsContextType,
-  SettingsState,
-  ThemeSetting,
-} from 'src/@types/types';
+import { SettingsContextType } from 'src/@types/types';
 import reducer from 'src/context/SettingsProvider/settingsReducer';
+import { INITIAL_SETTINGS_STATE } from 'src/utils/constants';
 
 type SettingsProviderProps = {
   children?: ReactNode;
 };
 
-const initialState = {
-  theme: ThemeSetting.LIGHT,
-  invisibleChar: true,
-  uriReserved: false,
-  uriUnsafe: false,
-  stringLength: null,
-  trimEnd: true,
-  customWarn: [],
-  replace: [],
-} as SettingsState;
+const SettingsContext = createContext({} as SettingsContextType);
 
-const InputsContext = createContext({} as SettingsContextType);
-
-const InputsProvider: FC<SettingsProviderProps> = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, INITIAL_SETTINGS_STATE);
   return (
-    <InputsContext.Provider value={{ state, dispatch }}>
+    <SettingsContext.Provider value={{ state, dispatch }}>
       {children}
-    </InputsContext.Provider>
+    </SettingsContext.Provider>
   );
 };
 
-export { InputsContext, InputsProvider };
+export { SettingsContext, SettingsProvider };

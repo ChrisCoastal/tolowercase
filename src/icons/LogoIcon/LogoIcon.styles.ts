@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const Spinner = styled.div`
   padding: 0;
   margin: 0;
-  height: 24px;
+  height: 30px;
   .svg {
     /* width: 1.6rem; */
     /* height: 1.6rem; */

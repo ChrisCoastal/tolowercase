@@ -1,3 +1,5 @@
+import { SettingsState, ThemeSetting } from 'src/@types/types';
+
 export const INVISIBLE = [
   'U+0009',
   'U+0020',
@@ -131,3 +133,50 @@ export const BAD_WORDS = [
   'slobbish',
   'yobbish',
 ];
+
+export const SETTINGS_TEXT = {
+  shortcuts: {
+    modifierKey: 'modifier',
+    copy: 'copy output',
+    save: 'save',
+    clear: 'clear input',
+    settings: 'open settings',
+  },
+  invisibleChar: 'invisible characters',
+  uriReserved: 'uri reserved characters',
+  uriUnsafe: 'uri unsafe characters',
+  stringLength: 'string length',
+  trim: 'trim whitespace',
+  findReplace: 'find',
+};
+
+export const INITIAL_SETTINGS_STATE = {
+  userAgent: '',
+  theme: ThemeSetting.LIGHT,
+  shortcuts: {
+    modifierKey: { text: SETTINGS_TEXT.shortcuts.modifierKey, key: 'Control' },
+    copy: { text: SETTINGS_TEXT.shortcuts.copy, key: 'c' },
+    save: { text: SETTINGS_TEXT.shortcuts.save, key: 's' },
+    clear: { text: SETTINGS_TEXT.shortcuts.clear, key: 'esc' },
+    settings: {
+      text: SETTINGS_TEXT.shortcuts.settings,
+      key: 'm',
+    },
+  },
+  inputSettings: {
+    invisibleChar: {
+      text: SETTINGS_TEXT.invisibleChar,
+      isActive: false,
+      value: 0,
+    },
+    uriReserved: { text: SETTINGS_TEXT.uriReserved, isActive: false, value: 0 },
+    uriUnsafe: { text: SETTINGS_TEXT.uriUnsafe, isActive: false, value: 0 },
+    stringLength: {
+      text: SETTINGS_TEXT.stringLength,
+      isActive: false,
+      value: 0,
+    },
+    trim: { text: SETTINGS_TEXT.trim, isActive: false, value: 0 },
+    findReplace: { text: SETTINGS_TEXT.findReplace, isActive: false, value: 0 },
+  },
+} as SettingsState;

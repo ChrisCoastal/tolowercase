@@ -19,9 +19,8 @@ const Nav: FC<NavProps> = ({ setIsVisible }) => {
     <NavBar>
       <NavItemsList>
         <NavItem>
-          <Typography startDecorator={<LogoIcon height="24px" width="24px" />}>
-            tolowercase
-          </Typography>
+          <LogoIcon height="30px" width="30px" />
+          <Typography>tolowercase</Typography>
         </NavItem>
         <NavItem>
           <IconButton

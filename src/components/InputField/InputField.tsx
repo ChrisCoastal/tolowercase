@@ -5,9 +5,10 @@ import Textarea from '@mui/joy/Textarea';
 import Typography from '@mui/joy/Typography';
 import React, { ChangeEvent } from 'react';
 import { InputsReducerTypes } from 'src/@types/types';
+import InputActions from 'src/components/InputActions/InputActions';
 import useInputsContext from 'src/hooks/useInputsContext';
 
-import InputActions from '../InputActions/InputActions';
+import { InputDiv } from './InputField.styles';
 
 const InputField = () => {
   const { state, dispatch } = useInputsContext();
@@ -16,7 +17,7 @@ const InputField = () => {
   function handleInputChange(event: ChangeEvent<HTMLTextAreaElement>) {
     const value = event.currentTarget.value;
     dispatch({ type: InputsReducerTypes.INPUT, payload: value });
-    console.log(value);
+    // console.log(value);
   }
 
   return (
@@ -35,32 +36,35 @@ const InputField = () => {
           </FormLabel>
           <InputActions />
         </Box>
-        <Textarea
-          placeholder="enter text"
-          onChange={handleInputChange}
-          value={state.input}
-          minRows={3}
-          maxRows={3}
-          sx={{ color: `` }}
-          endDecorator={
-            <Box
-              sx={{
-                display: 'flex',
-                // justifyContent: 'space-between',
-                width: '100%',
-                gap: 2,
-              }}
-            >
-              <Typography level="body3" sx={{ ml: '4px' }}>
-                {state.input.length} character
-                {state.input.length !== 1 ? 's' : ' '}
-              </Typography>
-              <Typography level="body3" sx={{ mr: '4px' }}>
-                {numUppercase || 0} uppercase
-              </Typography>
-            </Box>
-          }
-        />
+        <Box sx={{ position: 'relative' }}>
+          <InputDiv></InputDiv>
+
+          <Textarea
+            placeholder="enter text"
+            onChange={handleInputChange}
+            value={state.input}
+            minRows={3}
+            maxRows={3}
+            sx={{ color: `` }}
+            endDecorator={
+              <Box
+                sx={{
+                  display: 'flex',
+                  width: '100%',
+                  gap: 2,
+                }}
+              >
+                <Typography level="body3" sx={{ ml: '4px' }}>
+                  {state.input.length} character
+                  {state.input.length !== 1 ? 's' : ' '}
+                </Typography>
+                <Typography level="body3" sx={{ mr: '4px' }}>
+                  {numUppercase || 0} uppercase
+                </Typography>
+              </Box>
+            }
+          />
+        </Box>
       </FormControl>
     </Box>
   );

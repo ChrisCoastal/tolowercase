@@ -10,10 +10,12 @@ import { InputsReducerTypes } from 'src/@types/types';
 import useInputsContext from 'src/hooks/useInputsContext';
 import CheckIcon from 'src/icons/CheckIcon/CheckIcon';
 import CopyIcon from 'src/icons/CopyIcon/CopyIcon';
+import VerifiedIcon from 'src/icons/VerifiedIcon/VerifiedIcon';
 
 const OutputField = () => {
   const { state, dispatch } = useInputsContext();
   const [copied, setCopied] = useState<boolean>(false);
+  const numUppercase = state.input.match(/[A-Z]/g)?.length;
 
   function handleInputChange(event: ChangeEvent<HTMLTextAreaElement>) {
     const value = event.currentTarget.value;
@@ -32,6 +34,16 @@ const OutputField = () => {
     }, 1800);
     return () => clearTimeout(copiedTimer);
   }, [copied]);
+
+  const checks = (
+    <Typography
+      level="body3"
+      sx={{ mr: '4px' }}
+      startDecorator={<VerifiedIcon height="18" width="18" />}
+    >
+      all checks passing
+    </Typography>
+  );
 
   return (
     <Box
@@ -61,10 +73,23 @@ const OutputField = () => {
                 gap: 0.2,
               }}
             >
-              <Typography level="body3" sx={{ ml: '4px' }}>
-                {state.input.length} character
-                {state.input.length !== 1 ? 's' : ' '}
-              </Typography>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  width: '100%',
+                  gap: 2,
+                }}
+              >
+                <Typography level="body3" sx={{ ml: '4px' }}>
+                  {state.input.length} character
+                  {state.input.length !== 1 ? 's' : ' '}
+                </Typography>
+                <Typography level="body3" sx={{ mr: '4px' }}>
+                  {numUppercase || 0} replaced
+                </Typography>
+                {Boolean(state.output.length) && checks}
+              </Box>
               <Tooltip title="copy" size="sm" placement="top">
                 <IconButton
                   variant="plain"

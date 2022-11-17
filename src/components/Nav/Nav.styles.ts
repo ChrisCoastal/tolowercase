@@ -20,5 +20,8 @@ export const NavItemsList = styled.ul`
 `;
 
 export const NavItem = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   list-style: none;
 `;
