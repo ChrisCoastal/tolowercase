@@ -4,30 +4,27 @@ import FormHelperText from '@mui/joy/FormHelperText';
 import FormLabel from '@mui/joy/FormLabel';
 import Switch from '@mui/joy/Switch';
 import React, { FC, useState } from 'react';
-import { SettingsReducerTypes } from 'src/@types/types';
+import { Setting, SettingsReducerTypes } from 'src/@types/types';
 import useSettingsContext from 'src/hooks/useSettingsContext';
 import { sliderSx } from 'src/utils/muiSx';
 
 type SettingProps = {
-  dispatchType: SettingsReducerTypes;
-  label: string;
-  helperText?: string;
-  isActive: boolean;
+  setting: Setting;
   toggleSwitch: (type: SettingsReducerTypes, isActive: boolean) => void;
 };
 
-const Setting: FC = () => {
+const Setting: FC<SettingProps> = ({ setting, toggleSwitch }) => {
   const { state, dispatch } = useSettingsContext();
   const [checked, setChecked] = useState(false);
 
-  function toggleSwitch(isActive: boolean) {
-    console.log(isActive);
+  // function toggleSwitch(isActive: boolean) {
+  //   console.log(isActive);
 
-    dispatch({
-      type: SettingsReducerTypes.INVISIBLE,
-      payload: { isActive },
-    });
-  }
+  //   dispatch({
+  //     type: SettingsReducerTypes.INVISIBLE,
+  //     payload: { isActive },
+  //   });
+  // }
 
   return (
     <FormControl

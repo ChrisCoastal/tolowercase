@@ -1,4 +1,8 @@
-import { SettingsState, ThemeSetting } from 'src/@types/types';
+import {
+  SettingsReducerTypes,
+  SettingsState,
+  ThemeSetting,
+} from 'src/@types/types';
 
 export const INVISIBLE = [
   'U+0009',
@@ -168,34 +172,51 @@ export const INITIAL_SETTINGS_STATE = {
   //     key: 'm',
   //   },
   // ],
-  inputSettings: {
+  outputValidation: {
     invisibleChar: {
-      text: SETTINGS_TEXT.invisibleChar,
+      label: SETTINGS_TEXT.invisibleChar,
+      helperText: null,
       isActive: false,
+      dispatchType: SettingsReducerTypes.INVISIBLE,
       value: 0,
     },
 
     uriReserved: {
-      text: SETTINGS_TEXT.uriReserved,
+      label: SETTINGS_TEXT.uriReserved,
+      helperText: null,
       isActive: false,
+      dispatchType: SettingsReducerTypes.URI_RESERVED,
       value: 0,
     },
     uriUnsafe: {
-      text: SETTINGS_TEXT.uriUnsafe,
+      label: SETTINGS_TEXT.uriUnsafe,
+      helperText: null,
       isActive: false,
+      dispatchType: SettingsReducerTypes.URI_UNSAFE,
       value: 0,
     },
 
     outputLength: {
-      text: SETTINGS_TEXT.outputLength,
+      label: SETTINGS_TEXT.outputLength,
+      helperText: null,
       isActive: false,
+      dispatchType: SettingsReducerTypes.LENGTH,
       value: 0,
     },
-    trim: { text: SETTINGS_TEXT.trim, isActive: false, value: 0 },
+    trim: {
+      label: SETTINGS_TEXT.trim,
+      isActive: false,
+      value: 0,
+      helperText: null,
+
+      dispatchType: SettingsReducerTypes.TRIM,
+    },
 
     findReplace: {
-      text: SETTINGS_TEXT.findReplace,
+      label: SETTINGS_TEXT.findReplace,
+      helperText: null,
       isActive: false,
+      dispatchType: SettingsReducerTypes.FIND,
       value: 0,
     },
   },

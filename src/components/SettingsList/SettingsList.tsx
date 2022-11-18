@@ -6,6 +6,7 @@ import Typography from '@mui/joy/Typography';
 import React, { FC } from 'react';
 import { Setting } from 'src/@types/types';
 import InvisibleChar from 'src/components/SettingsList/Settings/InvisibleChar';
+import SettingItem from 'src/components/SettingsList/Settings/SettingItem';
 import useSettingsContext from 'src/hooks/useSettingsContext';
 
 import OutputLength from './Settings/OutputLength';
@@ -14,8 +15,25 @@ import { List, ListItem } from './SettingsList.styles';
 const SettingsList: FC = () => {
   const { state, dispatch } = useSettingsContext();
 
+  function toggleSetting(type: SettingsReducerTypes, isActive: boolean) {
+    console.log(isActive);
+
+    dispatch({
+      type: SettingsReducerTypes.INVISIBLE,
+      payload: { isActive },
+    });
+  }
+
+  const outputValidationSettings = state.outputValidation.
+
   const checks = (
     <>
+      <ListItem>
+        <SettingItem
+          setting={state.inputSettings.uriUnsafe}
+          toggleSwitch={toggleSetting}
+        />
+      </ListItem>
       <ListItem>
         <InvisibleChar />
       </ListItem>

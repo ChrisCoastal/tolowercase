@@ -37,7 +37,7 @@ export type SettingsState = {
   userAgent: string;
   theme: ThemeSetting;
   // shortcuts: Shortcut[];
-  inputSettings: {
+  outputValidation: {
     invisibleChar: Setting;
     uriReserved: Setting;
     uriUnsafe: Setting;
@@ -61,8 +61,10 @@ export enum ShortcutName {
 }
 
 export type Setting = {
-  text: string;
+  label: string;
+  helperText: string | null;
   isActive: boolean;
+  dispatchType: SettingsReducerTypes;
   value?: string | number | FindReplace[];
 };
 
