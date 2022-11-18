@@ -1,4 +1,6 @@
 import Box from '@mui/joy/Box';
+// import List from '@mui/joy/List';
+// import ListItem from '@mui/joy/ListItem';
 import Slider from '@mui/joy/Slider';
 import Typography from '@mui/joy/Typography';
 import React, { FC } from 'react';

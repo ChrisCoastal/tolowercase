@@ -40,11 +40,15 @@ const OutputLength: FC = () => {
           {state.inputSettings.outputLength.text}
         </Typography>
         <Switch
-          checked={sliderValue.length === 2}
-          onChange={toggleSliderRange}
-          color={sliderValue.length === 2 ? 'success' : 'neutral'}
+          checked={state.inputSettings.outputLength.isActive}
+          onChange={(event) => toggleSwitch(event.target.checked)}
+          color={
+            state.inputSettings.outputLength.isActive ? 'success' : 'neutral'
+          }
           variant="outlined"
-          endDecorator={sliderValue.length === 2 ? 'range' : 'exact'}
+          endDecorator={
+            state.inputSettings.outputLength.isActive ? 'on' : 'off'
+          }
           componentsProps={{
             endDecorator: {
               sx: {
@@ -55,17 +59,49 @@ const OutputLength: FC = () => {
           sx={sliderSx}
         />
       </Box>
-      <Slider
-        value={sliderValue}
-        min={1}
-        max={sliderMax}
-        color="neutral"
-        onChange={handleChange}
-        valueLabelDisplay="auto"
-        getAriaLabel={() => 'check output length'}
-        getAriaValueText={() => `${sliderValue} characters`}
-        sx={{ paddingBottom: '0', '--Slider-track-size': '4px' }}
-      />
+      <Box
+        sx={{
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Slider
+          value={sliderValue}
+          min={1}
+          max={sliderMax}
+          color="neutral"
+          onChange={handleChange}
+          valueLabelDisplay="auto"
+          getAriaLabel={() => 'check output length'}
+          getAriaValueText={() => `${sliderValue} characters`}
+          sx={{ paddingBottom: '0', '--Slider-track-size': '4px' }}
+        />{' '}
+        {/* <Switch
+          checked={sliderValue.length === 2}
+          onChange={toggleSliderRange}
+          color={sliderValue.length === 2 ? 'success' : 'neutral'}
+          variant="outlined"
+          endDecorator={'range'}
+          componentsProps={{
+            endDecorator: {
+              sx: {
+                minWidth: 10,
+              },
+            },
+          }}
+          sx={sliderSx}
+        /> */}
+        <Checkbox
+          disabled={!state.inputSettings.outputLength.isActive}
+          // overlay
+          disableIcon
+          variant="soft"
+          label={'range'}
+          // sx={{ height: '0.5rem', width: '1rem' }}
+        />
+      </Box>
     </Box>
   );
 };

@@ -41,8 +41,8 @@ export type SettingsState = {
     invisibleChar: Setting;
     uriReserved: Setting;
     uriUnsafe: Setting;
-    outputLength: Setting;
     trim: Setting;
+    outputLength: Setting;
     findReplace: Setting;
   };
 };

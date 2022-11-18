@@ -6,5 +6,5 @@ export const List = styled.ul`
 `;
 
 export const ListItem = styled.li`
-  //
+  padding-bottom: 1rem;
 `;
