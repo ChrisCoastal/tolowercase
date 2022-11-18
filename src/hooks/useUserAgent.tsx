@@ -1,23 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SettingsReducerTypes } from 'src/@types/types';
 import useSettingsContext from 'src/hooks/useSettingsContext';
 
 const useUserAgent = () => {
-  const { dispatch } = useSettingsContext();
+  const [userAgent, setUserAgent] = useState<string>('windows');
 
   function getUserAgent() {
     let agent = 'windows';
-    const userAgent = window.navigator.userAgent.toLowerCase();
-    if (agent.includes('macintosh')) agent = 'mac';
-    if (agent.includes('ios') || agent.includes('android')) agent = 'mobile';
+    const clientUserAgent = window.navigator.userAgent.toLowerCase();
+    if (clientUserAgent.includes('macintosh')) agent = 'mac';
+    if (clientUserAgent.includes('ios') || agent.includes('android'))
+      agent = 'mobile';
 
-    dispatch({
-      type: SettingsReducerTypes.SET_USER_AGENT,
-      payload: { userAgent },
-    });
+    setUserAgent(agent);
   }
 
-  return { getUserAgent };
+  return { getUserAgent, userAgent };
 };
 
 export default useUserAgent;

@@ -9,9 +9,9 @@ export const Drawer = styled.ul<DrawerProps>`
   position: absolute;
   display: grid;
   top: 0;
-  right: -24rem;
-  width: 32vw;
-  max-width: 20rem;
+  right: -34rem;
+  width: 40vw;
+  max-width: 30rem;
   height: 100vh;
   margin-top: 0;
   padding: 1rem 2rem;

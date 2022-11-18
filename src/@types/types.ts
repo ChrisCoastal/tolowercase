@@ -36,33 +36,41 @@ export type InputsContextType = {
 export type SettingsState = {
   userAgent: string;
   theme: ThemeSetting;
-  shortcuts: {
-    copy: Shortcut;
-    save: Shortcut;
-    clear: Shortcut;
-    settings: Shortcut;
-    modifierKey: Shortcut;
-  };
+  // shortcuts: Shortcut[];
   inputSettings: {
     invisibleChar: Setting;
     uriReserved: Setting;
     uriUnsafe: Setting;
-    stringLength: Setting;
+    outputLength: Setting;
     trim: Setting;
     findReplace: Setting;
   };
 };
 
 export type Shortcut = {
+  name: string;
   text: string;
-  key: string;
+  key: ModifierKey;
 };
+
+export enum ShortcutName {
+  COPY = 'Copy',
+  CLEAR = 'Clear',
+  SAVE = 'Save',
+  OPEN_DRAWER = 'Open',
+}
 
 export type Setting = {
   text: string;
   isActive: boolean;
   value?: string | number | FindReplace[];
 };
+
+export enum ModifierKey {
+  META = 'Meta',
+  CTRL = 'Control',
+  ALT = 'Alt',
+}
 
 export type FindReplace = {
   inputChar: string;
@@ -76,7 +84,12 @@ export enum ThemeSetting {
 }
 
 export enum SettingsReducerTypes {
-  UPDATE = 'update',
+  INVISIBLE = 'invisible',
+  URI_RESERVED = 'uriReserved',
+  URI_UNSAFE = 'uirUnsafe',
+  LENGTH = 'length',
+  TRIM = 'trim',
+  FIND = 'find',
   SET_USER_AGENT = 'setUserAgent',
   SET_MODIFIER_KEY = 'setModifier',
   SET_COPY = 'setCopy',

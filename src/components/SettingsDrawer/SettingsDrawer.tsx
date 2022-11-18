@@ -3,6 +3,7 @@ import IconButton from '@mui/joy/IconButton';
 import Tooltip from '@mui/joy/Tooltip';
 import Typography from '@mui/joy/Typography';
 import React, { FC } from 'react';
+import SettingsList from 'src/components/SettingsList/SettingsList';
 import useSettingsContext from 'src/hooks/useSettingsContext';
 import CloseIcon from 'src/icons/ClearIcon/ClearIcon';
 
@@ -40,12 +41,8 @@ const SettingsDrawer: FC<SettingsDrawerProps> = ({
             </Tooltip>
           </CloseDrawer>
           <Box>
-            <Typography>shortcuts</Typography>
+            <SettingsList />
           </Box>
-          <Typography fontSize="sm">
-            Hey Paul, I know you were probably expecting some cool settings
-            here, but they are not ready yet.
-          </Typography>
         </Box>
       </Drawer>
       <DrawerBackground isVisible={isVisible} onClick={toggleDrawer} />

@@ -145,7 +145,7 @@ export const SETTINGS_TEXT = {
   invisibleChar: 'invisible characters',
   uriReserved: 'uri reserved characters',
   uriUnsafe: 'uri unsafe characters',
-  stringLength: 'string length',
+  outputLength: 'length',
   trim: 'trim whitespace',
   findReplace: 'find',
 };
@@ -153,30 +153,50 @@ export const SETTINGS_TEXT = {
 export const INITIAL_SETTINGS_STATE = {
   userAgent: '',
   theme: ThemeSetting.LIGHT,
-  shortcuts: {
-    modifierKey: { text: SETTINGS_TEXT.shortcuts.modifierKey, key: 'Control' },
-    copy: { text: SETTINGS_TEXT.shortcuts.copy, key: 'c' },
-    save: { text: SETTINGS_TEXT.shortcuts.save, key: 's' },
-    clear: { text: SETTINGS_TEXT.shortcuts.clear, key: 'esc' },
-    settings: {
-      text: SETTINGS_TEXT.shortcuts.settings,
-      key: 'm',
-    },
-  },
+  // shortcuts: [
+  //   {
+  //     name: 'modifierKey',
+  //     text: SETTINGS_TEXT.shortcuts.modifierKey,
+  //     key: 'Control',
+  //   },
+  //   { name: 'copy', text: SETTINGS_TEXT.shortcuts.copy, key: 'c' },
+  //   { name: 'save', text: SETTINGS_TEXT.shortcuts.save, key: 's' },
+  //   { name: 'clear', text: SETTINGS_TEXT.shortcuts.clear, key: 'esc' },
+  //   {
+  //     name: 'openDrawer',
+  //     text: SETTINGS_TEXT.shortcuts.settings,
+  //     key: 'm',
+  //   },
+  // ],
   inputSettings: {
     invisibleChar: {
       text: SETTINGS_TEXT.invisibleChar,
       isActive: false,
       value: 0,
     },
-    uriReserved: { text: SETTINGS_TEXT.uriReserved, isActive: false, value: 0 },
-    uriUnsafe: { text: SETTINGS_TEXT.uriUnsafe, isActive: false, value: 0 },
-    stringLength: {
-      text: SETTINGS_TEXT.stringLength,
+
+    uriReserved: {
+      text: SETTINGS_TEXT.uriReserved,
+      isActive: false,
+      value: 0,
+    },
+    uriUnsafe: {
+      text: SETTINGS_TEXT.uriUnsafe,
+      isActive: false,
+      value: 0,
+    },
+
+    outputLength: {
+      text: SETTINGS_TEXT.outputLength,
       isActive: false,
       value: 0,
     },
     trim: { text: SETTINGS_TEXT.trim, isActive: false, value: 0 },
-    findReplace: { text: SETTINGS_TEXT.findReplace, isActive: false, value: 0 },
+
+    findReplace: {
+      text: SETTINGS_TEXT.findReplace,
+      isActive: false,
+      value: 0,
+    },
   },
 } as SettingsState;

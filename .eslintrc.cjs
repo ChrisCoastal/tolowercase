@@ -22,6 +22,7 @@ module.exports = {
     'eslint-plugin-import',
   ],
   rules: {
+    '@typescript-eslint/no-non-null-assertion': 'warn',
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
     'import/first': 'error',

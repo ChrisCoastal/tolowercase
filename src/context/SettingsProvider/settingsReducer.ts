@@ -15,8 +15,18 @@ const reducer = (
       if (typeof payload?.userAgent !== 'string') return state;
       return { ...state, userAgent: payload.userAgent };
     }
-    case SettingsReducerTypes.UPDATE: {
-      return { ...state }; //TODO:
+    case SettingsReducerTypes.INVISIBLE: {
+      if (typeof payload?.isActive !== 'boolean') return state;
+      return {
+        ...state,
+        inputSettings: {
+          ...state.inputSettings,
+          invisibleChar: {
+            ...state.inputSettings.invisibleChar,
+            isActive: payload.isActive,
+          },
+        },
+      }; //TODO:
     }
     default:
       return state;

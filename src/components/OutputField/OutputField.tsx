@@ -5,35 +5,40 @@ import IconButton from '@mui/joy/IconButton';
 import Textarea from '@mui/joy/Textarea';
 import Tooltip from '@mui/joy/Tooltip';
 import Typography from '@mui/joy/Typography';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 import { InputsReducerTypes } from 'src/@types/types';
 import useInputsContext from 'src/hooks/useInputsContext';
 import CheckIcon from 'src/icons/CheckIcon/CheckIcon';
 import CopyIcon from 'src/icons/CopyIcon/CopyIcon';
 import VerifiedIcon from 'src/icons/VerifiedIcon/VerifiedIcon';
 
-const OutputField = () => {
+type OutputFieldProps = {
+  copyOutput: boolean;
+  setCopyOutput: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
   const { state, dispatch } = useInputsContext();
   const [copied, setCopied] = useState<boolean>(false);
   const numUppercase = state.input.match(/[A-Z]/g)?.length;
 
-  function handleInputChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    const value = event.currentTarget.value;
-    dispatch({ type: InputsReducerTypes.INPUT, payload: value });
-    console.log(value);
-  }
+  // function handleInputChange(event: ChangeEvent<HTMLTextAreaElement>) {
+  //   const value = event.currentTarget.value;
+  //   dispatch({ type: InputsReducerTypes.INPUT, payload: value });
+  //   console.log(value);
+  // }
 
-  function copyOutput() {
-    setCopied(true);
+  function copyOutputHandler() {
+    setCopyOutput(true);
     navigator.clipboard.writeText(state.output);
   }
 
   useEffect(() => {
     const copiedTimer = setTimeout(() => {
-      setCopied(false);
+      setCopyOutput(false);
     }, 1800);
     return () => clearTimeout(copiedTimer);
-  }, [copied]);
+  }, [copyOutput]);
 
   const checks = (
     <Typography
@@ -58,7 +63,7 @@ const OutputField = () => {
       <FormControl>
         <FormLabel sx={{ paddingLeft: '0.5rem' }}>lowercase</FormLabel>
         <Textarea
-          onChange={handleInputChange}
+          // onChange={handleInputChange}
           value={state.output}
           readOnly={true}
           minRows={3}
@@ -95,9 +100,9 @@ const OutputField = () => {
                   variant="plain"
                   color="neutral"
                   size="sm"
-                  onClick={copyOutput}
+                  onClick={copyOutputHandler}
                 >
-                  {!copied ? (
+                  {!copyOutput ? (
                     <CopyIcon height="24" width="24" />
                   ) : (
                     <CheckIcon height="24" width="24" />

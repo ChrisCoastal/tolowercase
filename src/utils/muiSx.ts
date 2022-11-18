@@ -4,3 +4,11 @@ export const inputBoxSx = {
   width: '100%',
   maxWidth: '48rem',
 };
+
+export const sliderSx = {
+  '--Switch-thumb-size': '14px',
+  '--Switch-track-height': '14px',
+  '--Switch-gap': '8px',
+  '--Switch-track-radius': '14px',
+  '--Switch-track-width': '36px',
+};
