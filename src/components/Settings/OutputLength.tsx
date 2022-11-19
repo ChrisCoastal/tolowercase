@@ -25,7 +25,8 @@ const OutputLength: FC = () => {
     if (sliderValue.length === 1) setSliderValue((prev) => [...prev, 54]);
     if (sliderValue.length === 2) setSliderValue((prev) => [prev[0]]);
   }
-
+  return <>temporary</>;
+  /*
   return (
     <Box>
       <Box
@@ -78,21 +79,7 @@ const OutputLength: FC = () => {
           getAriaValueText={() => `${sliderValue} characters`}
           sx={{ paddingBottom: '0', '--Slider-track-size': '4px' }}
         />{' '}
-        {/* <Switch
-          checked={sliderValue.length === 2}
-          onChange={toggleSliderRange}
-          color={sliderValue.length === 2 ? 'success' : 'neutral'}
-          variant="outlined"
-          endDecorator={'range'}
-          componentsProps={{
-            endDecorator: {
-              sx: {
-                minWidth: 10,
-              },
-            },
-          }}
-          sx={sliderSx}
-        /> */}
+
         <Checkbox
           disabled={!state.inputSettings.outputLength.isActive}
           // overlay
@@ -104,6 +91,7 @@ const OutputLength: FC = () => {
       </Box>
     </Box>
   );
+  */
 };
 
 export default OutputLength;

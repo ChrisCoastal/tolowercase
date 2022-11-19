@@ -37,14 +37,16 @@ export type SettingsState = {
   userAgent: string;
   theme: ThemeSetting;
   // shortcuts: Shortcut[];
-  outputValidation: {
-    invisibleChar: Setting;
-    uriReserved: Setting;
-    uriUnsafe: Setting;
-    trim: Setting;
-    outputLength: Setting;
-    findReplace: Setting;
-  };
+  outputValidation: ValidationSetting[];
+  // {
+  //   toLowerCase: Setting
+  //   invisibleChar: Setting;
+  //   uriReserved: Setting;
+  //   uriUnsafe: Setting;
+  //   trim: Setting;
+  //   outputLength: Setting;
+  //   findReplace: Setting;
+  // };
 };
 
 export type Shortcut = {
@@ -60,13 +62,23 @@ export enum ShortcutName {
   OPEN_DRAWER = 'Open',
 }
 
-export type Setting = {
+export type ValidationSetting = {
+  settingName: SettingName;
   label: string;
   helperText: string | null;
   isActive: boolean;
-  dispatchType: SettingsReducerTypes;
   value?: string | number | FindReplace[];
 };
+
+export enum SettingName {
+  TO_LOWER = 'toLowerCase',
+  INVISIBLE = 'unicodeInvisible',
+  URI_RESERVED = 'uriReserved',
+  URI_UNSAFE = 'uirUnsafe',
+  LENGTH = 'length',
+  TRIM = 'trim',
+  FIND = 'find',
+}
 
 export enum ModifierKey {
   META = 'Meta',
@@ -86,6 +98,7 @@ export enum ThemeSetting {
 }
 
 export enum SettingsReducerTypes {
+  UPDATE_SETTING = 'updateSetting',
   INVISIBLE = 'invisible',
   URI_RESERVED = 'uriReserved',
   URI_UNSAFE = 'uirUnsafe',

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SettingsReducerTypes, Shortcut, ShortcutName } from 'src/@types/types';
+import { SettingsReducerTypes } from 'src/@types/types';
 import FieldsContainer from 'src/components/FieldsContainer/FieldsContainer';
 import InputField from 'src/components/InputField/InputField';
 import Nav from 'src/components/Nav/Nav';
@@ -7,7 +7,7 @@ import OutputField from 'src/components/OutputField/OutputField';
 import SavedField from 'src/components/SavedField/SavedField';
 import SettingsDrawer from 'src/components/SettingsDrawer/SettingsDrawer';
 import useDrawer from 'src/hooks/useDrawer';
-import useInputsContext from 'src/hooks/useInputsContext';
+// import useInputsContext from 'src/hooks/useInputsContext';
 import useSettingsContext from 'src/hooks/useSettingsContext';
 import { getUserAgent } from 'src/utils/helpers';
 
@@ -15,9 +15,8 @@ import { AppContainer } from './App.styles';
 
 function App() {
   const [copyOutput, setCopyOutput] = useState<boolean>(false);
-  const { state: inputsState, dispatch: inputsDispatch } = useInputsContext();
-  const { state: settingsState, dispatch: settingsDispatch } =
-    useSettingsContext();
+  // const { state: inputsState, dispatch: inputsDispatch } = useInputsContext();
+  const { dispatch: settingsDispatch } = useSettingsContext();
   const { isVisible, setIsVisible } = useDrawer();
 
   // function keyDownHandler(event: KeyboardEvent): ShortcutName | void {

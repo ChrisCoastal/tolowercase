@@ -1,47 +1,49 @@
 import Box from '@mui/joy/Box';
+import Typography from '@mui/joy/Typography';
 // import List from '@mui/joy/List';
 // import ListItem from '@mui/joy/ListItem';
-import Slider from '@mui/joy/Slider';
-import Typography from '@mui/joy/Typography';
+import { nanoid } from 'nanoid';
 import React, { FC } from 'react';
-import { Setting } from 'src/@types/types';
-import InvisibleChar from 'src/components/SettingsList/Settings/InvisibleChar';
-import SettingItem from 'src/components/SettingsList/Settings/SettingItem';
+import { SettingName, SettingsReducerTypes } from 'src/@types/types';
+import SettingItem from 'src/components/Settings/SettingItem';
 import useSettingsContext from 'src/hooks/useSettingsContext';
 
-import OutputLength from './Settings/OutputLength';
+// import OutputLength from './Settings/OutputLength';
 import { List, ListItem } from './SettingsList.styles';
 
 const SettingsList: FC = () => {
   const { state, dispatch } = useSettingsContext();
 
-  function toggleSetting(type: SettingsReducerTypes, isActive: boolean) {
+  function toggleSetting(setting: SettingName, isActive: boolean) {
     console.log(isActive);
 
     dispatch({
-      type: SettingsReducerTypes.INVISIBLE,
-      payload: { isActive },
+      type: SettingsReducerTypes.UPDATE_SETTING,
+      payload: { isActive, setting },
     });
   }
 
-  const outputValidationSettings = state.outputValidation.
+  const outputValidationSettings = state.outputValidation.map((setting) => {
+    return (
+      <ListItem key={nanoid()}>
+        <SettingItem setting={setting} toggleSwitch={toggleSetting} />
+      </ListItem>
+    );
+  });
 
-  const checks = (
-    <>
-      <ListItem>
-        <SettingItem
-          setting={state.inputSettings.uriUnsafe}
-          toggleSwitch={toggleSetting}
-        />
-      </ListItem>
-      <ListItem>
-        <InvisibleChar />
-      </ListItem>
-      <ListItem>
-        <OutputLength />
-      </ListItem>
-    </>
-  );
+  // const checks = (
+  //   <>
+  //     <ListItem>
+  //       <SettingItem
+  //         setting={state.inputSettings.uriUnsafe}
+  //         toggleSwitch={toggleSetting}
+  //       />
+  //     </ListItem>
+  //     <ListItem>
+  //       <OutputLength />
+  //     </ListItem>
+  //   </>
+  // );
 
   return (
     <>
@@ -53,7 +55,7 @@ const SettingsList: FC = () => {
           padding: '0.4rem',
         }}
       >
-        <List>{checks}</List>
+        <List>{outputValidationSettings}</List>
       </Box>
     </>
   );

@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { SettingsReducerTypes } from 'src/@types/types';
-import useSettingsContext from 'src/hooks/useSettingsContext';
 
 const useUserAgent = () => {
   const [userAgent, setUserAgent] = useState<string>('windows');

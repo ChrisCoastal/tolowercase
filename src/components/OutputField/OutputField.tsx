@@ -5,8 +5,7 @@ import IconButton from '@mui/joy/IconButton';
 import Textarea from '@mui/joy/Textarea';
 import Tooltip from '@mui/joy/Tooltip';
 import Typography from '@mui/joy/Typography';
-import React, { ChangeEvent, FC, useEffect, useState } from 'react';
-import { InputsReducerTypes } from 'src/@types/types';
+import React, { FC, useEffect, useState } from 'react';
 import useInputsContext from 'src/hooks/useInputsContext';
 import CheckIcon from 'src/icons/CheckIcon/CheckIcon';
 import CopyIcon from 'src/icons/CopyIcon/CopyIcon';
@@ -18,15 +17,8 @@ type OutputFieldProps = {
 };
 
 const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
-  const { state, dispatch } = useInputsContext();
-  const [copied, setCopied] = useState<boolean>(false);
+  const { state } = useInputsContext();
   const numUppercase = state.input.match(/[A-Z]/g)?.length;
-
-  // function handleInputChange(event: ChangeEvent<HTMLTextAreaElement>) {
-  //   const value = event.currentTarget.value;
-  //   dispatch({ type: InputsReducerTypes.INPUT, payload: value });
-  //   console.log(value);
-  // }
 
   function copyOutputHandler() {
     setCopyOutput(true);
@@ -63,7 +55,6 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
       <FormControl>
         <FormLabel sx={{ paddingLeft: '0.5rem' }}>lowercase</FormLabel>
         <Textarea
-          // onChange={handleInputChange}
           value={state.output}
           readOnly={true}
           minRows={3}

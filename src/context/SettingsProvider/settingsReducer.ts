@@ -1,4 +1,5 @@
 import {
+  SettingName,
   SettingsReducerAction,
   SettingsReducerTypes,
   SettingsState,
@@ -13,21 +14,24 @@ const reducer = (
   switch (type) {
     case SettingsReducerTypes.SET_USER_AGENT: {
       if (typeof payload?.userAgent !== 'string') return state;
+
       return { ...state, userAgent: payload.userAgent };
     }
-    case SettingsReducerTypes.INVISIBLE: {
+
+    case SettingsReducerTypes.UPDATE_SETTING: {
       if (typeof payload?.isActive !== 'boolean') return state;
+
+      const index = state.outputValidation.findIndex(
+        (setting) => setting.settingName === payload.settingName
+      );
+      const updatedState = state.outputValidation;
+      updatedState[index].isActive = payload.isActive;
       return {
         ...state,
-        inputSettings: {
-          ...state.inputSettings,
-          invisibleChar: {
-            ...state.inputSettings.invisibleChar,
-            isActive: payload.isActive,
-          },
-        },
-      }; //TODO:
+        outputValidation: updatedState,
+      };
     }
+
     default:
       return state;
   }

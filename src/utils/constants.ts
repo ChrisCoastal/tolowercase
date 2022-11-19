@@ -1,5 +1,5 @@
 import {
-  SettingsReducerTypes,
+  SettingName,
   SettingsState,
   ThemeSetting,
 } from 'src/@types/types';
@@ -172,52 +172,96 @@ export const INITIAL_SETTINGS_STATE = {
   //     key: 'm',
   //   },
   // ],
-  outputValidation: {
-    invisibleChar: {
+  // outputValidation: {
+  //   invisibleChar: {
+  //     label: SETTINGS_TEXT.invisibleChar,
+  //     helperText: null,
+  //     isActive: false,
+  //     dispatchType: SettingsReducerTypes.INVISIBLE,
+  //     value: 0,
+  //   },
+
+  //   uriReserved: {
+  //     label: SETTINGS_TEXT.uriReserved,
+  //     helperText: null,
+  //     isActive: false,
+  //     dispatchType: SettingsReducerTypes.URI_RESERVED,
+  //     value: 0,
+  //   },
+  //   uriUnsafe: {
+  //     label: SETTINGS_TEXT.uriUnsafe,
+  //     helperText: null,
+  //     isActive: false,
+  //     dispatchType: SettingsReducerTypes.URI_UNSAFE,
+  //     value: 0,
+  //   },
+
+  //   outputLength: {
+  //     label: SETTINGS_TEXT.outputLength,
+  //     helperText: null,
+  //     isActive: false,
+  //     dispatchType: SettingsReducerTypes.LENGTH,
+  //     value: 0,
+  //   },
+  //   trim: {
+  //     label: SETTINGS_TEXT.trim,
+  //     isActive: false,
+  //     value: 0,
+  //     helperText: null,
+
+  //     dispatchType: SettingsReducerTypes.TRIM,
+  //   },
+
+  //   findReplace: {
+  //     label: SETTINGS_TEXT.findReplace,
+  //     helperText: null,
+  //     isActive: false,
+  //     dispatchType: SettingsReducerTypes.FIND,
+  //     value: 0,
+  //   },
+  // },
+  outputValidation: [
+    {
+      settingName: SettingName.INVISIBLE,
       label: SETTINGS_TEXT.invisibleChar,
       helperText: null,
       isActive: false,
-      dispatchType: SettingsReducerTypes.INVISIBLE,
       value: 0,
     },
-
-    uriReserved: {
+    {
+      settingName: SettingName.URI_RESERVED,
       label: SETTINGS_TEXT.uriReserved,
       helperText: null,
       isActive: false,
-      dispatchType: SettingsReducerTypes.URI_RESERVED,
       value: 0,
     },
-    uriUnsafe: {
+    {
+      settingName: SettingName.URI_UNSAFE,
       label: SETTINGS_TEXT.uriUnsafe,
       helperText: null,
       isActive: false,
-      dispatchType: SettingsReducerTypes.URI_UNSAFE,
       value: 0,
     },
-
-    outputLength: {
+    {
+      settingName: SettingName.LENGTH,
       label: SETTINGS_TEXT.outputLength,
       helperText: null,
       isActive: false,
-      dispatchType: SettingsReducerTypes.LENGTH,
       value: 0,
     },
-    trim: {
+    {
+      settingName: SettingName.TRIM,
       label: SETTINGS_TEXT.trim,
       isActive: false,
       value: 0,
       helperText: null,
-
-      dispatchType: SettingsReducerTypes.TRIM,
     },
-
-    findReplace: {
+    {
+      settingName: SettingName.FIND,
       label: SETTINGS_TEXT.findReplace,
       helperText: null,
       isActive: false,
-      dispatchType: SettingsReducerTypes.FIND,
       value: 0,
     },
-  },
+  ],
 } as SettingsState;
