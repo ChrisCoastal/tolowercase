@@ -6,6 +6,8 @@ export const inputBoxSx = {
 };
 
 export const sliderSx = {
+  justifySelf: 'end',
+  alignSelf: 'start',
   '--Switch-thumb-size': '14px',
   '--Switch-track-height': '14px',
   '--Switch-gap': '8px',

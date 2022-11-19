@@ -63,15 +63,18 @@ export enum ShortcutName {
 }
 
 export type ValidationSetting = {
-  settingName: SettingName;
+  id: SettingId;
   label: string;
   helperText: string | null;
   isActive: boolean;
-  value?: string | number | FindReplace[];
+  value: SettingValue;
+  replace?: any;
 };
 
-export enum SettingName {
-  TO_LOWER = 'toLowerCase',
+export type SettingValue = number | number[];
+
+export enum SettingId {
+  CASE = 'characterCase',
   INVISIBLE = 'unicodeInvisible',
   URI_RESERVED = 'uriReserved',
   URI_UNSAFE = 'uirUnsafe',
@@ -98,6 +101,8 @@ export enum ThemeSetting {
 }
 
 export enum SettingsReducerTypes {
+  IS_ACTIVE = 'isActive',
+  VALUE = 'value',
   UPDATE_SETTING = 'updateSetting',
   INVISIBLE = 'invisible',
   URI_RESERVED = 'uriReserved',
@@ -113,10 +118,31 @@ export enum SettingsReducerTypes {
   SET_OPEN_DRAWER = 'setOpen',
 }
 
-export type SettingsReducerAction = {
-  type: SettingsReducerTypes;
-  payload: { [key: string]: string | number | boolean | FindReplace };
+export type UserAgentAction = {
+  type: SettingsReducerTypes.SET_USER_AGENT;
+  payload: { userAgent: string };
 };
+
+export type SettingIsActiveAction = {
+  type: SettingsReducerTypes.IS_ACTIVE;
+  payload: { id: SettingId; isActive: boolean };
+};
+
+export type SettingValueAction = {
+  type: SettingsReducerTypes.VALUE;
+  payload: { id: SettingId; value: number | number[] };
+};
+
+// export type SettingsReducerAction = {
+//   type: SettingsReducerTypes;
+//   payload: {
+//     [key: string]: string | number | boolean | FindReplace | SettingValue;
+//   };
+// };
+export type SettingsReducerAction =
+  | UserAgentAction
+  | SettingIsActiveAction
+  | SettingValueAction;
 
 export type SettingsContextType = {
   state: SettingsState;

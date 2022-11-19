@@ -1,8 +1,9 @@
 import {
-  SettingName,
+  SettingId,
   SettingsReducerAction,
   SettingsReducerTypes,
   SettingsState,
+  SettingValue,
 } from 'src/@types/types';
 
 const reducer = (
@@ -13,19 +14,35 @@ const reducer = (
 
   switch (type) {
     case SettingsReducerTypes.SET_USER_AGENT: {
-      if (typeof payload?.userAgent !== 'string') return state;
-
       return { ...state, userAgent: payload.userAgent };
     }
 
-    case SettingsReducerTypes.UPDATE_SETTING: {
-      if (typeof payload?.isActive !== 'boolean') return state;
-
+    case SettingsReducerTypes.IS_ACTIVE: {
       const index = state.outputValidation.findIndex(
-        (setting) => setting.settingName === payload.settingName
+        (setting) => setting.id === payload.id
       );
+      if (index === -1) {
+        console.error('no index found');
+        return state;
+      }
       const updatedState = state.outputValidation;
       updatedState[index].isActive = payload.isActive;
+      return {
+        ...state,
+        outputValidation: updatedState,
+      };
+    }
+
+    case SettingsReducerTypes.VALUE: {
+      const index = state.outputValidation.findIndex(
+        (setting) => setting.id === payload.id
+      );
+      if (index === -1) {
+        console.error('no index found');
+        return state;
+      }
+      const updatedState = state.outputValidation;
+      updatedState[index].value = payload.value;
       return {
         ...state,
         outputValidation: updatedState,

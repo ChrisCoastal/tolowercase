@@ -1,8 +1,4 @@
-import {
-  SettingName,
-  SettingsState,
-  ThemeSetting,
-} from 'src/@types/types';
+import { SettingId, SettingsState, ThemeSetting } from 'src/@types/types';
 
 export const INVISIBLE = [
   'U+0009',
@@ -139,127 +135,75 @@ export const BAD_WORDS = [
 ];
 
 export const SETTINGS_TEXT = {
-  shortcuts: {
-    modifierKey: 'modifier',
-    copy: 'copy output',
-    save: 'save',
-    clear: 'clear input',
-    settings: 'open settings',
-  },
-  invisibleChar: 'invisible characters',
-  uriReserved: 'uri reserved characters',
-  uriUnsafe: 'uri unsafe characters',
-  outputLength: 'length',
-  trim: 'trim whitespace',
-  findReplace: 'find',
+  characterCase: { label: 'character case', helperText: '' },
+  invisibleChar: { label: 'invisible characters', helperText: '' },
+  uriReserved: { label: 'uri reserved characters', helperText: '' },
+  uriUnsafe: { label: 'uri unsafe characters', helperText: '' },
+  outputLength: { label: 'length', helperText: '' },
+  trim: { label: 'whitespace', helperText: '' },
+  findReplace: { label: 'find', helperText: '' },
 };
+
+// export const SETTINGS_REPLACE = {
+//   characterCase: {},
+//   invisibleChar: {},
+//   uriReserved: {},
+//   uriUnsafe: {},
+//   outputLength: {},
+//   trim: {},
+//   findReplace: {},
+// };
 
 export const INITIAL_SETTINGS_STATE = {
   userAgent: '',
   theme: ThemeSetting.LIGHT,
-  // shortcuts: [
-  //   {
-  //     name: 'modifierKey',
-  //     text: SETTINGS_TEXT.shortcuts.modifierKey,
-  //     key: 'Control',
-  //   },
-  //   { name: 'copy', text: SETTINGS_TEXT.shortcuts.copy, key: 'c' },
-  //   { name: 'save', text: SETTINGS_TEXT.shortcuts.save, key: 's' },
-  //   { name: 'clear', text: SETTINGS_TEXT.shortcuts.clear, key: 'esc' },
-  //   {
-  //     name: 'openDrawer',
-  //     text: SETTINGS_TEXT.shortcuts.settings,
-  //     key: 'm',
-  //   },
-  // ],
-  // outputValidation: {
-  //   invisibleChar: {
-  //     label: SETTINGS_TEXT.invisibleChar,
-  //     helperText: null,
-  //     isActive: false,
-  //     dispatchType: SettingsReducerTypes.INVISIBLE,
-  //     value: 0,
-  //   },
-
-  //   uriReserved: {
-  //     label: SETTINGS_TEXT.uriReserved,
-  //     helperText: null,
-  //     isActive: false,
-  //     dispatchType: SettingsReducerTypes.URI_RESERVED,
-  //     value: 0,
-  //   },
-  //   uriUnsafe: {
-  //     label: SETTINGS_TEXT.uriUnsafe,
-  //     helperText: null,
-  //     isActive: false,
-  //     dispatchType: SettingsReducerTypes.URI_UNSAFE,
-  //     value: 0,
-  //   },
-
-  //   outputLength: {
-  //     label: SETTINGS_TEXT.outputLength,
-  //     helperText: null,
-  //     isActive: false,
-  //     dispatchType: SettingsReducerTypes.LENGTH,
-  //     value: 0,
-  //   },
-  //   trim: {
-  //     label: SETTINGS_TEXT.trim,
-  //     isActive: false,
-  //     value: 0,
-  //     helperText: null,
-
-  //     dispatchType: SettingsReducerTypes.TRIM,
-  //   },
-
-  //   findReplace: {
-  //     label: SETTINGS_TEXT.findReplace,
-  //     helperText: null,
-  //     isActive: false,
-  //     dispatchType: SettingsReducerTypes.FIND,
-  //     value: 0,
-  //   },
-  // },
   outputValidation: [
     {
-      settingName: SettingName.INVISIBLE,
-      label: SETTINGS_TEXT.invisibleChar,
-      helperText: null,
+      id: SettingId.CASE,
+      label: SETTINGS_TEXT.characterCase.label,
+      helperText: SETTINGS_TEXT.characterCase.helperText,
+      isActive: true,
+      value: 3,
+    },
+    {
+      id: SettingId.INVISIBLE,
+      label: SETTINGS_TEXT.invisibleChar.label,
+      helperText: SETTINGS_TEXT.invisibleChar.helperText,
+      isActive: true,
+      value: 1,
+    },
+    {
+      id: SettingId.URI_RESERVED,
+      label: SETTINGS_TEXT.uriReserved.label,
+      helperText: SETTINGS_TEXT.uriReserved.helperText,
       isActive: false,
       value: 0,
     },
     {
-      settingName: SettingName.URI_RESERVED,
-      label: SETTINGS_TEXT.uriReserved,
-      helperText: null,
+      id: SettingId.URI_UNSAFE,
+      label: SETTINGS_TEXT.uriUnsafe.label,
+      helperText: SETTINGS_TEXT.uriUnsafe.helperText,
       isActive: false,
       value: 0,
     },
     {
-      settingName: SettingName.URI_UNSAFE,
-      label: SETTINGS_TEXT.uriUnsafe,
-      helperText: null,
+      id: SettingId.LENGTH,
+      label: SETTINGS_TEXT.outputLength.label,
+      helperText: SETTINGS_TEXT.outputLength.helperText,
       isActive: false,
       value: 0,
     },
     {
-      settingName: SettingName.LENGTH,
-      label: SETTINGS_TEXT.outputLength,
-      helperText: null,
-      isActive: false,
-      value: 0,
+      id: SettingId.TRIM,
+      label: SETTINGS_TEXT.trim.label,
+      helperText: SETTINGS_TEXT.trim.helperText,
+      isActive: true,
+      value: 2,
     },
     {
-      settingName: SettingName.TRIM,
-      label: SETTINGS_TEXT.trim,
-      isActive: false,
-      value: 0,
-      helperText: null,
-    },
-    {
-      settingName: SettingName.FIND,
-      label: SETTINGS_TEXT.findReplace,
-      helperText: null,
+      id: SettingId.FIND,
+      label: SETTINGS_TEXT.findReplace.label,
+      helperText: SETTINGS_TEXT.findReplace.helperText,
       isActive: false,
       value: 0,
     },

@@ -8,18 +8,19 @@ export type DrawerProps = {
 export const Drawer = styled.ul<DrawerProps>`
   position: absolute;
   display: grid;
+  /* grid-column: 1fr 1fr; */
   top: 0;
-  right: -34rem;
-  width: 40vw;
-  max-width: 30rem;
-  height: 100vh;
+  right: -104vw;
+  width: 100vw;
+  height: 100%;
   margin-top: 0;
   padding: 1rem 2rem;
+  overflow-y: scroll;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
   background-color: #fff;
   box-shadow: 0 0 2rem 0.5rem rgba(0, 0, 0, 0.4);
-  transition: all 0.4s;
+  transition: all 0.3s;
   z-index: 10000;
 
   ${({ isVisible }: DrawerProps) =>
@@ -27,6 +28,18 @@ export const Drawer = styled.ul<DrawerProps>`
     css`
       right: 0;
     `}
+
+  @media screen and (min-width: 600px) {
+    right: -64vw;
+    width: 60vw;
+    max-width: 30rem;
+
+    ${({ isVisible }: DrawerProps) =>
+      isVisible &&
+      css`
+        right: 0;
+      `};
+  }
 `;
 
 export const CloseDrawer = styled.li`
@@ -48,7 +61,7 @@ export const DrawerBackground = styled.div`
   ${({ isVisible }: DrawerProps) =>
     isVisible &&
     css`
-      height: 100vh;
-      width: 100vw;
+      height: 100%;
+      width: 100%;
     `}
 `;

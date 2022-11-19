@@ -6,5 +6,8 @@ export const List = styled.ul`
 `;
 
 export const ListItem = styled.li`
-  padding-bottom: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+  background-color: #ddd;
 `;
