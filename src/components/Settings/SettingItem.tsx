@@ -6,7 +6,11 @@ import FormLabel from '@mui/joy/FormLabel';
 import Slider from '@mui/joy/Slider';
 import Switch from '@mui/joy/Switch';
 import React, { ChangeEvent, FC } from 'react';
-import { SettingId, SettingValue, ValidationSetting } from 'src/@types/types';
+import {
+  SettingActionType,
+  SettingId,
+  ValidationSetting,
+} from 'src/@types/types';
 import { sliderSx } from 'src/utils/muiSx';
 
 const marks = [
@@ -27,7 +31,7 @@ const marks = [
 type SettingItemProps = {
   setting: ValidationSetting;
   toggleSetting: (id: SettingId, isActive: boolean) => void;
-  updateSettingValue: (id: SettingId, value: SettingValue) => void;
+  updateSettingValue: (id: SettingId, value: number | number[]) => void;
 };
 
 const Setting: FC<SettingItemProps> = ({
@@ -58,7 +62,7 @@ const Setting: FC<SettingItemProps> = ({
         onChange={(event) => toggleSetting(setting.id, event.target.checked)}
         color={setting.isActive ? 'success' : 'neutral'}
         variant="outlined"
-        endDecorator={setting.isActive ? 'on' : 'off'}
+        // endDecorator={setting.isActive ? 'on' : 'off'}
         componentsProps={{
           endDecorator: {
             sx: {
@@ -82,7 +86,7 @@ const Setting: FC<SettingItemProps> = ({
           }}
         >
           <Slider
-            defaultValue={setting.value}
+            defaultValue={setting.actionType}
             max={2}
             step={1}
             onChange={(_, value: number | number[]) =>
@@ -98,7 +102,7 @@ const Setting: FC<SettingItemProps> = ({
           />
         </Box>
       )}
-      {setting.value === 2 && setting.isActive && (
+      {setting.actionType === SettingActionType.REPLACE && setting.isActive && (
         <Typography>select replace</Typography>
       )}
     </FormControl>

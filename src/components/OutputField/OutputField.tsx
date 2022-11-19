@@ -5,8 +5,10 @@ import IconButton from '@mui/joy/IconButton';
 import Textarea from '@mui/joy/Textarea';
 import Tooltip from '@mui/joy/Tooltip';
 import Typography from '@mui/joy/Typography';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
+import { InputsReducerTypes, OutputType } from 'src/@types/types';
 import useInputsContext from 'src/hooks/useInputsContext';
+import useSettingsContext from 'src/hooks/useSettingsContext';
 import CheckIcon from 'src/icons/CheckIcon/CheckIcon';
 import CopyIcon from 'src/icons/CopyIcon/CopyIcon';
 import VerifiedIcon from 'src/icons/VerifiedIcon/VerifiedIcon';
@@ -17,13 +19,39 @@ type OutputFieldProps = {
 };
 
 const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
-  const { state } = useInputsContext();
-  const numUppercase = state.input.match(/[A-Z]/g)?.length;
+  const { state: inputsState, dispatch: dispatchInputs } = useInputsContext();
+  const { state: settingsState } = useSettingsContext();
+  const numUppercase = inputsState.input.match(/[\p{Lu}\p{Lt}]/g)?.length;
+
+  function inputChangeHandler() {
+    const output = validateOutput(inputsState.input);
+
+    dispatchInputs({ type: InputsReducerTypes.OUTPUT, payload: output });
+  }
 
   function copyOutputHandler() {
     setCopyOutput(true);
-    navigator.clipboard.writeText(state.output);
+    navigator.clipboard.writeText(inputsState.output.value);
   }
+
+  function validateOutput(input: string) {
+    let validatedOutput: OutputType = {
+      value: input,
+      warn: false,
+      warnDetail: [],
+    };
+
+    settingsState.outputValidation.forEach((setting) => {
+      if (!setting.isActive) return;
+      validatedOutput = setting.validate(validatedOutput, setting.actionType);
+    });
+
+    return validatedOutput;
+  }
+
+  useEffect(() => {
+    inputChangeHandler();
+  }, [inputsState.input]);
 
   useEffect(() => {
     const copiedTimer = setTimeout(() => {
@@ -55,7 +83,7 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
       <FormControl>
         <FormLabel sx={{ paddingLeft: '0.5rem' }}>lowercase</FormLabel>
         <Textarea
-          value={state.output}
+          value={inputsState.output.value}
           readOnly={true}
           minRows={3}
           maxRows={3}
@@ -78,13 +106,13 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
                 }}
               >
                 <Typography level="body3" sx={{ ml: '4px' }}>
-                  {state.input.length} character
-                  {state.input.length !== 1 ? 's' : ' '}
+                  {inputsState.input?.length} character
+                  {inputsState.input?.length !== 1 ? 's' : ' '}
                 </Typography>
                 <Typography level="body3" sx={{ mr: '4px' }}>
                   {numUppercase || 0} replaced
                 </Typography>
-                {Boolean(state.output.length) && checks}
+                {Boolean(inputsState.output.value?.length) && checks}
               </Box>
               <Tooltip title="copy" size="sm" placement="top">
                 <IconButton

@@ -9,5 +9,5 @@ export const ListItem = styled.li`
   padding: 1rem;
   margin: 1rem;
   border-radius: 8px;
-  background-color: #ddd;
+  border: solid 1px #ddd;
 `;

@@ -4,11 +4,7 @@ import Typography from '@mui/joy/Typography';
 // import ListItem from '@mui/joy/ListItem';
 import { nanoid } from 'nanoid';
 import React, { FC } from 'react';
-import {
-  SettingId,
-  SettingsReducerTypes,
-  SettingValue,
-} from 'src/@types/types';
+import { SettingId, SettingsReducerTypes } from 'src/@types/types';
 import SettingItem from 'src/components/Settings/SettingItem';
 import useSettingsContext from 'src/hooks/useSettingsContext';
 
@@ -27,7 +23,7 @@ const SettingsList: FC = () => {
     });
   }
 
-  function updateSettingValue(id: SettingId, value: SettingValue | number) {
+  function updateSettingValue(id: SettingId, value: number | number[]) {
     console.log(id, value);
 
     dispatch({

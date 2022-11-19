@@ -1,4 +1,11 @@
-import { SettingId, SettingsState, ThemeSetting } from 'src/@types/types';
+import {
+  SettingActionType,
+  SettingId,
+  SettingsState,
+  ThemeSetting,
+} from 'src/@types/types';
+
+import { validateLowerCase, validateUpperCase } from './helpers';
 
 export const INVISIBLE = [
   'U+0009',
@@ -135,7 +142,8 @@ export const BAD_WORDS = [
 ];
 
 export const SETTINGS_TEXT = {
-  characterCase: { label: 'character case', helperText: '' },
+  upperCase: { label: 'uppercase', helperText: '' },
+  lowerCase: { label: 'lowercase', helperText: '' },
   invisibleChar: { label: 'invisible characters', helperText: '' },
   uriReserved: { label: 'uri reserved characters', helperText: '' },
   uriUnsafe: { label: 'uri unsafe characters', helperText: '' },
@@ -159,53 +167,62 @@ export const INITIAL_SETTINGS_STATE = {
   theme: ThemeSetting.LIGHT,
   outputValidation: [
     {
-      id: SettingId.CASE,
-      label: SETTINGS_TEXT.characterCase.label,
-      helperText: SETTINGS_TEXT.characterCase.helperText,
+      id: SettingId.UPPERCASE,
+      label: SETTINGS_TEXT.upperCase.label,
+      helperText: SETTINGS_TEXT.upperCase.helperText,
       isActive: true,
-      value: 3,
+      validate: validateUpperCase,
+      actionType: SettingActionType.REPLACE,
     },
     {
-      id: SettingId.INVISIBLE,
-      label: SETTINGS_TEXT.invisibleChar.label,
-      helperText: SETTINGS_TEXT.invisibleChar.helperText,
+      id: SettingId.LOWERCASE,
+      label: SETTINGS_TEXT.lowerCase.label,
+      helperText: SETTINGS_TEXT.lowerCase.helperText,
       isActive: true,
-      value: 1,
+      validate: validateLowerCase,
+      actionType: SettingActionType.REPLACE,
     },
-    {
-      id: SettingId.URI_RESERVED,
-      label: SETTINGS_TEXT.uriReserved.label,
-      helperText: SETTINGS_TEXT.uriReserved.helperText,
-      isActive: false,
-      value: 0,
-    },
-    {
-      id: SettingId.URI_UNSAFE,
-      label: SETTINGS_TEXT.uriUnsafe.label,
-      helperText: SETTINGS_TEXT.uriUnsafe.helperText,
-      isActive: false,
-      value: 0,
-    },
-    {
-      id: SettingId.LENGTH,
-      label: SETTINGS_TEXT.outputLength.label,
-      helperText: SETTINGS_TEXT.outputLength.helperText,
-      isActive: false,
-      value: 0,
-    },
-    {
-      id: SettingId.TRIM,
-      label: SETTINGS_TEXT.trim.label,
-      helperText: SETTINGS_TEXT.trim.helperText,
-      isActive: true,
-      value: 2,
-    },
-    {
-      id: SettingId.FIND,
-      label: SETTINGS_TEXT.findReplace.label,
-      helperText: SETTINGS_TEXT.findReplace.helperText,
-      isActive: false,
-      value: 0,
-    },
+    // {
+    //   id: SettingId.INVISIBLE,
+    //   label: SETTINGS_TEXT.invisibleChar.label,
+    //   helperText: SETTINGS_TEXT.invisibleChar.helperText,
+    //   isActive: true,
+    //   actionType: SettingActionType.WARN,
+    // },
+    // {
+    //   id: SettingId.URI_RESERVED,
+    //   label: SETTINGS_TEXT.uriReserved.label,
+    //   helperText: SETTINGS_TEXT.uriReserved.helperText,
+    //   isActive: false,
+    //   actionType: SettingActionType.WARN,
+    // },
+    // {
+    //   id: SettingId.URI_UNSAFE,
+    //   label: SETTINGS_TEXT.uriUnsafe.label,
+    //   helperText: SETTINGS_TEXT.uriUnsafe.helperText,
+    //   isActive: false,
+    //   actionType: SettingActionType.WARN,
+    // },
+    // {
+    //   id: SettingId.LENGTH,
+    //   label: SETTINGS_TEXT.outputLength.label,
+    //   helperText: SETTINGS_TEXT.outputLength.helperText,
+    //   isActive: false,
+    //   actionType: SettingActionType.WARN,
+    // },
+    // {
+    //   id: SettingId.TRIM,
+    //   label: SETTINGS_TEXT.trim.label,
+    //   helperText: SETTINGS_TEXT.trim.helperText,
+    //   isActive: true,
+    //   actionType: SettingActionType.REMOVE,
+    // },
+    // {
+    //   id: SettingId.FIND,
+    //   label: SETTINGS_TEXT.findReplace.label,
+    //   helperText: SETTINGS_TEXT.findReplace.helperText,
+    //   isActive: false,
+    //   actionType: SettingActionType.WARN,
+    // },
   ],
 } as SettingsState;

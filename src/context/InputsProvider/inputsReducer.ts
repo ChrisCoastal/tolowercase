@@ -9,14 +9,19 @@ const reducer = (state: AppState, action: InputsReducerActions): AppState => {
 
   switch (type) {
     case InputsReducerTypes.INPUT: {
-      const output = payload.toLowerCase();
-      return { ...state, input: payload, output: output };
+      // const output = payload.toLowerCase();
+      return { ...state, input: payload };
     }
-    case InputsReducerTypes.REMOVE: {
-      const toRemove = state.prev.findIndex((item) => item.id === payload);
-      //TODO:
-      return { ...state }; // TODO:
+
+    case InputsReducerTypes.OUTPUT: {
+      return { ...state, output: payload };
     }
+
+    // case InputsReducerTypes.REMOVE: {
+    //   const toRemove = state.prev.findIndex((item) => item.id === payload);
+    //   //TODO:
+    //   return { ...state }; // TODO:
+    // }
     default:
       return state;
   }

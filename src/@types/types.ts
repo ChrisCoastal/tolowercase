@@ -2,25 +2,39 @@ import { Dispatch } from 'react';
 
 export type AppState = {
   input: string;
-  output: string;
+  output: OutputType;
   prev: {
     id: string;
     input: string;
-    output: string;
+    output: OutputType;
   }[];
+};
+
+export type OutputType = {
+  value: string;
+  warn: boolean;
+  warnDetail: [];
 };
 
 // Inputs Context
 export enum InputsReducerTypes {
   INPUT = 'input',
+  OUTPUT = 'output',
   REMOVE = 'remove',
   LOAD = 'load',
 }
 
-export type InputsReducerActions = {
-  type: InputsReducerTypes;
+export type InputChangeAction = {
+  type: InputsReducerTypes.INPUT;
   payload: string;
 };
+
+export type UpdateOutputAction = {
+  type: InputsReducerTypes.OUTPUT;
+  payload: OutputType;
+};
+
+export type InputsReducerActions = InputChangeAction | UpdateOutputAction;
 
 export type InputsReducer = {
   state: AppState;
@@ -67,14 +81,25 @@ export type ValidationSetting = {
   label: string;
   helperText: string | null;
   isActive: boolean;
-  value: SettingValue;
+  validate: (
+    output: OutputType,
+    actionType: SettingActionType | number | number[]
+  ) => OutputType;
+  actionType: SettingActionType;
+  // value: number | number[];
+  length?: number | number[];
   replace?: any;
 };
 
-export type SettingValue = number | number[];
+export enum SettingActionType {
+  WARN = 0,
+  REMOVE = 1,
+  REPLACE = 2,
+}
 
 export enum SettingId {
-  CASE = 'characterCase',
+  UPPERCASE = 'upperCase',
+  LOWERCASE = 'lowerCase',
   INVISIBLE = 'unicodeInvisible',
   URI_RESERVED = 'uriReserved',
   URI_UNSAFE = 'uirUnsafe',
@@ -118,17 +143,17 @@ export enum SettingsReducerTypes {
   SET_OPEN_DRAWER = 'setOpen',
 }
 
-export type UserAgentAction = {
+export type UserAgentSettingsAction = {
   type: SettingsReducerTypes.SET_USER_AGENT;
   payload: { userAgent: string };
 };
 
-export type SettingIsActiveAction = {
+export type IsActiveSettingsAction = {
   type: SettingsReducerTypes.IS_ACTIVE;
   payload: { id: SettingId; isActive: boolean };
 };
 
-export type SettingValueAction = {
+export type ValueSettingsAction = {
   type: SettingsReducerTypes.VALUE;
   payload: { id: SettingId; value: number | number[] };
 };
@@ -139,10 +164,11 @@ export type SettingValueAction = {
 //     [key: string]: string | number | boolean | FindReplace | SettingValue;
 //   };
 // };
+
 export type SettingsReducerAction =
-  | UserAgentAction
-  | SettingIsActiveAction
-  | SettingValueAction;
+  | UserAgentSettingsAction
+  | IsActiveSettingsAction
+  | ValueSettingsAction;
 
 export type SettingsContextType = {
   state: SettingsState;
