@@ -69,25 +69,38 @@ const Setting: FC<SettingItemProps> = ({
         sx={sliderSx}
       />
       {setting.isActive && (
-        <Slider
-          defaultValue={setting.value}
-          max={2}
-          step={1}
-          onChange={(_, value: number | number[]) =>
-            updateSettingValue(setting.id, value)
-          }
-          valueLabelDisplay="off"
-          valueLabelFormat={(value) => marks[value].label}
-          marks={marks}
-          disabled={!setting.isActive}
+        <Box
           sx={{
+            display: 'grid',
             gridColumn: '1 / span 2',
             justifySelf: 'center',
-            maxWidth: '70%',
+            justifyItems: 'center',
+            width: '100%',
+            borderRadius: '8px',
+            backgroundColor: '#fff',
+            padding: '0.3rem 2rem 1rem 2rem',
           }}
-        />
+        >
+          <Slider
+            defaultValue={setting.value}
+            max={2}
+            step={1}
+            onChange={(_, value: number | number[]) =>
+              updateSettingValue(setting.id, value)
+            }
+            valueLabelDisplay="off"
+            valueLabelFormat={(value) => marks[value].label}
+            marks={marks}
+            disabled={!setting.isActive}
+            sx={{
+              maxWidth: '80%',
+            }}
+          />
+        </Box>
       )}
-      {setting.value === 2 && <Typography>select replace</Typography>}
+      {setting.value === 2 && setting.isActive && (
+        <Typography>select replace</Typography>
+      )}
     </FormControl>
   );
 };
