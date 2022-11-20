@@ -31,7 +31,7 @@ const marks = [
 type SettingItemProps = {
   setting: ValidationSetting;
   toggleSetting: (id: SettingId, isActive: boolean) => void;
-  updateSettingValue: (id: SettingId, value: number | number[]) => void;
+  // updateSettingValue: (id: SettingId, value: number | number[]) => void;
   updateSettingActionType: (
     id: SettingId,
     actionType: number | number[]
@@ -49,7 +49,7 @@ const Setting: FC<SettingItemProps> = ({
       orientation="horizontal"
       sx={{
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
+        gridTemplateColumns: '3fr 1fr',
         justifyContent: 'space-between',
       }}
     >
@@ -57,7 +57,7 @@ const Setting: FC<SettingItemProps> = ({
         <FormLabel>{setting.label}</FormLabel>
         {setting.helperText && (
           <FormHelperText sx={{ mt: 0, fontSize: 10 }}>
-            setting.helperText
+            {setting.helperText}
           </FormHelperText>
         )}
       </Box>
@@ -81,18 +81,18 @@ const Setting: FC<SettingItemProps> = ({
         <Box
           sx={{
             display: 'grid',
-            gridColumn: '1 / span 2',
+            gridColumn: '1 / span 3',
             justifySelf: 'center',
-            justifyItems: 'center',
+            justifyItems: 'left',
             width: '100%',
             borderRadius: '8px',
             backgroundColor: '#fff',
-            padding: '0.3rem 2rem 1rem 2rem',
+            padding: '0.3rem 2rem 1rem 1rem',
           }}
         >
           <Slider
-            defaultValue={setting.actionType}
-            max={2}
+            defaultValue={setting.curAction}
+            max={setting.validActions.length - 1}
             step={1}
             onChange={(_, value: number | number[]) =>
               updateSettingActionType(setting.id, value)
@@ -100,16 +100,17 @@ const Setting: FC<SettingItemProps> = ({
             valueLabelDisplay="off"
             valueLabelFormat={(value) => marks[value].label}
             marks={marks}
+            color="success"
             disabled={!setting.isActive}
             sx={{
-              maxWidth: '80%',
+              maxWidth: setting.validActions.length - 1 === 2 ? '80%' : '40%',
             }}
           />
         </Box>
       )}
-      {setting.actionType === SettingActionType.REPLACE && setting.isActive && (
+      {/* {setting.actionType === SettingActionType.REPLACE && setting.isActive && (
         <Typography>select replace</Typography>
-      )}
+      )} */}
     </FormControl>
   );
 };

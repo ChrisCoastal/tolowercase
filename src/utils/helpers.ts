@@ -1,10 +1,6 @@
 import { OutputType, SettingActionType, ShortcutName } from 'src/@types/types';
 
-export function checkInvisibleChar(input: string): boolean {
-  console.log(input);
-  // TODO:
-  return true;
-}
+import { INVISIBLE } from './constants';
 
 export function checkEmoji(input: string): boolean {
   return /\p{Extended_Pictographic}/u.test(input);
@@ -82,11 +78,9 @@ export function validateToLowerCase(
   if (actionType === SettingActionType.WARN)
     validatedOutput.warn =
       validatedOutput.value.toLowerCase() !== validatedOutput.value;
-  if (actionType === SettingActionType.REMOVE)
-    validatedOutput.value = validatedOutput.value.replaceAll(
-      /[\p{Lu}\p{Lt}]/g,
-      ''
-    );
+  if (actionType === SettingActionType.REMOVE) {
+    validatedOutput.value = validatedOutput.value.replaceAll(/[A-Z]/g, '');
+  }
   if (actionType === SettingActionType.REPLACE)
     validatedOutput.value = validatedOutput.value.toLowerCase();
   // validatedOutput.value = getLowerCase(validatedOutput.value);
@@ -104,3 +98,41 @@ export function validateToLowerCase(
 //   }
 //   return output;
 // }
+
+export function validateInvisible(
+  output: OutputType,
+  actionType: SettingActionType
+) {
+  const validatedOutput = output;
+
+  const regexInvisible = new RegExp(INVISIBLE.join('|'), 'i');
+
+  if (actionType === SettingActionType.WARN) {
+    for (let i = 0; i < validatedOutput.value.length; i++) {
+      const code = validatedOutput.value
+        .codePointAt(i)
+        ?.toString(16)
+        .padStart(4, '0');
+
+      if (code && regexInvisible.test(code)) {
+        validatedOutput.warn = true;
+      }
+    }
+  }
+  if (actionType === SettingActionType.REMOVE) {
+    let validChar = '';
+    for (let i = 0; i < validatedOutput.value.length; i++) {
+      const code = validatedOutput.value
+        .codePointAt(i)
+        ?.toString(16)
+        .padStart(4, '0');
+
+      if (code && !regexInvisible.test(code)) {
+        validChar = validChar + validatedOutput.value[i];
+      }
+    }
+    validatedOutput.value = validChar;
+  }
+
+  return validatedOutput;
+}

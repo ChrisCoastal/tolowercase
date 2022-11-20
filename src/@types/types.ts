@@ -80,7 +80,8 @@ export type ValidationSetting = {
     output: OutputType,
     actionType: SettingActionType | number | number[]
   ) => OutputType;
-  actionType: SettingActionType;
+  validActions: SettingActionType[];
+  curAction: SettingActionType;
   // value: number | number[];
   length?: number | number[];
   replace?: any;
@@ -156,7 +157,7 @@ export type ValueSettingsAction = {
 
 export type ActionTypeSettingsAction = {
   type: SettingsReducerTypes.ACTION;
-  payload: { id: SettingId; actionType: SettingActionType };
+  payload: { id: SettingId; curAction: SettingActionType };
 };
 
 // export type SettingsReducerAction = {

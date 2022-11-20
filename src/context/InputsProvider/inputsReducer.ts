@@ -14,6 +14,8 @@ const reducer = (state: AppState, action: InputsReducerActions): AppState => {
     }
 
     case InputsReducerTypes.OUTPUT: {
+      console.log('inputsReducer OUTPUT');
+
       return { ...state, output: payload };
     }
 

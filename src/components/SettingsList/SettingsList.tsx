@@ -5,6 +5,7 @@ import Typography from '@mui/joy/Typography';
 import { nanoid } from 'nanoid';
 import React, { FC } from 'react';
 import {
+  InputsReducerTypes,
   SettingActionType,
   SettingId,
   SettingsReducerTypes,
@@ -22,11 +23,18 @@ const SettingsList: FC = () => {
 
   function toggleSetting(id: SettingId, isActive: boolean) {
     console.log(id, isActive);
-
+    const curInput = inputsState.input;
     dispatchSettings({
       type: SettingsReducerTypes.IS_ACTIVE,
       payload: { isActive, id },
     });
+    dispatchInputs({ type: InputsReducerTypes.INPUT, payload: '' });
+    setTimeout(() => {
+      dispatchInputs({
+        type: InputsReducerTypes.INPUT,
+        payload: curInput,
+      });
+    }, 10);
   }
 
   function updateSettingValue(id: SettingId, value: number | number[]) {
@@ -42,12 +50,20 @@ const SettingsList: FC = () => {
     console.log(id, value);
     if (value > SettingActionType.REPLACE || value < SettingActionType.WARN)
       return;
-    const actionType = value as SettingActionType;
+    const curInput = inputsState.input;
+    const curAction = value as SettingActionType;
 
     dispatchSettings({
       type: SettingsReducerTypes.ACTION,
-      payload: { id, actionType },
+      payload: { id, curAction },
     });
+    dispatchInputs({ type: InputsReducerTypes.INPUT, payload: '' });
+    setTimeout(() => {
+      dispatchInputs({
+        type: InputsReducerTypes.INPUT,
+        payload: curInput,
+      });
+    }, 10);
   }
 
   const outputValidationSettings = settingsState.outputValidation.map(
@@ -57,7 +73,6 @@ const SettingsList: FC = () => {
           <SettingItem
             setting={setting}
             toggleSetting={toggleSetting}
-            updateSettingValue={updateSettingValue}
             updateSettingActionType={updateSettingActionType}
           />
         </ListItem>

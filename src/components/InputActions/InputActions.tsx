@@ -6,13 +6,13 @@ import ClearIcon from 'src/icons/ClearIcon/ClearIcon';
 import SaveIcon from 'src/icons/SaveIcon/SaveIcon';
 
 const InputActions: FC = () => {
-  const { dispatch } = useInputsContext();
+  const { dispatchInputs } = useInputsContext();
 
   function handleSave() {
     console.log('save');
   }
   function handleClear() {
-    dispatch({ type: InputsReducerTypes.INPUT, payload: '' });
+    dispatchInputs({ type: InputsReducerTypes.INPUT, payload: '' });
   }
 
   return (

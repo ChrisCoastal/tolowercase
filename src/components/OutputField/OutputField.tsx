@@ -21,10 +21,11 @@ type OutputFieldProps = {
 const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
   const { inputsState, dispatchInputs } = useInputsContext();
   const { settingsState } = useSettingsContext();
-  const numUppercase = inputsState.input.match(/[\p{Lu}\p{Lt}]/g)?.length;
+  // const numUppercase = inputsState.input.match(/[A-Z]/g)?.length;
 
   function inputChangeHandler() {
     const output = validateOutput(inputsState.input);
+    console.log(output);
 
     dispatchInputs({ type: InputsReducerTypes.OUTPUT, payload: output });
   }
@@ -43,7 +44,7 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
 
     settingsState.outputValidation.forEach((setting) => {
       if (!setting.isActive) return;
-      validatedOutput = setting.validate(validatedOutput, setting.actionType);
+      validatedOutput = setting.validate(validatedOutput, setting.curAction);
     });
 
     return validatedOutput;
@@ -106,12 +107,16 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
                 }}
               >
                 <Typography level="body3" sx={{ ml: '4px' }}>
-                  {inputsState.input?.length} character
-                  {inputsState.input?.length !== 1 ? 's' : ' '}
+                  {inputsState.output.value?.length} character
+                  {inputsState.output.value?.length !== 1 ? 's' : ' '}
                 </Typography>
                 <Typography level="body3" sx={{ mr: '4px' }}>
-                  {numUppercase || 0} replaced
+                  {inputsState.input.length - inputsState.output.value.length}{' '}
+                  removed
                 </Typography>
+                {/* <Typography level="body3" sx={{ mr: '4px' }}>
+                  {numUppercase || 0} replaced
+                </Typography> */}
                 {Boolean(inputsState.output.value?.length) && checks}
               </Box>
               <Tooltip title="copy" size="sm" placement="top">

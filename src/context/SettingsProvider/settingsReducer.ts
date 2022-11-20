@@ -41,7 +41,7 @@ const reducer = (
         return state;
       }
       const updatedState = state.outputValidation;
-      updatedState[index].actionType = payload.actionType;
+      updatedState[index].curAction = payload.curAction;
       return {
         ...state,
         outputValidation: updatedState,
