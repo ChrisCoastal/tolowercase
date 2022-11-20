@@ -26,23 +26,19 @@ const SettingsDrawer: FC<SettingsDrawerProps> = ({
     //TODO: focus lock
     <>
       <Drawer isVisible={isVisible}>
-        <Box sx={{ display: 'grid' }}>
-          <CloseDrawer>
-            <Tooltip title="close" size="sm" placement="top">
-              <IconButton
-                variant="plain"
-                color="neutral"
-                size="sm"
-                onClick={toggleDrawer}
-              >
-                <CloseIcon height="24px" width="24px" />
-              </IconButton>
-            </Tooltip>
-          </CloseDrawer>
-          <Box>
-            <SettingsList />
-          </Box>
-        </Box>
+        <CloseDrawer>
+          <Tooltip title="close" size="sm" placement="top">
+            <IconButton
+              variant="plain"
+              color="neutral"
+              size="sm"
+              onClick={toggleDrawer}
+            >
+              <CloseIcon height="24px" width="24px" />
+            </IconButton>
+          </Tooltip>
+        </CloseDrawer>
+        <SettingsList />
       </Drawer>
       <DrawerBackground isVisible={isVisible} onClick={toggleDrawer} />
     </>

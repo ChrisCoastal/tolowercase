@@ -36,14 +36,9 @@ export type UpdateOutputAction = {
 
 export type InputsReducerActions = InputChangeAction | UpdateOutputAction;
 
-export type InputsReducer = {
-  state: AppState;
-  dispatch: Dispatch<InputsReducerActions>;
-};
-
 export type InputsContextType = {
-  state: AppState;
-  dispatch: Dispatch<InputsReducerActions>;
+  inputsState: AppState;
+  dispatchInputs: Dispatch<InputsReducerActions>;
 };
 
 // Settings Context
@@ -171,8 +166,8 @@ export type SettingsReducerAction =
   | ValueSettingsAction;
 
 export type SettingsContextType = {
-  state: SettingsState;
-  dispatch: Dispatch<SettingsReducerAction>;
+  settingsState: SettingsState;
+  dispatchSettings: Dispatch<SettingsReducerAction>;
 };
 
 // Theme

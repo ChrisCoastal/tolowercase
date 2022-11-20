@@ -57,9 +57,21 @@ export function validateLowerCase(
   if (actionType === SettingActionType.REMOVE)
     validatedOutput.value.replaceAll(/[\p{Ll}]/g, '');
   if (actionType === SettingActionType.REPLACE)
-    validatedOutput.value = validatedOutput.value.toUpperCase();
+    // validatedOutput.value = validatedOutput.value.toUpperCase();
+    validatedOutput.value = getUpperCase(validatedOutput.value);
 
   return validatedOutput;
+}
+
+function getUpperCase(input: string) {
+  let output = '';
+  for (let i = 0; i < input.length; i++) {
+    // /[\p{Lu}\p{Lt}]/.test(input.charAt(i))
+    /[A-Z]/.test(input.charAt(i))
+      ? (output += input.charAt(i).toLowerCase())
+      : (output += input.charAt(i));
+  }
+  return output;
 }
 
 export function validateUpperCase(
@@ -73,7 +85,18 @@ export function validateUpperCase(
   if (actionType === SettingActionType.REMOVE)
     validatedOutput.value.replaceAll(/[\p{Lu}\p{Lt}]/g, '');
   if (actionType === SettingActionType.REPLACE)
-    validatedOutput.value = validatedOutput.value.toLowerCase();
+    // validatedOutput.value = validatedOutput.value.toLowerCase();
+    validatedOutput.value = getLowerCase(validatedOutput.value);
 
   return validatedOutput;
+}
+
+function getLowerCase(input: string) {
+  let output = '';
+  for (let i = 0; i < input.length; i++) {
+    /[a-z]/.test(input.charAt(i))
+      ? (output += input.charAt(i).toLowerCase())
+      : (output += input.charAt(i));
+  }
+  return output;
 }

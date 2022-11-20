@@ -10,9 +10,12 @@ type SettingsProviderProps = {
 const SettingsContext = createContext({} as SettingsContextType);
 
 const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, INITIAL_SETTINGS_STATE);
+  const [settingsState, dispatchSettings] = useReducer(
+    reducer,
+    INITIAL_SETTINGS_STATE
+  );
   return (
-    <SettingsContext.Provider value={{ state, dispatch }}>
+    <SettingsContext.Provider value={{ settingsState, dispatchSettings }}>
       {children}
     </SettingsContext.Provider>
   );

@@ -16,7 +16,7 @@ import { AppContainer } from './App.styles';
 function App() {
   const [copyOutput, setCopyOutput] = useState<boolean>(false);
   // const { state: inputsState, dispatch: inputsDispatch } = useInputsContext();
-  const { dispatch: settingsDispatch } = useSettingsContext();
+  const { dispatchSettings } = useSettingsContext();
   const { isVisible, setIsVisible } = useDrawer();
 
   // function keyDownHandler(event: KeyboardEvent): ShortcutName | void {
@@ -40,7 +40,7 @@ function App() {
 
   useEffect(() => {
     const userAgent = getUserAgent();
-    settingsDispatch({
+    dispatchSettings({
       type: SettingsReducerTypes.SET_USER_AGENT,
       payload: { userAgent },
     });

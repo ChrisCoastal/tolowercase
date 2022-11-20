@@ -8,14 +8,18 @@ type InputsProviderProps = {
 
 const initialState = {
   input: '',
-  output: '',
+  output: {
+    value: '',
+    warn: false,
+    warnDetail: [],
+  },
 } as AppState;
 const InputsContext = createContext({} as InputsContextType);
 
 const InputsProvider: FC<InputsProviderProps> = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [inputsState, dispatchInputs] = useReducer(reducer, initialState);
   return (
-    <InputsContext.Provider value={{ state, dispatch }}>
+    <InputsContext.Provider value={{ inputsState, dispatchInputs }}>
       {children}
     </InputsContext.Provider>
   );

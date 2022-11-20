@@ -19,8 +19,8 @@ type OutputFieldProps = {
 };
 
 const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
-  const { state: inputsState, dispatch: dispatchInputs } = useInputsContext();
-  const { state: settingsState } = useSettingsContext();
+  const { inputsState, dispatchInputs } = useInputsContext();
+  const { settingsState } = useSettingsContext();
   const numUppercase = inputsState.input.match(/[\p{Lu}\p{Lt}]/g)?.length;
 
   function inputChangeHandler() {

@@ -6,18 +6,20 @@ import { nanoid } from 'nanoid';
 import React, { FC } from 'react';
 import { SettingId, SettingsReducerTypes } from 'src/@types/types';
 import SettingItem from 'src/components/Settings/SettingItem';
+import useInputsContext from 'src/hooks/useInputsContext';
 import useSettingsContext from 'src/hooks/useSettingsContext';
 
 // import OutputLength from './Settings/OutputLength';
-import { List, ListItem } from './SettingsList.styles';
+import { List, ListContainer,ListItem } from './SettingsList.styles';
 
 const SettingsList: FC = () => {
-  const { state, dispatch } = useSettingsContext();
+  const { inputsState, dispatchInputs } = useInputsContext();
+  const { settingsState, dispatchSettings } = useSettingsContext();
 
   function toggleSetting(id: SettingId, isActive: boolean) {
     console.log(id, isActive);
 
-    dispatch({
+    dispatchSettings({
       type: SettingsReducerTypes.IS_ACTIVE,
       payload: { isActive, id },
     });
@@ -26,23 +28,25 @@ const SettingsList: FC = () => {
   function updateSettingValue(id: SettingId, value: number | number[]) {
     console.log(id, value);
 
-    dispatch({
+    dispatchSettings({
       type: SettingsReducerTypes.VALUE,
       payload: { id, value },
     });
   }
 
-  const outputValidationSettings = state.outputValidation.map((setting) => {
-    return (
-      <ListItem key={nanoid()}>
-        <SettingItem
-          setting={setting}
-          toggleSetting={toggleSetting}
-          updateSettingValue={updateSettingValue}
-        />
-      </ListItem>
-    );
-  });
+  const outputValidationSettings = settingsState.outputValidation.map(
+    (setting) => {
+      return (
+        <ListItem key={nanoid()}>
+          <SettingItem
+            setting={setting}
+            toggleSetting={toggleSetting}
+            updateSettingValue={updateSettingValue}
+          />
+        </ListItem>
+      );
+    }
+  );
 
   // const checks = (
   //   <>
@@ -59,7 +63,7 @@ const SettingsList: FC = () => {
   // );
 
   return (
-    <>
+    <ListContainer>
       <Typography fontSize="sm">validate output</Typography>
       <Box
         sx={{
@@ -70,7 +74,7 @@ const SettingsList: FC = () => {
       >
         <List>{outputValidationSettings}</List>
       </Box>
-    </>
+    </ListContainer>
   );
 };
 

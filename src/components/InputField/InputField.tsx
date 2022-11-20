@@ -11,12 +11,12 @@ import useInputsContext from 'src/hooks/useInputsContext';
 import { InputDiv } from './InputField.styles';
 
 const InputField = () => {
-  const { state, dispatch } = useInputsContext();
-  const numUppercase = state.input.match(/[A-Z]/g)?.length;
+  const { inputsState, dispatchInputs } = useInputsContext();
+  const numUppercase = inputsState.input.match(/[A-Z]/g)?.length;
 
   function handleInputChange(event: ChangeEvent<HTMLTextAreaElement>) {
     const value = event.currentTarget.value;
-    dispatch({ type: InputsReducerTypes.INPUT, payload: value });
+    dispatchInputs({ type: InputsReducerTypes.INPUT, payload: value });
     // console.log(value);
   }
 
@@ -42,7 +42,7 @@ const InputField = () => {
           <Textarea
             placeholder="enter text"
             onChange={handleInputChange}
-            value={state.input}
+            value={inputsState.input}
             minRows={3}
             maxRows={3}
             sx={{ color: `` }}
@@ -55,8 +55,8 @@ const InputField = () => {
                 }}
               >
                 <Typography level="body3" sx={{ ml: '4px' }}>
-                  {state.input.length} character
-                  {state.input.length !== 1 ? 's' : ' '}
+                  {inputsState.input.length} character
+                  {inputsState.input.length !== 1 ? 's' : ' '}
                 </Typography>
                 <Typography level="body3" sx={{ mr: '4px' }}>
                   {numUppercase || 0} uppercase
