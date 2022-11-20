@@ -70,7 +70,7 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
   }, [copyOutput]);
 
   function checkWarningTip() {
-    return `not passing: ${inputsState.output.warnDetail.join(' ,')}`;
+    return `not passing: ${inputsState.output.warnDetail.join(', ')}`;
   }
 
   const checks = (
@@ -131,7 +131,7 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
                   {inputsState.output.value?.length !== 1 ? 's' : ' '}
                 </Typography>
                 <Typography level="body3" sx={{ mr: '4px' }}>
-                  {charDiff < 0
+                  {charDiff >= 0
                     ? `${Math.abs(charDiff)} removed`
                     : `${Math.abs(charDiff)} added`}
                 </Typography>
