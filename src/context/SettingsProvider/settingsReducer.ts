@@ -3,7 +3,6 @@ import {
   SettingsReducerAction,
   SettingsReducerTypes,
   SettingsState,
-  SettingValue,
 } from 'src/@types/types';
 
 const reducer = (
@@ -33,7 +32,7 @@ const reducer = (
       };
     }
 
-    case SettingsReducerTypes.VALUE: {
+    case SettingsReducerTypes.ACTION: {
       const index = state.outputValidation.findIndex(
         (setting) => setting.id === payload.id
       );
@@ -42,7 +41,7 @@ const reducer = (
         return state;
       }
       const updatedState = state.outputValidation;
-      updatedState[index].value = payload.value;
+      updatedState[index].actionType = payload.actionType;
       return {
         ...state,
         outputValidation: updatedState,

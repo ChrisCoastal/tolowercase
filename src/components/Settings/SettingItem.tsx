@@ -32,12 +32,17 @@ type SettingItemProps = {
   setting: ValidationSetting;
   toggleSetting: (id: SettingId, isActive: boolean) => void;
   updateSettingValue: (id: SettingId, value: number | number[]) => void;
+  updateSettingActionType: (
+    id: SettingId,
+    actionType: number | number[]
+  ) => void;
 };
 
 const Setting: FC<SettingItemProps> = ({
   setting,
   toggleSetting,
-  updateSettingValue,
+  // updateSettingValue,
+  updateSettingActionType,
 }) => {
   return (
     <FormControl
@@ -90,7 +95,7 @@ const Setting: FC<SettingItemProps> = ({
             max={2}
             step={1}
             onChange={(_, value: number | number[]) =>
-              updateSettingValue(setting.id, value)
+              updateSettingActionType(setting.id, value)
             }
             valueLabelDisplay="off"
             valueLabelFormat={(value) => marks[value].label}

@@ -4,13 +4,17 @@ import Typography from '@mui/joy/Typography';
 // import ListItem from '@mui/joy/ListItem';
 import { nanoid } from 'nanoid';
 import React, { FC } from 'react';
-import { SettingId, SettingsReducerTypes } from 'src/@types/types';
+import {
+  SettingActionType,
+  SettingId,
+  SettingsReducerTypes,
+} from 'src/@types/types';
 import SettingItem from 'src/components/Settings/SettingItem';
 import useInputsContext from 'src/hooks/useInputsContext';
 import useSettingsContext from 'src/hooks/useSettingsContext';
 
 // import OutputLength from './Settings/OutputLength';
-import { List, ListContainer,ListItem } from './SettingsList.styles';
+import { List, ListContainer, ListItem } from './SettingsList.styles';
 
 const SettingsList: FC = () => {
   const { inputsState, dispatchInputs } = useInputsContext();
@@ -34,6 +38,18 @@ const SettingsList: FC = () => {
     });
   }
 
+  function updateSettingActionType(id: SettingId, value: number | number[]) {
+    console.log(id, value);
+    if (value > SettingActionType.REPLACE || value < SettingActionType.WARN)
+      return;
+    const actionType = value as SettingActionType;
+
+    dispatchSettings({
+      type: SettingsReducerTypes.ACTION,
+      payload: { id, actionType },
+    });
+  }
+
   const outputValidationSettings = settingsState.outputValidation.map(
     (setting) => {
       return (
@@ -42,6 +58,7 @@ const SettingsList: FC = () => {
             setting={setting}
             toggleSetting={toggleSetting}
             updateSettingValue={updateSettingValue}
+            updateSettingActionType={updateSettingActionType}
           />
         </ListItem>
       );

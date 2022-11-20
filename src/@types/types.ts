@@ -93,8 +93,8 @@ export enum SettingActionType {
 }
 
 export enum SettingId {
-  UPPERCASE = 'upperCase',
-  LOWERCASE = 'lowerCase',
+  TO_UPPERCASE = 'toUpperCase',
+  TO_LOWERCASE = 'toLowerCase',
   INVISIBLE = 'unicodeInvisible',
   URI_RESERVED = 'uriReserved',
   URI_UNSAFE = 'uirUnsafe',
@@ -122,6 +122,7 @@ export enum ThemeSetting {
 
 export enum SettingsReducerTypes {
   IS_ACTIVE = 'isActive',
+  ACTION = 'actionType',
   VALUE = 'value',
   UPDATE_SETTING = 'updateSetting',
   INVISIBLE = 'invisible',
@@ -153,6 +154,11 @@ export type ValueSettingsAction = {
   payload: { id: SettingId; value: number | number[] };
 };
 
+export type ActionTypeSettingsAction = {
+  type: SettingsReducerTypes.ACTION;
+  payload: { id: SettingId; actionType: SettingActionType };
+};
+
 // export type SettingsReducerAction = {
 //   type: SettingsReducerTypes;
 //   payload: {
@@ -163,7 +169,8 @@ export type ValueSettingsAction = {
 export type SettingsReducerAction =
   | UserAgentSettingsAction
   | IsActiveSettingsAction
-  | ValueSettingsAction;
+  | ValueSettingsAction
+  | ActionTypeSettingsAction;
 
 export type SettingsContextType = {
   settingsState: SettingsState;

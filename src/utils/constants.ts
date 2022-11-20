@@ -5,7 +5,7 @@ import {
   ThemeSetting,
 } from 'src/@types/types';
 
-import { validateLowerCase, validateUpperCase } from './helpers';
+import { validateToLowerCase } from './helpers';
 
 export const INVISIBLE = [
   'U+0009',
@@ -142,8 +142,7 @@ export const BAD_WORDS = [
 ];
 
 export const SETTINGS_TEXT = {
-  upperCase: { label: 'uppercase', helperText: '' },
-  lowerCase: { label: 'lowercase', helperText: '' },
+  toLowerCase: { label: 'toLowercase', helperText: '' },
   invisibleChar: { label: 'invisible characters', helperText: '' },
   uriReserved: { label: 'uri reserved characters', helperText: '' },
   uriUnsafe: { label: 'uri unsafe characters', helperText: '' },
@@ -167,19 +166,11 @@ export const INITIAL_SETTINGS_STATE = {
   theme: ThemeSetting.LIGHT,
   outputValidation: [
     {
-      id: SettingId.UPPERCASE,
-      label: SETTINGS_TEXT.upperCase.label,
-      helperText: SETTINGS_TEXT.upperCase.helperText,
+      id: SettingId.TO_LOWERCASE,
+      label: SETTINGS_TEXT.toLowerCase.label,
+      helperText: SETTINGS_TEXT.toLowerCase.helperText,
       isActive: true,
-      validate: validateUpperCase,
-      actionType: SettingActionType.REPLACE,
-    },
-    {
-      id: SettingId.LOWERCASE,
-      label: SETTINGS_TEXT.lowerCase.label,
-      helperText: SETTINGS_TEXT.lowerCase.helperText,
-      isActive: true,
-      validate: validateLowerCase,
+      validate: validateToLowerCase,
       actionType: SettingActionType.REPLACE,
     },
     // {

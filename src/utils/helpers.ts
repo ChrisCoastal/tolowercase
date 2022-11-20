@@ -46,35 +46,35 @@ export function getUserAgent() {
 
 // Output Validation
 
-export function validateLowerCase(
-  output: OutputType,
-  actionType: SettingActionType
-) {
-  const validatedOutput = output;
-  if (actionType === SettingActionType.WARN)
-    validatedOutput.warn =
-      validatedOutput.value.toUpperCase() !== validatedOutput.value;
-  if (actionType === SettingActionType.REMOVE)
-    validatedOutput.value.replaceAll(/[\p{Ll}]/g, '');
-  if (actionType === SettingActionType.REPLACE)
-    // validatedOutput.value = validatedOutput.value.toUpperCase();
-    validatedOutput.value = getUpperCase(validatedOutput.value);
+// export function validateLowerCase(
+//   output: OutputType,
+//   actionType: SettingActionType
+// ) {
+//   const validatedOutput = output;
+//   if (actionType === SettingActionType.WARN)
+//     validatedOutput.warn =
+//       validatedOutput.value.toUpperCase() !== validatedOutput.value;
+//   if (actionType === SettingActionType.REMOVE)
+//     validatedOutput.value.replaceAll(/[\p{Ll}]/g, '');
+//   if (actionType === SettingActionType.REPLACE)
+//     // validatedOutput.value = validatedOutput.value.toUpperCase();
+//     validatedOutput.value = getUpperCase(validatedOutput.value);
 
-  return validatedOutput;
-}
+//   return validatedOutput;
+// }
 
-function getUpperCase(input: string) {
-  let output = '';
-  for (let i = 0; i < input.length; i++) {
-    // /[\p{Lu}\p{Lt}]/.test(input.charAt(i))
-    /[A-Z]/.test(input.charAt(i))
-      ? (output += input.charAt(i).toLowerCase())
-      : (output += input.charAt(i));
-  }
-  return output;
-}
+// function getUpperCase(input: string) {
+//   let output = '';
+//   for (let i = 0; i < input.length; i++) {
+//     // /[\p{Lu}\p{Lt}]/.test(input.charAt(i))
+//     /[A-Z]/.test(input.charAt(i))
+//       ? (output += input.charAt(i).toLowerCase())
+//       : (output += input.charAt(i));
+//   }
+//   return output;
+// }
 
-export function validateUpperCase(
+export function validateToLowerCase(
   output: OutputType,
   actionType: SettingActionType
 ) {
@@ -83,20 +83,24 @@ export function validateUpperCase(
     validatedOutput.warn =
       validatedOutput.value.toLowerCase() !== validatedOutput.value;
   if (actionType === SettingActionType.REMOVE)
-    validatedOutput.value.replaceAll(/[\p{Lu}\p{Lt}]/g, '');
+    validatedOutput.value = validatedOutput.value.replaceAll(
+      /[\p{Lu}\p{Lt}]/g,
+      ''
+    );
   if (actionType === SettingActionType.REPLACE)
-    // validatedOutput.value = validatedOutput.value.toLowerCase();
-    validatedOutput.value = getLowerCase(validatedOutput.value);
+    validatedOutput.value = validatedOutput.value.toLowerCase();
+  // validatedOutput.value = getLowerCase(validatedOutput.value);
 
   return validatedOutput;
 }
 
-function getLowerCase(input: string) {
-  let output = '';
-  for (let i = 0; i < input.length; i++) {
-    /[a-z]/.test(input.charAt(i))
-      ? (output += input.charAt(i).toLowerCase())
-      : (output += input.charAt(i));
-  }
-  return output;
-}
+//FIXME:
+// function getLowerCase(input: string) {
+//   let output = '';
+//   for (let i = 0; i < input.length; i++) {
+//     /[a-z]/.test(input.charAt(i))
+//       ? (output += input.charAt(i).toLowerCase())
+//       : (output += input.charAt(i));
+//   }
+//   return output;
+// }
