@@ -12,6 +12,7 @@ import useSettingsContext from 'src/hooks/useSettingsContext';
 import CheckIcon from 'src/icons/CheckIcon/CheckIcon';
 import CopyIcon from 'src/icons/CopyIcon/CopyIcon';
 import VerifiedIcon from 'src/icons/VerifiedIcon/VerifiedIcon';
+import WarnIcon from 'src/icons/WarnIcon/WarnIcon';
 
 type OutputFieldProps = {
   copyOutput: boolean;
@@ -22,6 +23,7 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
   const { inputsState, dispatchInputs } = useInputsContext();
   const { settingsState } = useSettingsContext();
   // const numUppercase = inputsState.input.match(/[A-Z]/g)?.length;
+  const charDiff = inputsState.output.value.length - inputsState.input.length;
 
   function inputChangeHandler() {
     const output = validateOutput(inputsState.input);
@@ -67,14 +69,26 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
     return () => clearTimeout(copiedTimer);
   }, [copyOutput]);
 
+  function checkWarningTip() {
+    return `not passing: ${inputsState.output.warnDetail.join(' ,')}`;
+  }
+
   const checks = (
-    <Typography
-      level="body3"
-      sx={{ mr: '4px' }}
-      startDecorator={<VerifiedIcon height="18" width="18" />}
-    >
-      all checks passing
-    </Typography>
+    <Tooltip title={checkWarningTip()} size="sm" placement="top">
+      <Typography
+        level="body3"
+        sx={{ mr: '4px' }}
+        startDecorator={
+          inputsState.output.warn ? (
+            <WarnIcon height="18" width="18" />
+          ) : (
+            <VerifiedIcon height="18" width="18" />
+          )
+        }
+      >
+        {inputsState.output.warn ? 'validation warning' : 'validation passing '}
+      </Typography>
+    </Tooltip>
   );
 
   return (
@@ -117,8 +131,9 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
                   {inputsState.output.value?.length !== 1 ? 's' : ' '}
                 </Typography>
                 <Typography level="body3" sx={{ mr: '4px' }}>
-                  {inputsState.input.length - inputsState.output.value.length}{' '}
-                  removed
+                  {charDiff < 0
+                    ? `${Math.abs(charDiff)} removed`
+                    : `${Math.abs(charDiff)} added`}
                 </Typography>
                 {/* <Typography level="body3" sx={{ mr: '4px' }}>
                   {numUppercase || 0} replaced

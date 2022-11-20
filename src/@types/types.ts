@@ -13,7 +13,7 @@ export type AppState = {
 export type OutputType = {
   value: string;
   warn: boolean;
-  warnDetail: [];
+  warnDetail: string[];
 };
 
 // Inputs Context

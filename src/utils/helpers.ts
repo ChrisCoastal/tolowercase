@@ -83,6 +83,7 @@ export function validateToLowerCase(
   if (actionType === SettingActionType.WARN)
     validatedOutput.warn =
       validatedOutput.value.toLowerCase() !== validatedOutput.value;
+  validatedOutput.warn && validatedOutput.warnDetail.push('uppercase');
   if (actionType === SettingActionType.REMOVE) {
     validatedOutput.value = validatedOutput.value.replaceAll(/[A-Z]/g, '');
   }
@@ -114,6 +115,7 @@ export function validateTrim(
   if (actionType === SettingActionType.WARN) {
     validatedOutput.warn =
       validatedOutput.value.trim() !== validatedOutput.value;
+    validatedOutput.warn && validatedOutput.warnDetail.push('outer whitespace');
   }
   if (actionType === SettingActionType.REMOVE) {
     validatedOutput.value = validatedOutput.value.trim();
@@ -144,6 +146,8 @@ export function validateInvisible(
         validatedOutput.warn = true;
       }
     }
+    validatedOutput.warn &&
+      validatedOutput.warnDetail.push('invisible characters');
   }
   if (actionType === SettingActionType.REMOVE) {
     let validChar = '';
@@ -170,12 +174,13 @@ export function validateUriReserved(
   const validatedOutput = output;
   // const regexUriReserved = new RegExp(URI_RESERVED.join('|'), 'gi');
   const regexUriReserved = new RegExp(
-    /^([!#$&-;=?-[]_a-z~]|%[0-9a-fA-F]{2})+$/,
+    /^([ !#$&-;=?-[\]_a-z~]|%[0-9a-fA-F]{2})+$/,
     'gi'
   );
 
   if (actionType === SettingActionType.WARN) {
     validatedOutput.warn = regexUriReserved.test(validatedOutput.value);
+    validatedOutput.warn && validatedOutput.warnDetail.push('uri reserved');
   }
   if (actionType === SettingActionType.REMOVE) {
     validatedOutput.value = validatedOutput.value.replaceAll(
