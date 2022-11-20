@@ -29,6 +29,7 @@ const SettingsList: FC = () => {
       payload: { isActive, id },
     });
     dispatchInputs({ type: InputsReducerTypes.INPUT, payload: '' });
+    // timeout keeps react from batching dispatches together
     setTimeout(() => {
       dispatchInputs({
         type: InputsReducerTypes.INPUT,
@@ -58,6 +59,7 @@ const SettingsList: FC = () => {
       payload: { id, curAction },
     });
     dispatchInputs({ type: InputsReducerTypes.INPUT, payload: '' });
+    // timeout keeps react from batching dispatches together
     setTimeout(() => {
       dispatchInputs({
         type: InputsReducerTypes.INPUT,

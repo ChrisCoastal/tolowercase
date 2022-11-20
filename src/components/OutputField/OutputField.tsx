@@ -44,7 +44,13 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
 
     settingsState.outputValidation.forEach((setting) => {
       if (!setting.isActive) return;
-      validatedOutput = setting.validate(validatedOutput, setting.curAction);
+      validatedOutput = setting.replaceValue
+        ? setting.validate(
+            validatedOutput,
+            setting.curAction,
+            setting.replaceValue
+          )
+        : setting.validate(validatedOutput, setting.curAction);
     });
 
     return validatedOutput;

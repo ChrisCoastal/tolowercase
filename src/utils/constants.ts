@@ -5,7 +5,12 @@ import {
   ThemeSetting,
 } from 'src/@types/types';
 
-import { validateInvisible, validateToLowerCase } from './helpers';
+import {
+  validateInvisible,
+  validateToLowerCase,
+  validateTrim,
+  validateUriReserved,
+} from './helpers';
 
 export const INVISIBLE = [
   '0009',
@@ -203,6 +208,10 @@ export const SETTINGS_TEXT = {
     label: 'uppercase',
     helperText: 'optionally replace with lowercase',
   },
+  trim: {
+    label: 'outer whitespace',
+    helperText: 'start/end whitespace and terminators',
+  },
   invisibleChar: {
     label: 'invisible characters',
     helperText: 'uncommon non-visible/empty characters',
@@ -211,11 +220,6 @@ export const SETTINGS_TEXT = {
     label: 'uri reserved characters',
     helperText: 'optionally encode as UTF-8',
   },
-  uriUnsafe: {
-    label: 'uri unsafe characters',
-    helperText: 'optionally encode as UTF-8',
-  },
-  trim: { label: 'whitespace', helperText: '' },
   outputLength: { label: 'length', helperText: '' },
   findReplace: { label: 'find', helperText: '' },
 };
@@ -248,41 +252,43 @@ export const INITIAL_SETTINGS_STATE = {
       curAction: SettingActionType.REPLACE,
     },
     {
+      id: SettingId.TRIM,
+      label: SETTINGS_TEXT.trim.label,
+      helperText: SETTINGS_TEXT.trim.helperText,
+      isActive: false,
+      validate: validateTrim,
+      validActions: [
+        SettingActionType.WARN,
+        SettingActionType.REMOVE,
+        SettingActionType.REPLACE,
+      ],
+      curAction: SettingActionType.WARN,
+      replaceValue: '',
+    },
+    {
       id: SettingId.INVISIBLE,
       label: SETTINGS_TEXT.invisibleChar.label,
       helperText: SETTINGS_TEXT.invisibleChar.helperText,
-      isActive: true,
+      isActive: false,
       validate: validateInvisible,
       validActions: [SettingActionType.WARN, SettingActionType.REMOVE],
-      curAction: SettingActionType.REMOVE,
+      curAction: SettingActionType.WARN,
     },
-    // {
-    //   id: SettingId.URI_RESERVED,
-    //   label: SETTINGS_TEXT.uriReserved.label,
-    //   helperText: SETTINGS_TEXT.uriReserved.helperText,
-    //   isActive: false,
-    //   actionType: SettingActionType.WARN,
-    // },
-    // {
-    //   id: SettingId.URI_UNSAFE,
-    //   label: SETTINGS_TEXT.uriUnsafe.label,
-    //   helperText: SETTINGS_TEXT.uriUnsafe.helperText,
-    //   isActive: false,
-    //   actionType: SettingActionType.WARN,
-    // },
+    {
+      id: SettingId.URI_RESERVED,
+      label: SETTINGS_TEXT.uriReserved.label,
+      helperText: SETTINGS_TEXT.uriReserved.helperText,
+      isActive: false,
+      validate: validateUriReserved,
+      validActions: [SettingActionType.WARN, SettingActionType.REMOVE],
+      curAction: SettingActionType.WARN,
+    },
     // {
     //   id: SettingId.LENGTH,
     //   label: SETTINGS_TEXT.outputLength.label,
     //   helperText: SETTINGS_TEXT.outputLength.helperText,
     //   isActive: false,
     //   actionType: SettingActionType.WARN,
-    // },
-    // {
-    //   id: SettingId.TRIM,
-    //   label: SETTINGS_TEXT.trim.label,
-    //   helperText: SETTINGS_TEXT.trim.helperText,
-    //   isActive: true,
-    //   actionType: SettingActionType.REMOVE,
     // },
     // {
     //   id: SettingId.FIND,

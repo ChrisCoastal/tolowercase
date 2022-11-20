@@ -1,6 +1,11 @@
-import { OutputType, SettingActionType, ShortcutName } from 'src/@types/types';
+import {
+  OutputType,
+  ReplaceValue,
+  SettingActionType,
+  ShortcutName,
+} from 'src/@types/types';
 
-import { INVISIBLE } from './constants';
+import { INVISIBLE, URI_RESERVED } from './constants';
 
 export function checkEmoji(input: string): boolean {
   return /\p{Extended_Pictographic}/u.test(input);
@@ -99,12 +104,33 @@ export function validateToLowerCase(
 //   return output;
 // }
 
+export function validateTrim(
+  output: OutputType,
+  actionType: SettingActionType,
+  replaceValue: ReplaceValue = ['', '']
+) {
+  const validatedOutput = output;
+
+  if (actionType === SettingActionType.WARN) {
+    validatedOutput.warn =
+      validatedOutput.value.trim() !== validatedOutput.value;
+  }
+  if (actionType === SettingActionType.REMOVE) {
+    validatedOutput.value = validatedOutput.value.trim();
+  }
+  if (actionType === SettingActionType.REPLACE) {
+    validatedOutput.value =
+      replaceValue[0] + validatedOutput.value.trim() + replaceValue[1];
+  }
+
+  return validatedOutput;
+}
+
 export function validateInvisible(
   output: OutputType,
   actionType: SettingActionType
 ) {
   const validatedOutput = output;
-
   const regexInvisible = new RegExp(INVISIBLE.join('|'), 'i');
 
   if (actionType === SettingActionType.WARN) {
@@ -134,5 +160,32 @@ export function validateInvisible(
     validatedOutput.value = validChar;
   }
 
+  return validatedOutput;
+}
+
+export function validateUriReserved(
+  output: OutputType,
+  actionType: SettingActionType
+) {
+  const validatedOutput = output;
+  // const regexUriReserved = new RegExp(URI_RESERVED.join('|'), 'gi');
+  const regexUriReserved = new RegExp(
+    /^([!#$&-;=?-[]_a-z~]|%[0-9a-fA-F]{2})+$/,
+    'gi'
+  );
+
+  if (actionType === SettingActionType.WARN) {
+    validatedOutput.warn = regexUriReserved.test(validatedOutput.value);
+  }
+  if (actionType === SettingActionType.REMOVE) {
+    validatedOutput.value = validatedOutput.value.replaceAll(
+      regexUriReserved,
+      ''
+    );
+  }
+  if (actionType === SettingActionType.REPLACE) {
+    validatedOutput.value = encodeURIComponent(validatedOutput.value);
+    //
+  }
   return validatedOutput;
 }

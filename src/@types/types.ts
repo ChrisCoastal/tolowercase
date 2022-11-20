@@ -78,14 +78,17 @@ export type ValidationSetting = {
   isActive: boolean;
   validate: (
     output: OutputType,
-    actionType: SettingActionType | number | number[]
+    actionType: SettingActionType | number | number[],
+    replaceValue?: ReplaceValue
   ) => OutputType;
   validActions: SettingActionType[];
   curAction: SettingActionType;
   // value: number | number[];
   length?: number | number[];
-  replace?: any;
+  replaceValue?: any;
 };
+
+export type ReplaceValue = [string, string];
 
 export enum SettingActionType {
   WARN = 0,

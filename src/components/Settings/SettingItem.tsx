@@ -7,6 +7,7 @@ import Slider from '@mui/joy/Slider';
 import Switch from '@mui/joy/Switch';
 import React, { ChangeEvent, FC } from 'react';
 import {
+  ReplaceValue,
   SettingActionType,
   SettingId,
   ValidationSetting,
@@ -34,7 +35,8 @@ type SettingItemProps = {
   // updateSettingValue: (id: SettingId, value: number | number[]) => void;
   updateSettingActionType: (
     id: SettingId,
-    actionType: number | number[]
+    actionType: number | number[],
+    replaceValue?: ReplaceValue
   ) => void;
 };
 
