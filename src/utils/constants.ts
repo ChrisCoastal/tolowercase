@@ -1,6 +1,7 @@
 import {
   SettingActionType,
   SettingId,
+  SettingModifierInputType,
   SettingsState,
   ThemeSetting,
 } from 'src/@types/types';
@@ -288,6 +289,8 @@ export const INITIAL_SETTINGS_STATE = {
       curAction: SettingActionType.WARN,
     },
     {
+      // length setting keeps curAction constant
+      // only targetLength is updated
       id: SettingId.LENGTH,
       label: SETTINGS_TEXT.outputLength.label,
       helperText: SETTINGS_TEXT.outputLength.helperText,
@@ -295,6 +298,7 @@ export const INITIAL_SETTINGS_STATE = {
       validate: validateUriReserved,
       validActions: [SettingActionType.WARN],
       curAction: SettingActionType.WARN,
+      targetLength: [33],
       sliderSetting: {
         min: 1,
         max: 100,
@@ -305,7 +309,11 @@ export const INITIAL_SETTINGS_STATE = {
           { label: '50', value: 50 },
           { label: '100', value: 100 },
         ],
-        sliderWidth: 80,
+        sliderWidth: 90,
+      },
+      modifier: {
+        inputType: SettingModifierInputType.CHECKBOX,
+        value: false,
       },
     },
 

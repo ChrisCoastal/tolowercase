@@ -3,7 +3,6 @@ import {
   ReplaceValue,
   SettingActionType,
   ShortcutName,
-  ValidLength,
 } from 'src/@types/types';
 
 import { INVISIBLE, URI_RESERVED } from './constants';
@@ -200,7 +199,7 @@ export function validateLength(
   output: OutputType,
   actionType: SettingActionType,
   inputLength: number,
-  targetLength: ValidLength
+  targetLength: number[]
   // replaceValue: ReplaceValue
 ) {
   const validatedOutput = output;

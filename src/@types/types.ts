@@ -83,14 +83,13 @@ export type ValidationSetting = {
   ) => OutputType;
   validActions: SettingActionType[];
   curAction: SettingActionType;
-  targetLength?: ValidLength;
+  targetLength?: number[];
   sliderSetting?: SliderSetting;
   replaceValue?: ReplaceValue;
+  modifier: SettingModifier;
 };
 
 export type ReplaceValue = [string, string];
-
-export type ValidLength = [number] | [number, number];
 
 export type SliderSetting = {
   min: number;
@@ -100,6 +99,17 @@ export type SliderSetting = {
   marks?: Mark;
   sliderWidth?: number;
 };
+
+export type SettingModifier = {
+  inputType: SettingModifierInputType | null;
+  value: SettingModifierValue | null;
+};
+
+export enum SettingModifierInputType {
+  CHECKBOX = 'checkbox',
+}
+
+export type SettingModifierValue = boolean | string | string[];
 
 export type Mark = boolean | { value: number; label?: string | number }[];
 
@@ -140,6 +150,7 @@ export enum ThemeSetting {
 export enum SettingsReducerTypes {
   IS_ACTIVE = 'isActive',
   ACTION = 'actionType',
+  MODIFIER = 'modifier',
   VALUE = 'value',
   UPDATE_SETTING = 'updateSetting',
   INVISIBLE = 'invisible',
@@ -173,7 +184,12 @@ export type ValueSettingsAction = {
 
 export type LengthSettingsAction = {
   type: SettingsReducerTypes.LENGTH;
-  payload: { id: SettingId; targetLength: ValidLength };
+  payload: { id: SettingId; targetLength: number[] };
+};
+
+export type ModifierSettingsAction = {
+  type: SettingsReducerTypes.MODIFIER;
+  payload: { id: SettingId; modifierValue: SettingModifierValue };
 };
 
 export type ActionTypeSettingsAction = {
@@ -189,11 +205,12 @@ export type ActionTypeSettingsAction = {
 // };
 
 export type SettingsReducerAction =
-  | UserAgentSettingsAction
+  | ActionTypeSettingsAction
   | IsActiveSettingsAction
-  | ValueSettingsAction
   | LengthSettingsAction
-  | ActionTypeSettingsAction;
+  | ModifierSettingsAction
+  | UserAgentSettingsAction
+  | ValueSettingsAction;
 
 export type SettingsContextType = {
   settingsState: SettingsState;

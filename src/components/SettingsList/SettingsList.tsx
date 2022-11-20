@@ -3,11 +3,12 @@ import Typography from '@mui/joy/Typography';
 // import List from '@mui/joy/List';
 // import ListItem from '@mui/joy/ListItem';
 import { nanoid } from 'nanoid';
-import React, { FC } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import {
   InputsReducerTypes,
   SettingActionType,
   SettingId,
+  SettingModifier,
   SettingsReducerTypes,
 } from 'src/@types/types';
 import SettingItem from 'src/components/Settings/SettingItem';
@@ -51,7 +52,11 @@ const SettingsList: FC = () => {
     });
   }
 
-  function updateSettingActionType(id: SettingId, value: number | number[]) {
+  function updateSetting(
+    id: SettingId,
+    value: number | number[],
+    modifier?: any
+  ) {
     console.log(id, value);
     if (id === SettingId.LENGTH) return updateLengthSetting(id, value);
     if (value > SettingActionType.REPLACE || value < SettingActionType.WARN)
@@ -65,13 +70,64 @@ const SettingsList: FC = () => {
     revalidateOutput();
   }
 
-  function updateLengthSetting(id: SettingId, value: number | number[]) {
-    function toggleSliderRange() {
-      const lengthSetting = settingsState.outputValidation.find((setting) => setting.id === SettingId.LENGTH)
-      if (settingsState.outputValidation..length === 1) setSliderValue((prev) => [...prev, 54]);
-      if (sliderValue.length === 2) setSliderValue((prev) => [prev[0]]);
-    }
+  function updateSettingModifier(id: SettingId, event: ChangeEvent) {
+    console.log(id, event);
 
+    const setting = settingsState.outputValidation.find(
+      (setting) => setting.id === id
+    );
+    if (typeof setting?.modifier === 'boolean') {
+      dispatchSettings({
+        type: SettingsReducerTypes.MODIFIER,
+        payload: { id, modifierValue: !setting?.modifier },
+      });
+    }
+  }
+
+  function updateLengthSetting(
+    id: SettingId,
+    value: number | number[]
+    // modifier?: any
+  ) {
+    const lengthSetting = settingsState.outputValidation.find(
+      (setting) => setting.id === SettingId.LENGTH
+    );
+    if (!lengthSetting) return console.error('length setting not found');
+    // if (lengthSetting.targetLength!.length === 1)
+    //   dispatchSettings({
+    //     type: SettingsReducerTypes.LENGTH,
+    //     payload: { id, targetLength: lengthSetting.targetLength!.concat(67) },
+    //   });
+    // if (lengthSetting.targetLength!.length === 2)
+    //   dispatchSettings({
+    //     type: SettingsReducerTypes.LENGTH,
+    //     payload: { id, targetLength: [lengthSetting.targetLength![0]] },
+    //   });
+    dispatchSettings({
+      type: SettingsReducerTypes.LENGTH,
+      payload: {
+        id,
+        targetLength: typeof value === 'number' ? [value] : value,
+      },
+    });
+    revalidateOutput();
+
+    // function toggleSliderRange() {
+    //   const lengthSetting = settingsState.outputValidation.find(
+    //     (setting) => setting.id === SettingId.LENGTH
+    //   );
+    //   if (!lengthSetting) return console.error('length setting not found');
+    //   if (lengthSetting.targetLength!.length === 1)
+    //     dispatchSettings({
+    //       type: SettingsReducerTypes.LENGTH,
+    //       payload: { id, targetLength: lengthSetting.targetLength!.concat(67) },
+    //     });
+    //   if (lengthSetting.targetLength!.length === 2)
+    //     dispatchSettings({
+    //       type: SettingsReducerTypes.LENGTH,
+    //       payload: { id, targetLength: [lengthSetting.targetLength![0]] },
+    //     });
+    // }
   }
 
   const outputValidationSettings = settingsState.outputValidation.map(
@@ -81,7 +137,8 @@ const SettingsList: FC = () => {
           <SettingItem
             setting={setting}
             toggleSetting={toggleSetting}
-            updateSettingActionType={updateSettingActionType}
+            updateSetting={updateSetting}
+            updateSettingModifier={updateSettingModifier}
           />
         </ListItem>
       );
