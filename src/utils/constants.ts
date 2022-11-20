@@ -280,7 +280,11 @@ export const INITIAL_SETTINGS_STATE = {
       helperText: SETTINGS_TEXT.uriReserved.helperText,
       isActive: false,
       validate: validateUriReserved,
-      validActions: [SettingActionType.WARN, SettingActionType.REMOVE],
+      validActions: [
+        SettingActionType.WARN,
+        SettingActionType.REMOVE,
+        SettingActionType.REPLACE,
+      ],
       curAction: SettingActionType.WARN,
     },
     // {
