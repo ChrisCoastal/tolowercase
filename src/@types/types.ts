@@ -83,12 +83,25 @@ export type ValidationSetting = {
   ) => OutputType;
   validActions: SettingActionType[];
   curAction: SettingActionType;
-  // value: number | number[];
-  length?: number | number[];
-  replaceValue?: any;
+  targetLength?: ValidLength;
+  sliderSetting?: SliderSetting;
+  replaceValue?: ReplaceValue;
 };
 
 export type ReplaceValue = [string, string];
+
+export type ValidLength = [number] | [number, number];
+
+export type SliderSetting = {
+  min: number;
+  max: number;
+  step: number;
+  labelDisplay?: 'auto' | 'on' | 'off';
+  marks?: Mark;
+  sliderWidth?: number;
+};
+
+export type Mark = boolean | { value: number; label?: string | number }[];
 
 export enum SettingActionType {
   WARN = 0,
@@ -158,6 +171,11 @@ export type ValueSettingsAction = {
   payload: { id: SettingId; value: number | number[] };
 };
 
+export type LengthSettingsAction = {
+  type: SettingsReducerTypes.LENGTH;
+  payload: { id: SettingId; targetLength: ValidLength };
+};
+
 export type ActionTypeSettingsAction = {
   type: SettingsReducerTypes.ACTION;
   payload: { id: SettingId; curAction: SettingActionType };
@@ -174,6 +192,7 @@ export type SettingsReducerAction =
   | UserAgentSettingsAction
   | IsActiveSettingsAction
   | ValueSettingsAction
+  | LengthSettingsAction
   | ActionTypeSettingsAction;
 
 export type SettingsContextType = {

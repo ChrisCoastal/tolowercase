@@ -23,13 +23,17 @@ const SettingsList: FC = () => {
 
   function toggleSetting(id: SettingId, isActive: boolean) {
     console.log(id, isActive);
-    const curInput = inputsState.input;
     dispatchSettings({
       type: SettingsReducerTypes.IS_ACTIVE,
       payload: { isActive, id },
     });
+    revalidateOutput();
+  }
+
+  function revalidateOutput() {
+    const curInput = inputsState.input;
     dispatchInputs({ type: InputsReducerTypes.INPUT, payload: '' });
-    // timeout keeps react from batching dispatches together
+    // revalidate output; timeout keeps react from batching dispatches together
     setTimeout(() => {
       dispatchInputs({
         type: InputsReducerTypes.INPUT,
@@ -49,23 +53,25 @@ const SettingsList: FC = () => {
 
   function updateSettingActionType(id: SettingId, value: number | number[]) {
     console.log(id, value);
+    if (id === SettingId.LENGTH) return updateLengthSetting(id, value);
     if (value > SettingActionType.REPLACE || value < SettingActionType.WARN)
       return;
-    const curInput = inputsState.input;
     const curAction = value as SettingActionType;
 
     dispatchSettings({
       type: SettingsReducerTypes.ACTION,
       payload: { id, curAction },
     });
-    dispatchInputs({ type: InputsReducerTypes.INPUT, payload: '' });
-    // timeout keeps react from batching dispatches together
-    setTimeout(() => {
-      dispatchInputs({
-        type: InputsReducerTypes.INPUT,
-        payload: curInput,
-      });
-    }, 10);
+    revalidateOutput();
+  }
+
+  function updateLengthSetting(id: SettingId, value: number | number[]) {
+    function toggleSliderRange() {
+      const lengthSetting = settingsState.outputValidation.find((setting) => setting.id === SettingId.LENGTH)
+      if (settingsState.outputValidation..length === 1) setSliderValue((prev) => [...prev, 54]);
+      if (sliderValue.length === 2) setSliderValue((prev) => [prev[0]]);
+    }
+
   }
 
   const outputValidationSettings = settingsState.outputValidation.map(

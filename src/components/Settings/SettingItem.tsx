@@ -7,10 +7,13 @@ import Slider from '@mui/joy/Slider';
 import Switch from '@mui/joy/Switch';
 import React, { ChangeEvent, FC } from 'react';
 import {
+  Mark,
   ReplaceValue,
   SettingActionType,
   SettingId,
+  SliderSetting,
   ValidationSetting,
+  ValidLength,
 } from 'src/@types/types';
 import { sliderSx } from 'src/utils/muiSx';
 
@@ -35,8 +38,7 @@ type SettingItemProps = {
   // updateSettingValue: (id: SettingId, value: number | number[]) => void;
   updateSettingActionType: (
     id: SettingId,
-    actionType: number | number[],
-    replaceValue?: ReplaceValue
+    actionType: number | number[]
   ) => void;
 };
 
@@ -46,6 +48,12 @@ const Setting: FC<SettingItemProps> = ({
   // updateSettingValue,
   updateSettingActionType,
 }) => {
+  const sliderWidth = setting.sliderSetting?.sliderWidth
+    ? `${setting.sliderSetting?.sliderWidth}%`
+    : setting.validActions.length - 1 === 2
+    ? '80%'
+    : '40%';
+
   return (
     <FormControl
       orientation="horizontal"
@@ -93,19 +101,21 @@ const Setting: FC<SettingItemProps> = ({
           }}
         >
           <Slider
-            defaultValue={setting.curAction}
-            max={setting.validActions.length - 1}
+            defaultValue={setting.targetLength || setting.curAction}
+            min={setting.sliderSetting?.min || 0}
+            max={setting.sliderSetting?.max || setting.validActions.length - 1}
             step={1}
             onChange={(_, value: number | number[]) =>
               updateSettingActionType(setting.id, value)
             }
-            valueLabelDisplay="off"
-            valueLabelFormat={(value) => marks[value].label}
-            marks={marks}
+            valueLabelDisplay={setting.sliderSetting?.labelDisplay || 'off'}
+            // valueLabelFormat={(value) => || marks[value].label
+            // }
+            marks={setting.sliderSetting?.marks || marks}
             color="success"
             disabled={!setting.isActive}
             sx={{
-              maxWidth: setting.validActions.length - 1 === 2 ? '80%' : '40%',
+              maxWidth: sliderWidth,
             }}
           />
         </Box>

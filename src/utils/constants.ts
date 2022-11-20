@@ -220,7 +220,7 @@ export const SETTINGS_TEXT = {
     label: 'uri reserved characters',
     helperText: 'optionally encode as UTF-8',
   },
-  outputLength: { label: 'length', helperText: '' },
+  outputLength: { label: 'length', helperText: 'specify output length' },
   findReplace: { label: 'find', helperText: '' },
 };
 
@@ -287,13 +287,28 @@ export const INITIAL_SETTINGS_STATE = {
       ],
       curAction: SettingActionType.WARN,
     },
-    // {
-    //   id: SettingId.LENGTH,
-    //   label: SETTINGS_TEXT.outputLength.label,
-    //   helperText: SETTINGS_TEXT.outputLength.helperText,
-    //   isActive: false,
-    //   actionType: SettingActionType.WARN,
-    // },
+    {
+      id: SettingId.LENGTH,
+      label: SETTINGS_TEXT.outputLength.label,
+      helperText: SETTINGS_TEXT.outputLength.helperText,
+      isActive: false,
+      validate: validateUriReserved,
+      validActions: [SettingActionType.WARN],
+      curAction: SettingActionType.WARN,
+      sliderSetting: {
+        min: 1,
+        max: 100,
+        step: 1,
+        labelDisplay: 'on',
+        marks: [
+          { label: '1', value: 1 },
+          { label: '50', value: 50 },
+          { label: '100', value: 100 },
+        ],
+        sliderWidth: 80,
+      },
+    },
+
     // {
     //   id: SettingId.FIND,
     //   label: SETTINGS_TEXT.findReplace.label,

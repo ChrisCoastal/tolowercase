@@ -3,6 +3,7 @@ import {
   ReplaceValue,
   SettingActionType,
   ShortcutName,
+  ValidLength,
 } from 'src/@types/types';
 
 import { INVISIBLE, URI_RESERVED } from './constants';
@@ -192,5 +193,41 @@ export function validateUriReserved(
     validatedOutput.value = encodeURIComponent(validatedOutput.value);
     //
   }
+  return validatedOutput;
+}
+
+export function validateLength(
+  output: OutputType,
+  actionType: SettingActionType,
+  inputLength: number,
+  targetLength: ValidLength
+  // replaceValue: ReplaceValue
+) {
+  const validatedOutput = output;
+  const isRange = targetLength.length === 2;
+
+  if (actionType === SettingActionType.WARN) {
+    const validLength = isRange
+      ? targetLength
+      : targetLength.concat(targetLength);
+    if (
+      validatedOutput.value.length < validLength[0] ||
+      validatedOutput.value.length > validLength[1]
+    )
+      validatedOutput.warn = true;
+    validatedOutput.warn && validatedOutput.warnDetail.push('invalid length');
+  }
+  if (actionType === SettingActionType.REMOVE) {
+    isRange
+      ? (validatedOutput.value = validatedOutput.value.slice(
+          targetLength[0],
+          targetLength[1]
+        ))
+      : (validatedOutput.value = validatedOutput.value.slice(
+          0,
+          targetLength[0]
+        ));
+  }
+
   return validatedOutput;
 }
