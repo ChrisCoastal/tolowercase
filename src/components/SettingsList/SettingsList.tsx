@@ -11,10 +11,13 @@ import {
   SettingModifier,
   SettingsReducerTypes,
 } from 'src/@types/types';
+import LengthSlider from 'src/components/Settings/LengthSlider/LengthSlider';
+import OutputLength from 'src/components/Settings/OutputLength/OutputLength';
 import SettingItem from 'src/components/Settings/SettingItem';
 import useInputsContext from 'src/hooks/useInputsContext';
 import useSettingsContext from 'src/hooks/useSettingsContext';
 
+import SettingActionSlider from '../Settings/SettingActionSlider/SettingActionSlider';
 // import OutputLength from './Settings/OutputLength';
 import { List, ListContainer, ListItem } from './SettingsList.styles';
 
@@ -22,7 +25,7 @@ const SettingsList: FC = () => {
   const { inputsState, dispatchInputs } = useInputsContext();
   const { settingsState, dispatchSettings } = useSettingsContext();
 
-  function toggleSetting(id: SettingId, isActive: boolean) {
+  function toggleIsActive(id: SettingId, isActive: boolean) {
     console.log(id, isActive);
     dispatchSettings({
       type: SettingsReducerTypes.IS_ACTIVE,
@@ -58,7 +61,7 @@ const SettingsList: FC = () => {
     modifier?: any
   ) {
     console.log(id, value);
-    if (id === SettingId.LENGTH) return updateLengthSetting(id, value);
+    // if (id === SettingId.LENGTH) return updateLengthSlider(id, value);
     if (value > SettingActionType.REPLACE || value < SettingActionType.WARN)
       return;
     const curAction = value as SettingActionType;
@@ -84,7 +87,7 @@ const SettingsList: FC = () => {
     }
   }
 
-  function updateLengthSetting(
+  function updateLengthSlider(
     id: SettingId,
     value: number | number[]
     // modifier?: any
@@ -104,7 +107,7 @@ const SettingsList: FC = () => {
     //     payload: { id, targetLength: [lengthSetting.targetLength![0]] },
     //   });
     dispatchSettings({
-      type: SettingsReducerTypes.LENGTH,
+      type: SettingsReducerTypes.LENGTH_SLIDER,
       payload: {
         id,
         targetLength: typeof value === 'number' ? [value] : value,
@@ -136,10 +139,25 @@ const SettingsList: FC = () => {
         <ListItem key={nanoid()}>
           <SettingItem
             setting={setting}
-            toggleSetting={toggleSetting}
+            toggleIsActive={toggleIsActive}
             updateSetting={updateSetting}
             updateSettingModifier={updateSettingModifier}
-          />
+          >
+            {setting.id === SettingId.LENGTH && (
+              <LengthSlider
+                setting={setting}
+                updateSetting={updateSetting}
+                updateLengthSlider={updateLengthSlider}
+                revalidateOutput={revalidateOutput}
+              />
+            )}
+            {setting.id !== SettingId.LENGTH && (
+              <SettingActionSlider
+                setting={setting}
+                updateSetting={updateSetting}
+              />
+            )}
+          </SettingItem>
         </ListItem>
       );
     }
@@ -150,7 +168,7 @@ const SettingsList: FC = () => {
   //     <ListItem>
   //       <SettingItem
   //         setting={state.inputSettings.uriUnsafe}
-  //         toggleSwitch={toggleSetting}
+  //         toggleSwitch={toggleIsActive}
   //       />
   //     </ListItem>
   //     <ListItem>
@@ -171,7 +189,13 @@ const SettingsList: FC = () => {
           padding: '0.4rem',
         }}
       >
-        <List>{outputValidationSettings}</List>
+        <List>
+          {outputValidationSettings}
+          <OutputLength
+            toggleIsActive={toggleIsActive}
+            revalidateOutput={revalidateOutput}
+          />
+        </List>
       </Box>
     </ListContainer>
   );

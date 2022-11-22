@@ -48,7 +48,7 @@ const reducer = (
       };
     }
 
-    case SettingsReducerTypes.LENGTH: {
+    case SettingsReducerTypes.LENGTH_SLIDER: {
       const index = state.outputValidation.findIndex(
         (setting) => setting.id === payload.id
       );

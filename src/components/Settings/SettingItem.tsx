@@ -7,7 +7,7 @@ import Grid from '@mui/joy/Grid';
 import Slider from '@mui/joy/Slider';
 import Switch from '@mui/joy/Switch';
 import Typography from '@mui/joy/Typography';
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { ChangeEvent, FC, ReactNode, useState } from 'react';
 import {
   Mark,
   ReplaceValue,
@@ -40,45 +40,47 @@ const marks = [
 
 type SettingItemProps = {
   setting: ValidationSetting;
-  toggleSetting: (id: SettingId, isActive: boolean) => void;
+  toggleIsActive: (id: SettingId, isActive: boolean) => void;
   // updateSettingValue: (id: SettingId, value: number | number[]) => void;
-  // updateSetting: (
-  //   id: SettingId,
-  //   actionType: number | number[],
-  //   modifier?: SettingModifier
-  // ) => void;
+  updateSetting: (
+    id: SettingId,
+    actionType: number | number[],
+    modifier?: SettingModifier
+  ) => void;
   updateSettingModifier: (id: SettingId, event: ChangeEvent) => void;
+  children: ReactNode;
 };
 
 const Setting: FC<SettingItemProps> = ({
   setting,
-  toggleSetting,
+  toggleIsActive,
   updateSettingModifier,
-  // updateSetting,
+  updateSetting,
+  children,
 }) => {
-  const [value, setValue] = useState<number | number[]>(1);
-  const { settingsState, dispatchSettings } = useSettingsContext();
+  // const [value, setValue] = useState<number | number[]>(1);
+  // const { settingsState, dispatchSettings } = useSettingsContext();
 
-  function updateSetting(id: SettingId, value: number | number[]) {
-    // setValue(() => value);
-    dispatchSettings({
-      type: SettingsReducerTypes.ACTION,
-      payload: { curAction: value },
-    });
-  }
+  // function updateSetting(id: SettingId, value: number | number[]) {
+  //   // setValue(() => value);
+  //   dispatchSettings({
+  //     type: SettingsReducerTypes.ACTION,
+  //     payload: { curAction: value },
+  //   });
+  // }
 
-  const sliderWidth = setting.sliderSetting?.sliderWidth
-    ? `${setting.sliderSetting?.sliderWidth}%`
-    : setting.validActions.length - 1 === 2
-    ? '90%'
-    : '45%';
+  // const sliderWidth = setting.sliderSetting?.sliderWidth
+  //   ? `${setting.sliderSetting?.sliderWidth}%`
+  //   : setting.validActions.length - 1 === 2
+  //   ? '90%'
+  //   : '45%';
 
-  const sliderValue =
-    setting.targetLength?.length === 1
-      ? setting.targetLength[0]
-      : setting.targetLength?.length === 2
-      ? setting.targetLength
-      : setting.curAction;
+  // const sliderValue =
+  //   setting.targetLength?.length === 1
+  //     ? setting.targetLength[0]
+  //     : setting.targetLength?.length === 2
+  //     ? setting.targetLength
+  //     : setting.curAction;
 
   return (
     <FormControl
@@ -100,7 +102,7 @@ const Setting: FC<SettingItemProps> = ({
 
       <Switch
         checked={setting.isActive}
-        onChange={(event) => toggleSetting(setting.id, event.target.checked)}
+        onChange={(event) => toggleIsActive(setting.id, event.target.checked)}
         color={setting.isActive ? 'success' : 'neutral'}
         variant="outlined"
         // endDecorator={setting.isActive ? 'on' : 'off'}
@@ -113,61 +115,7 @@ const Setting: FC<SettingItemProps> = ({
         }}
         sx={sliderSx}
       />
-      {setting.isActive && (
-        <Box
-          sx={{
-            display: 'grid',
-            gridColumn: '1',
-            justifySelf: 'center',
-            justifyItems: 'left',
-            width: '100%',
-            borderRadius: '8px',
-            backgroundColor: '#fff',
-            padding: '1rem 2rem 1rem 1rem',
-          }}
-        >
-          <Slider
-            defaultValue={sliderValue}
-            min={setting.sliderSetting?.min || 0}
-            max={setting.sliderSetting?.max || setting.validActions.length - 1}
-            step={1}
-            onChange={(_, value: number | number[]) =>
-              updateSetting(setting.id, value)
-            }
-            valueLabelDisplay={setting.sliderSetting?.labelDisplay || 'off'}
-            // valueLabelFormat={(value) => || marks[value].label
-            // }
-            marks={setting.sliderSetting?.marks || marks}
-            color="success"
-            disabled={!setting.isActive}
-            sx={{
-              fontSize: 'sm',
-              maxWidth: sliderWidth,
-            }}
-            // classes={{ markLabel: { fontSize: 'sm' } }}
-          />
-        </Box>
-      )}
-      {/* {setting.actionType === SettingActionType.REPLACE && setting.isActive && (
-        <Typography>select replace</Typography>
-      )} */}
-      {setting.isActive && setting.modifier && (
-        <FormControl sx={{ alignSelf: 'center' }}>
-          <Checkbox
-            variant="soft"
-            overlay
-            disableIcon
-            label={'range'}
-            onChange={(event: ChangeEvent) =>
-              updateSettingModifier(setting.id, event)
-            }
-            sx={{
-              // padding: '0.4rem 0.4rem',
-              textAlign: 'center',
-            }}
-          />
-        </FormControl>
-      )}
+      {setting.isActive && children}
     </FormControl>
   );
 };

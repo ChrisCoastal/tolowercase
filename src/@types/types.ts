@@ -83,7 +83,7 @@ export type ValidationSetting = {
   ) => OutputType;
   validActions: SettingActionType[];
   curAction: SettingActionType;
-  targetLength?: number[];
+  targetLength?: number | number[];
   sliderSetting?: SliderSetting;
   replaceValue?: ReplaceValue;
   modifier: SettingModifier;
@@ -156,7 +156,7 @@ export enum SettingsReducerTypes {
   INVISIBLE = 'invisible',
   URI_RESERVED = 'uriReserved',
   URI_UNSAFE = 'uirUnsafe',
-  LENGTH = 'length',
+  LENGTH_SLIDER = 'length',
   TRIM = 'trim',
   FIND = 'find',
   SET_USER_AGENT = 'setUserAgent',
@@ -183,8 +183,8 @@ export type ValueSettingsAction = {
 };
 
 export type LengthSettingsAction = {
-  type: SettingsReducerTypes.LENGTH;
-  payload: { id: SettingId; targetLength: number[] };
+  type: SettingsReducerTypes.LENGTH_SLIDER;
+  payload: { id: SettingId; targetLength: number | number[] };
 };
 
 export type ModifierSettingsAction = {
