@@ -8,9 +8,12 @@ import SaveIcon from 'src/icons/SaveIcon/SaveIcon';
 const InputActions: FC = () => {
   const { dispatchInputs } = useInputsContext();
 
+  const disabled = true;
+
   function handleSave() {
     console.log('save');
   }
+
   function handleClear() {
     dispatchInputs({ type: InputsReducerTypes.INPUT, payload: '' });
   }
@@ -19,6 +22,7 @@ const InputActions: FC = () => {
     <Box sx={{ display: 'flex', gap: '8px' }}>
       <Tooltip title="save" size="sm" placement="top">
         <IconButton
+          disabled={disabled}
           variant="plain"
           color="neutral"
           size="sm"
