@@ -10,7 +10,6 @@ export const Drawer = styled.ul<DrawerProps>`
   display: grid;
   grid-auto-rows: min-content;
   align-items: flex-start;
-  /* grid-column: 1fr 1fr; */
   top: 0;
   right: -104vw;
   width: 100vw;

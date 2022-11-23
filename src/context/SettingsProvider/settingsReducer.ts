@@ -1,5 +1,4 @@
 import {
-  SettingId,
   SettingsReducerAction,
   SettingsReducerTypes,
   SettingsState,
@@ -64,26 +63,6 @@ const reducer = (
         ...state,
         outputValidation: updatedState,
       };
-    }
-
-    case SettingsReducerTypes.MODIFIER: {
-      const index = state.outputValidation.findIndex(
-        (setting) => setting.id === payload.id
-      );
-      if (index === -1) {
-        console.error('no index found');
-        return state;
-      }
-
-      if (typeof payload.modifierValue === 'boolean') {
-        const updatedState = state.outputValidation;
-        updatedState[index].modifier.value = payload.modifierValue;
-        return {
-          ...state,
-          outputValidation: updatedState,
-        };
-      }
-      return state;
     }
 
     default:

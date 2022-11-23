@@ -1,4 +1,3 @@
-import Box from '@mui/joy/Box';
 import IconButton from '@mui/joy/IconButton';
 import Tooltip from '@mui/joy/Tooltip';
 import React, { FC } from 'react';
@@ -20,7 +19,6 @@ const SettingsDrawer: FC<SettingsDrawerProps> = ({
   function toggleDrawer() {
     setIsVisible(() => !isVisible);
   }
-  // const { state, dispatch } = useSettingsContext();
 
   return (
     //TODO: focus lock

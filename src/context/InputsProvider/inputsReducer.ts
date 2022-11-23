@@ -9,7 +9,6 @@ const reducer = (state: AppState, action: InputsReducerActions): AppState => {
 
   switch (type) {
     case InputsReducerTypes.INPUT: {
-      // const output = payload.toLowerCase();
       return { ...state, input: payload };
     }
 

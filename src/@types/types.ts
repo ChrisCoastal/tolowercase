@@ -3,11 +3,11 @@ import { Dispatch } from 'react';
 export type AppState = {
   input: string;
   output: OutputType;
-  prev: {
-    id: string;
-    input: string;
-    output: OutputType;
-  }[];
+  // saved: {
+  //   id: string;
+  //   input: string;
+  //   output: OutputType;
+  // }[];
 };
 
 export type OutputType = {
@@ -45,31 +45,21 @@ export type InputsContextType = {
 export type SettingsState = {
   userAgent: string;
   theme: ThemeSetting;
-  // shortcuts: Shortcut[];
   outputValidation: ValidationSetting[];
-  // {
-  //   toLowerCase: Setting
-  //   invisibleChar: Setting;
-  //   uriReserved: Setting;
-  //   uriUnsafe: Setting;
-  //   trim: Setting;
-  //   outputLength: Setting;
-  //   findReplace: Setting;
-  // };
 };
 
-export type Shortcut = {
-  name: string;
-  text: string;
-  key: ModifierKey;
-};
+// export type Shortcut = {
+//   name: string;
+//   text: string;
+//   key: ModifierKey;
+// };
 
-export enum ShortcutName {
-  COPY = 'Copy',
-  CLEAR = 'Clear',
-  SAVE = 'Save',
-  OPEN_DRAWER = 'Open',
-}
+// export enum ShortcutName {
+//   COPY = 'Copy',
+//   CLEAR = 'Clear',
+//   SAVE = 'Save',
+//   OPEN_DRAWER = 'Open',
+// }
 
 export type ValidationSetting = {
   id: SettingId;
@@ -87,7 +77,7 @@ export type ValidationSetting = {
   targetLength?: number | number[];
   sliderSetting?: SliderSetting;
   replaceValue?: ReplaceValue;
-  modifier: SettingModifier;
+  // modifier: SettingModifier;
 };
 
 export type ReplaceValue = [string, string];
@@ -101,16 +91,16 @@ export type SliderSetting = {
   sliderWidth?: number;
 };
 
-export type SettingModifier = {
-  inputType: SettingModifierInputType | null;
-  value: SettingModifierValue | null;
-};
+// export type SettingModifier = {
+//   inputType: SettingModifierInputType | null;
+//   value: SettingModifierValue | null;
+// };
 
-export enum SettingModifierInputType {
-  CHECKBOX = 'checkbox',
-}
+// export enum SettingModifierInputType {
+//   CHECKBOX = 'checkbox',
+// }
 
-export type SettingModifierValue = boolean | string | string[];
+// export type SettingModifierValue = boolean | string | string[];
 
 export type Mark = boolean | { value: number; label?: string | number }[];
 
@@ -145,7 +135,6 @@ export type FindReplace = {
 export enum ThemeSetting {
   LIGHT = 'light',
   DARK = 'dark',
-  FOUNTAIN = 'fountain',
 }
 
 export enum SettingsReducerTypes {
@@ -188,28 +177,21 @@ export type LengthSettingsAction = {
   payload: { id: SettingId; targetLength: number | number[] };
 };
 
-export type ModifierSettingsAction = {
-  type: SettingsReducerTypes.MODIFIER;
-  payload: { id: SettingId; modifierValue: SettingModifierValue };
-};
+// export type ModifierSettingsAction = {
+//   type: SettingsReducerTypes.MODIFIER;
+//   payload: { id: SettingId; modifierValue: SettingModifierValue };
+// };
 
 export type ActionTypeSettingsAction = {
   type: SettingsReducerTypes.ACTION;
   payload: { id: SettingId; curAction: SettingActionType };
 };
 
-// export type SettingsReducerAction = {
-//   type: SettingsReducerTypes;
-//   payload: {
-//     [key: string]: string | number | boolean | FindReplace | SettingValue;
-//   };
-// };
-
 export type SettingsReducerAction =
   | ActionTypeSettingsAction
   | IsActiveSettingsAction
   | LengthSettingsAction
-  | ModifierSettingsAction
+  // | ModifierSettingsAction
   | UserAgentSettingsAction
   | ValueSettingsAction;
 

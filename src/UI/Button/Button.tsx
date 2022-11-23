@@ -5,14 +5,21 @@ import React, { FC } from 'react';
 type ButtonProps = {
   Icon: FC;
   buttonHandler: () => void;
+  disabled?: boolean;
   tooltipText?: string;
 };
 
-const Button: FC<ButtonProps> = ({ Icon, buttonHandler, tooltipText }) => {
+const Button: FC<ButtonProps> = ({
+  Icon,
+  buttonHandler,
+  disabled,
+  tooltipText,
+}) => {
   return (
     <div>
       <ToolTip title={tooltipText}>
         <IconButton
+          disabled={disabled}
           variant="plain"
           color="neutral"
           size="sm"

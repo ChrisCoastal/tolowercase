@@ -1,11 +1,6 @@
-import {
-  OutputType,
-  ReplaceValue,
-  SettingActionType,
-  ShortcutName,
-} from 'src/@types/types';
+import { OutputType, ReplaceValue, SettingActionType } from 'src/@types/types';
 
-import { INVISIBLE, URI_RESERVED } from './constants';
+import { INVISIBLE } from './constants';
 
 export function checkEmoji(input: string): boolean {
   return /\p{Extended_Pictographic}/u.test(input);
@@ -27,59 +22,6 @@ export function isSliderRange(isRange: number | number[]): boolean {
   else return false;
 }
 
-// Shortcuts
-// function keyDownHandler(keyDownEvent: KeyboardEvent): void {
-//   console.log(keyDownEvent, keyDownEvent.key, keyDownEvent.ctrlKey);
-//   if (keyDownEvent.metaKey) getShortcut(keyDownEvent);
-// }
-
-// function getShortcut(keyDownEvent: KeyboardEvent): ShortcutName | void {
-//   switch (keyDownEvent.key) {
-//     case 'c': {
-//       const isSelection = window.getSelection()?.toString().length;
-//       keyDownEvent.metaKey && !isSelection && console.log('copy');
-//       return ShortcutName.COPY;
-//     }
-//     case 'm': {
-//       keyDownEvent.preventDefault();
-//       keyDownEvent.metaKey && console.log('open');
-//       return ShortcutName.OPEN_DRAWER;
-//     }
-//     default:
-//       return;
-//   }
-// }
-
-// Output Validation
-
-// export function validateLowerCase(
-//   output: OutputType,
-//   actionType: SettingActionType
-// ) {
-//   const validatedOutput = output;
-//   if (actionType === SettingActionType.WARN)
-//     validatedOutput.warn =
-//       validatedOutput.value.toUpperCase() !== validatedOutput.value;
-//   if (actionType === SettingActionType.REMOVE)
-//     validatedOutput.value.replaceAll(/[\p{Ll}]/g, '');
-//   if (actionType === SettingActionType.REPLACE)
-//     // validatedOutput.value = validatedOutput.value.toUpperCase();
-//     validatedOutput.value = getUpperCase(validatedOutput.value);
-
-//   return validatedOutput;
-// }
-
-// function getUpperCase(input: string) {
-//   let output = '';
-//   for (let i = 0; i < input.length; i++) {
-//     // /[\p{Lu}\p{Lt}]/.test(input.charAt(i))
-//     /[A-Z]/.test(input.charAt(i))
-//       ? (output += input.charAt(i).toLowerCase())
-//       : (output += input.charAt(i));
-//   }
-//   return output;
-// }
-
 export function validateToLowerCase(
   output: OutputType,
   actionType: SettingActionType
@@ -94,21 +36,9 @@ export function validateToLowerCase(
   }
   if (actionType === SettingActionType.REPLACE)
     validatedOutput.value = validatedOutput.value.toLowerCase();
-  // validatedOutput.value = getLowerCase(validatedOutput.value);
 
   return validatedOutput;
 }
-
-//FIXME:
-// function getLowerCase(input: string) {
-//   let output = '';
-//   for (let i = 0; i < input.length; i++) {
-//     /[a-z]/.test(input.charAt(i))
-//       ? (output += input.charAt(i).toLowerCase())
-//       : (output += input.charAt(i));
-//   }
-//   return output;
-// }
 
 export function validateTrim(
   output: OutputType,
@@ -177,7 +107,6 @@ export function validateUriReserved(
   actionType: SettingActionType
 ) {
   const validatedOutput = output;
-  // const regexUriReserved = new RegExp(URI_RESERVED.join('|'), 'gi');
   const regexUriReserved = new RegExp(
     /^([ !#$&-;=?-[\]_a-z~]|%[0-9a-fA-F]{2})+$/,
     'gi'

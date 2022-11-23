@@ -22,7 +22,6 @@ type OutputFieldProps = {
 const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
   const { inputsState, dispatchInputs } = useInputsContext();
   const { settingsState } = useSettingsContext();
-  // const numUppercase = inputsState.input.match(/[A-Z]/g)?.length;
   const charDiff = inputsState.output.value.length - inputsState.input.length;
 
   function inputChangeHandler() {
@@ -136,9 +135,6 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
                     ? `${Math.abs(charDiff)} removed`
                     : `${Math.abs(charDiff)} added`}
                 </Typography>
-                {/* <Typography level="body3" sx={{ mr: '4px' }}>
-                  {numUppercase || 0} replaced
-                </Typography> */}
                 {Boolean(inputsState.output.value?.length) && checks}
               </Box>
               <Tooltip title="copy" size="sm" placement="top">

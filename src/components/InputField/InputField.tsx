@@ -17,7 +17,6 @@ const InputField = () => {
   function handleInputChange(event: ChangeEvent<HTMLTextAreaElement>) {
     const value = event.currentTarget.value;
     dispatchInputs({ type: InputsReducerTypes.INPUT, payload: value });
-    // console.log(value);
   }
 
   return (
