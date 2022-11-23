@@ -8,6 +8,7 @@ import {
 
 import {
   validateInvisible,
+  validateLength,
   validateToLowerCase,
   validateTrim,
   validateUriReserved,
@@ -295,10 +296,10 @@ export const INITIAL_SETTINGS_STATE = {
       label: SETTINGS_TEXT.outputLength.label,
       helperText: SETTINGS_TEXT.outputLength.helperText,
       isActive: false,
-      validate: validateUriReserved,
+      validate: validateLength,
       validActions: [SettingActionType.WARN],
       curAction: SettingActionType.WARN,
-      targetLength: [33],
+      targetLength: 33,
       sliderSetting: {
         min: 1,
         max: 100,

@@ -6,7 +6,7 @@ import Textarea from '@mui/joy/Textarea';
 import Tooltip from '@mui/joy/Tooltip';
 import Typography from '@mui/joy/Typography';
 import React, { FC, useEffect } from 'react';
-import { InputsReducerTypes, OutputType } from 'src/@types/types';
+import { InputsReducerTypes, OutputType, SettingId } from 'src/@types/types';
 import useInputsContext from 'src/hooks/useInputsContext';
 import useSettingsContext from 'src/hooks/useSettingsContext';
 import CheckIcon from 'src/icons/CheckIcon/CheckIcon';
@@ -46,13 +46,14 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
 
     settingsState.outputValidation.forEach((setting) => {
       if (!setting.isActive) return;
-      validatedOutput = setting.replaceValue
-        ? setting.validate(
-            validatedOutput,
-            setting.curAction,
-            setting.replaceValue
-          )
-        : setting.validate(validatedOutput, setting.curAction);
+      if (setting.id === SettingId.LENGTH)
+        validatedOutput = setting.validate(
+          validatedOutput,
+          setting.curAction,
+          setting.targetLength!
+        );
+      else
+        validatedOutput = setting.validate(validatedOutput, setting.curAction);
     });
 
     return validatedOutput;

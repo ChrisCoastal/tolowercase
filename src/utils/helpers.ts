@@ -22,6 +22,11 @@ export function getUserAgent() {
   return userAgent;
 }
 
+export function isSliderRange(isRange: number | number[]): boolean {
+  if (Array.isArray(isRange)) return true;
+  else return false;
+}
+
 // Shortcuts
 // function keyDownHandler(keyDownEvent: KeyboardEvent): void {
 //   console.log(keyDownEvent, keyDownEvent.key, keyDownEvent.ctrlKey);
@@ -198,17 +203,16 @@ export function validateUriReserved(
 export function validateLength(
   output: OutputType,
   actionType: SettingActionType,
-  inputLength: number,
-  targetLength: number[]
-  // replaceValue: ReplaceValue
+  targetLength: number | number[]
 ) {
   const validatedOutput = output;
-  const isRange = targetLength.length === 2;
+  const isRange = isSliderRange(targetLength);
+  console.log(isRange, targetLength);
 
   if (actionType === SettingActionType.WARN) {
     const validLength = isRange
-      ? targetLength
-      : targetLength.concat(targetLength);
+      ? (targetLength as number[])
+      : ([targetLength, targetLength] as number[]);
     if (
       validatedOutput.value.length < validLength[0] ||
       validatedOutput.value.length > validLength[1]
@@ -219,12 +223,12 @@ export function validateLength(
   if (actionType === SettingActionType.REMOVE) {
     isRange
       ? (validatedOutput.value = validatedOutput.value.slice(
-          targetLength[0],
-          targetLength[1]
+          (targetLength as number[])[0],
+          (targetLength as number[])[1]
         ))
       : (validatedOutput.value = validatedOutput.value.slice(
           0,
-          targetLength[0]
+          targetLength as number
         ));
   }
 

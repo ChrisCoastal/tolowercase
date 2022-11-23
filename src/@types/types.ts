@@ -79,6 +79,7 @@ export type ValidationSetting = {
   validate: (
     output: OutputType,
     actionType: SettingActionType | number | number[],
+    targetLength?: number | number[],
     replaceValue?: ReplaceValue
   ) => OutputType;
   validActions: SettingActionType[];

@@ -17,6 +17,7 @@ import SettingItem from 'src/components/Settings/SettingItem';
 import useInputsContext from 'src/hooks/useInputsContext';
 import useSettingsContext from 'src/hooks/useSettingsContext';
 
+import LengthSetting from '../Settings/LengthSetting';
 import SettingActionSlider from '../Settings/SettingActionSlider/SettingActionSlider';
 // import OutputLength from './Settings/OutputLength';
 import { List, ListContainer, ListItem } from './SettingsList.styles';
@@ -135,6 +136,7 @@ const SettingsList: FC = () => {
 
   const outputValidationSettings = settingsState.outputValidation.map(
     (setting) => {
+      if (setting.id === SettingId.LENGTH) return;
       return (
         <ListItem key={nanoid()}>
           <SettingItem
@@ -143,20 +145,10 @@ const SettingsList: FC = () => {
             updateSetting={updateSetting}
             updateSettingModifier={updateSettingModifier}
           >
-            {setting.id === SettingId.LENGTH && (
-              <LengthSlider
-                setting={setting}
-                updateSetting={updateSetting}
-                updateLengthSlider={updateLengthSlider}
-                revalidateOutput={revalidateOutput}
-              />
-            )}
-            {setting.id !== SettingId.LENGTH && (
-              <SettingActionSlider
-                setting={setting}
-                updateSetting={updateSetting}
-              />
-            )}
+            <SettingActionSlider
+              setting={setting}
+              updateSetting={updateSetting}
+            />
           </SettingItem>
         </ListItem>
       );
@@ -191,10 +183,12 @@ const SettingsList: FC = () => {
       >
         <List>
           {outputValidationSettings}
-          <OutputLength
-            toggleIsActive={toggleIsActive}
-            revalidateOutput={revalidateOutput}
-          />
+          <ListItem>
+            <LengthSetting
+              toggleIsActive={toggleIsActive}
+              revalidateOutput={revalidateOutput}
+            />
+          </ListItem>
         </List>
       </Box>
     </ListContainer>

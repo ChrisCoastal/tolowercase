@@ -51,7 +51,7 @@ type SettingItemProps = {
   children: ReactNode;
 };
 
-const Setting: FC<SettingItemProps> = ({
+const SettingItem: FC<SettingItemProps> = ({
   setting,
   toggleIsActive,
   updateSettingModifier,
@@ -83,41 +83,43 @@ const Setting: FC<SettingItemProps> = ({
   //     : setting.curAction;
 
   return (
-    <FormControl
-      orientation="horizontal"
-      sx={{
-        display: 'grid',
-        gridTemplateColumns: '3fr 1fr',
-        justifyContent: 'space-between',
-      }}
-    >
-      <Box>
-        <FormLabel>{setting.label}</FormLabel>
-        {setting.helperText && (
-          <FormHelperText sx={{ mt: 0, fontSize: 10 }}>
-            {setting.helperText}
-          </FormHelperText>
-        )}
-      </Box>
-
-      <Switch
-        checked={setting.isActive}
-        onChange={(event) => toggleIsActive(setting.id, event.target.checked)}
-        color={setting.isActive ? 'success' : 'neutral'}
-        variant="outlined"
-        // endDecorator={setting.isActive ? 'on' : 'off'}
-        componentsProps={{
-          endDecorator: {
-            sx: {
-              minWidth: 10,
-            },
-          },
+    <Box>
+      <FormControl
+        orientation="horizontal"
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: '3fr 1fr',
+          justifyContent: 'space-between',
         }}
-        sx={sliderSx}
-      />
+      >
+        <Box>
+          <FormLabel>{setting.label}</FormLabel>
+          {setting.helperText && (
+            <FormHelperText sx={{ mt: 0, fontSize: 10 }}>
+              {setting.helperText}
+            </FormHelperText>
+          )}
+        </Box>
+
+        <Switch
+          checked={setting.isActive}
+          onChange={(event) => toggleIsActive(setting.id, event.target.checked)}
+          color={setting.isActive ? 'success' : 'neutral'}
+          variant="outlined"
+          // endDecorator={setting.isActive ? 'on' : 'off'}
+          componentsProps={{
+            endDecorator: {
+              sx: {
+                minWidth: 10,
+              },
+            },
+          }}
+          sx={sliderSx}
+        />
+      </FormControl>
       {setting.isActive && children}
-    </FormControl>
+    </Box>
   );
 };
 
-export default Setting;
+export default SettingItem;

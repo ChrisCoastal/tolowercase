@@ -42,10 +42,10 @@ const SettingActionSlider: FC<SettingActionSliderProps> = ({
   return (
     <Box
       sx={{
-        display: 'grid',
-        gridColumn: '1',
+        // display: 'grid',
+        // gridColumn: '1',
         justifySelf: 'center',
-        justifyItems: 'left',
+        // justifyItems: 'left',
         width: '100%',
         borderRadius: '8px',
         backgroundColor: '#fff',
@@ -69,7 +69,7 @@ const SettingActionSlider: FC<SettingActionSliderProps> = ({
         disabled={!setting.isActive}
         sx={{
           fontSize: 'sm',
-          maxWidth: { sliderWidth },
+          maxWidth: sliderWidth,
         }}
         // classes={{ markLabel: { fontSize: 'sm' } }}
       />

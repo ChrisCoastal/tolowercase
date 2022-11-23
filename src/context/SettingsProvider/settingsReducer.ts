@@ -52,6 +52,8 @@ const reducer = (
       const index = state.outputValidation.findIndex(
         (setting) => setting.id === payload.id
       );
+      console.log(payload);
+
       if (index === -1) {
         console.error('no index found');
         return state;
