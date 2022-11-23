@@ -17,35 +17,35 @@ export const Spinner = styled.div`
       0%,
       100% {
         transform: rotateY(0deg) rotateX(0deg);
-        background-color: rgba(26, 85, 234, 0.3);
+        background-color: rgba(26, 85, 234, 0.9);
       }
       15% {
         transform: rotateY(0deg) rotateX(0deg);
-        background-color: rgba(26, 85, 234, 0.3);
+        background-color: rgba(26, 85, 234, 0.9);
       }
       25% {
         transform: rotateY(1260deg) rotateX(0deg);
-        background-color: rgba(101, 238, 170, 0.3);
+        background-color: rgba(101, 238, 170, 0.9);
       }
       40% {
         transform: rotateY(1260deg) rotateX(0deg);
-        background-color: rgba(101, 238, 170, 0.3);
+        background-color: rgba(101, 238, 170, 0.9);
       }
       50% {
         transform: rotateY(1260deg) rotateX(-1260deg);
-        background-color: rgba(249, 173, 7, 0.3);
+        background-color: rgba(249, 173, 7, 0.9);
       }
       65% {
         transform: rotateY(1260deg) rotateX(-1260deg);
-        background-color: rgba(249, 173, 7, 0.3);
+        background-color: rgba(249, 173, 7, 0.9);
       }
       75% {
         transform: rotateY(0deg) rotateX(-1260deg);
-        background-color: rgba(243, 39, 36, 0.3);
+        background-color: rgba(243, 39, 36, 0.9);
       }
       90% {
         transform: rotateY(0deg) rotateX(-1260deg);
-        background-color: rgba(243, 39, 36, 0.3);
+        background-color: rgba(243, 39, 36, 0.9);
       }
     }
   }

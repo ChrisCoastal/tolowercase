@@ -3,10 +3,11 @@ import styled from '@emotion/styled';
 export const NavBar = styled.nav`
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
   width: 100vw;
   height: 4rem;
   border-bottom: solid 1px #ddd;
+  backdrop-filter: blur(0.5rem);
+  box-shadow: 0 0.4rem 2rem -1rem rgba(0, 0, 0, 0.4);
 `;
 
 export const NavItemsList = styled.ul`
@@ -15,7 +16,7 @@ export const NavItemsList = styled.ul`
   justify-content: space-between;
   width: 100%;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 3rem;
   list-style: none;
 `;
 

@@ -13,7 +13,7 @@ export const Drawer = styled.ul<DrawerProps>`
   top: 0;
   right: -104vw;
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   margin-top: 0;
   padding: 1rem 2rem;
   overflow-y: scroll;

@@ -30,7 +30,9 @@ const InputField = () => {
             justifyContent: 'space-between',
           }}
         >
-          <FormLabel sx={{ alignSelf: 'baseline', paddingLeft: '0.5rem' }}>
+          <FormLabel
+            sx={{ alignSelf: 'center', paddingLeft: '0.5rem', color: '#fff' }}
+          >
             input
           </FormLabel>
           <InputActions />
@@ -51,6 +53,7 @@ const InputField = () => {
                   display: 'flex',
                   width: '100%',
                   gap: 2,
+                  opacity: '0.9',
                 }}
               >
                 <Typography level="body3" sx={{ ml: '4px' }}>

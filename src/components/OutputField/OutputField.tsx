@@ -24,18 +24,6 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
   const { settingsState } = useSettingsContext();
   const charDiff = inputsState.output.value.length - inputsState.input.length;
 
-  function inputChangeHandler() {
-    const output = validateOutput(inputsState.input);
-    console.log(output);
-
-    dispatchInputs({ type: InputsReducerTypes.OUTPUT, payload: output });
-  }
-
-  function copyOutputHandler() {
-    setCopyOutput(true);
-    navigator.clipboard.writeText(inputsState.output.value);
-  }
-
   function validateOutput(input: string) {
     let validatedOutput: OutputType = {
       value: input,
@@ -56,6 +44,18 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
     });
 
     return validatedOutput;
+  }
+
+  function inputChangeHandler() {
+    const output = validateOutput(inputsState.input);
+    console.log(output);
+
+    dispatchInputs({ type: InputsReducerTypes.OUTPUT, payload: output });
+  }
+
+  function copyOutputHandler() {
+    setCopyOutput(true);
+    navigator.clipboard.writeText(inputsState.output.value);
   }
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
           inputsState.output.warn ? (
             <WarnIcon height="18" width="18" />
           ) : (
-            <VerifiedIcon height="18" width="18" />
+            <VerifiedIcon height="18" width="18" color="#6cf5a7" />
           )
         }
       >
@@ -102,7 +102,9 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
       }}
     >
       <FormControl>
-        <FormLabel sx={{ paddingLeft: '0.5rem' }}>lowercase</FormLabel>
+        <FormLabel sx={{ paddingLeft: '0.5rem', color: '#fff' }}>
+          output
+        </FormLabel>
         <Textarea
           value={inputsState.output.value}
           readOnly={true}
@@ -147,7 +149,7 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
                   {!copyOutput ? (
                     <CopyIcon height="24" width="24" />
                   ) : (
-                    <CheckIcon height="24" width="24" />
+                    <CheckIcon height="24" width="24" color="#6cf5a7" />
                   )}
                 </IconButton>
               </Tooltip>

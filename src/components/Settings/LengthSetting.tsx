@@ -50,7 +50,12 @@ const LengthSetting: FC<LengthSettingProps> = ({
       type: SettingsReducerTypes.LENGTH_SLIDER,
       payload: { id: outputSetting.id, targetLength: sliderValue },
     });
-    revalidateOutput();
+
+    const timer = setTimeout(() => {
+      revalidateOutput();
+    }, 200);
+
+    return () => clearTimeout(timer);
   }, [sliderValue]);
 
   return (
@@ -101,7 +106,7 @@ const LengthSetting: FC<LengthSettingProps> = ({
               width: '100%',
               borderRadius: '8px',
               backgroundColor: '#fff',
-              padding: '1rem 2rem 1rem 1rem',
+              padding: '1rem 0rem 1rem 1rem',
             }}
           >
             <FormControl
@@ -111,7 +116,7 @@ const LengthSetting: FC<LengthSettingProps> = ({
               }}
             >
               <Slider
-              // controlled slider must use value (not defaultValue)
+                // controlled slider must use value (not defaultValue)
                 value={outputSetting.targetLength}
                 min={1}
                 max={100}
@@ -124,7 +129,11 @@ const LengthSetting: FC<LengthSettingProps> = ({
                 getAriaValueText={() =>
                   `${outputSetting.targetLength} characters`
                 }
-                sx={{ paddingBottom: '0', '--Slider-track-size': '4px' }}
+                sx={{
+                  paddingBottom: '0',
+                  fontSize: 'sm',
+                  maxWidth: '90%',
+                }}
               />
             </FormControl>
 
@@ -137,12 +146,15 @@ const LengthSetting: FC<LengthSettingProps> = ({
               componentsProps={{
                 endDecorator: {
                   sx: {
-                    minWidth: 10,
-                    justifySelf: 'right',
+                    position: 'absolute',
+                    fontSize: '0.8rem',
+                    color: '#777',
+                    top: 18,
+                    right: 1,
                   },
                 },
               }}
-              sx={sliderSx}
+              sx={{ ...sliderSx, position: 'relative', alignSelf: 'bottom' }}
             />
           </Box>
         </Box>

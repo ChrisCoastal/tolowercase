@@ -1,6 +1,6 @@
 import { OutputType, ReplaceValue, SettingActionType } from 'src/@types/types';
 
-import { INVISIBLE } from './constants';
+import { INVISIBLE, URI_RESERVED, URI_UNSAFE } from './constants';
 
 export function checkEmoji(input: string): boolean {
   return /\p{Extended_Pictographic}/u.test(input);
@@ -107,13 +107,12 @@ export function validateUriReserved(
   actionType: SettingActionType
 ) {
   const validatedOutput = output;
-  const regexUriReserved = new RegExp(
-    /^([ !#$&-;=?-[\]_a-z~]|%[0-9a-fA-F]{2})+$/,
-    'gi'
-  );
+  const regexUriReserved = new RegExp('gi');
 
   if (actionType === SettingActionType.WARN) {
-    validatedOutput.warn = regexUriReserved.test(validatedOutput.value);
+    validatedOutput.warn =
+      validatedOutput.value !== encodeURIComponent(validatedOutput.value);
+
     validatedOutput.warn && validatedOutput.warnDetail.push('uri reserved');
   }
   if (actionType === SettingActionType.REMOVE) {

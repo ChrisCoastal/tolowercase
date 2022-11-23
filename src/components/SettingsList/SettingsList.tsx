@@ -20,15 +20,6 @@ const SettingsList: FC = () => {
   const { inputsState, dispatchInputs } = useInputsContext();
   const { settingsState, dispatchSettings } = useSettingsContext();
 
-  function toggleIsActive(id: SettingId, isActive: boolean) {
-    console.log(id, isActive);
-    dispatchSettings({
-      type: SettingsReducerTypes.IS_ACTIVE,
-      payload: { isActive, id },
-    });
-    revalidateOutput();
-  }
-
   function revalidateOutput() {
     const curInput = inputsState.input;
     dispatchInputs({ type: InputsReducerTypes.INPUT, payload: '' });
@@ -39,6 +30,15 @@ const SettingsList: FC = () => {
         payload: curInput,
       });
     }, 10);
+  }
+
+  function toggleIsActive(id: SettingId, isActive: boolean) {
+    console.log(id, isActive);
+    dispatchSettings({
+      type: SettingsReducerTypes.IS_ACTIVE,
+      payload: { isActive, id },
+    });
+    revalidateOutput();
   }
 
   function updateSetting(id: SettingId, value: number | number[]) {
@@ -76,13 +76,7 @@ const SettingsList: FC = () => {
       <Typography fontSize="sm" sx={{ paddingBottom: '0.5rem' }}>
         output validation
       </Typography>
-      <Box
-        sx={{
-          border: 'solid 1px #eee',
-          borderRadius: '6px',
-          padding: '0.4rem',
-        }}
-      >
+      <Box>
         <List>
           {outputValidationSettings}
           <ListItem>

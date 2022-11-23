@@ -1,3 +1,4 @@
+import { useColorScheme } from '@mui/joy/styles';
 import React, { createContext, FC, ReactNode, useReducer } from 'react';
 import { SettingsContextType } from 'src/@types/types';
 import reducer from 'src/context/SettingsProvider/settingsReducer';
@@ -14,6 +15,11 @@ const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     reducer,
     INITIAL_SETTINGS_STATE
   );
+
+  const { mode, systemMode } = useColorScheme();
+  console.log(mode); // "system"
+  console.log(systemMode); // "light" | "dark" based on the user's preference.
+
   return (
     <SettingsContext.Provider value={{ settingsState, dispatchSettings }}>
       {children}
