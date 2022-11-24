@@ -1,8 +1,10 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { Theme } from '@mui/joy';
 
 export type DrawerProps = {
   isVisible: boolean;
+  theme: Theme;
 };
 
 export const Drawer = styled.div<DrawerProps>`
@@ -19,9 +21,7 @@ export const Drawer = styled.div<DrawerProps>`
   overflow-y: scroll;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
-  background-color: var(
-    --tolowercase-palette-text-primary
-  ); // theme.vars.palette.primary[500]
+  background-color: ${({ theme }) => theme.vars.palette.background.body};
   box-shadow: 0 0 2rem 0.5rem rgba(0, 0, 0, 0.4);
   transition: all 0.3s;
   z-index: 10000;

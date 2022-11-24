@@ -34,7 +34,7 @@ function App() {
         <InputField />
         <OutputField copyOutput={copyOutput} setCopyOutput={setCopyOutput} />
       </FieldsContainer>
-      <Floaters />
+      {/* <Floaters /> */}
     </AppContainer>
   );
 }

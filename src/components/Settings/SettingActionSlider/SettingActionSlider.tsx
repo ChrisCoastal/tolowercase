@@ -50,7 +50,7 @@ const SettingActionSlider: FC<SettingActionSliderProps> = ({
         }
         valueLabelDisplay={setting.sliderSetting?.labelDisplay || 'off'}
         marks={settingActionMarks}
-        color="success"
+        color="primary"
         disabled={!setting.isActive}
         sx={{
           fontSize: 'sm',

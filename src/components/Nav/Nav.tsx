@@ -20,7 +20,7 @@ const Nav: FC<NavProps> = ({ setIsVisible }) => {
       <NavItemsList>
         <NavItem>
           <LogoIcon height="30px" width="30px" />
-          <Typography sx={{ color: '#fff' }}>tolowercase</Typography>
+          <Typography color="neutral">tolowercase</Typography>
         </NavItem>
         <NavItem>
           <IconButton

@@ -40,15 +40,6 @@ const SettingItem: FC<SettingItemProps> = ({
         <Switch
           checked={setting.isActive}
           onChange={(event) => toggleIsActive(setting.id, event.target.checked)}
-          color={setting.isActive ? 'success' : 'neutral'}
-          variant="outlined"
-          componentsProps={{
-            endDecorator: {
-              sx: {
-                minWidth: 10,
-              },
-            },
-          }}
           sx={switchSx}
         />
       </FormControl>

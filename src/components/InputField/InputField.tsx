@@ -19,6 +19,10 @@ const InputField = () => {
     dispatchInputs({ type: InputsReducerTypes.INPUT, payload: value });
   }
 
+  const inputFocusHighlight = inputsState.output.warn
+    ? '#fba61d'
+    : 'var(--tolowercase-palette-primary-500';
+
   return (
     <Box sx={{ py: 2, flexWrap: 'wrap', width: '100%', maxWidth: '48rem' }}>
       <FormControl>
@@ -46,7 +50,9 @@ const InputField = () => {
             value={inputsState.input}
             minRows={3}
             maxRows={3}
-            sx={{ color: `` }}
+            sx={{
+              '--Textarea-focusedHighlight': inputFocusHighlight,
+            }}
             endDecorator={
               <Box
                 sx={{
@@ -56,11 +62,11 @@ const InputField = () => {
                   opacity: '0.9',
                 }}
               >
-                <Typography level="body3" sx={{ ml: '4px' }}>
+                <Typography color="neutral" level="body3" sx={{ ml: '4px' }}>
                   {inputsState.input.length} character
                   {inputsState.input.length !== 1 ? 's' : ' '}
                 </Typography>
-                <Typography level="body3" sx={{ mr: '4px' }}>
+                <Typography color="neutral" level="body3" sx={{ mr: '4px' }}>
                   {numUppercase || 0} uppercase
                 </Typography>
               </Box>

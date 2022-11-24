@@ -76,6 +76,7 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
   const checks = (
     <Tooltip title={checkWarningTip()} size="sm" placement="top">
       <Typography
+        color="neutral"
         level="body3"
         sx={{ mr: '4px' }}
         startDecorator={
@@ -128,11 +129,11 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
                   gap: 2,
                 }}
               >
-                <Typography level="body3" sx={{ ml: '4px' }}>
+                <Typography color="neutral" level="body3" sx={{ ml: '4px' }}>
                   {inputsState.output.value?.length} character
                   {inputsState.output.value?.length !== 1 ? 's' : ' '}
                 </Typography>
-                <Typography level="body3" sx={{ mr: '4px' }}>
+                <Typography color="neutral" level="body3" sx={{ mr: '4px' }}>
                   {charDiff <= 0
                     ? `${Math.abs(charDiff)} removed`
                     : `${Math.abs(charDiff)} added`}

@@ -1,13 +1,23 @@
 import styled from '@emotion/styled';
+import { Theme, useColorScheme } from '@mui/joy';
+import { ThemeSetting } from 'src/@types/types';
 
-export const Spinner = styled.div`
+export type SpinnerProps = {
+  theme: Theme;
+};
+
+export const Spinner = styled.div<SpinnerProps>`
   padding: 0;
   margin: 0;
   height: 30px;
   .svg {
-    /* width: 1.6rem; */
-    /* height: 1.6rem; */
     border-radius: 6px;
+    fill: ${({ theme }) => {
+      const { mode } = useColorScheme();
+      return mode === ThemeSetting.LIGHT
+        ? theme.vars.palette.neutral[800]
+        : '#fff';
+    }};
     backface-visibility: visible;
     animation-name: flip;
     animation-duration: 30s;
@@ -17,35 +27,27 @@ export const Spinner = styled.div`
       0%,
       100% {
         transform: rotateY(0deg) rotateX(0deg);
-        background-color: rgba(26, 85, 234, 0.9);
       }
       15% {
         transform: rotateY(0deg) rotateX(0deg);
-        background-color: rgba(26, 85, 234, 0.9);
       }
       25% {
         transform: rotateY(1260deg) rotateX(0deg);
-        background-color: rgba(101, 238, 170, 0.9);
       }
       40% {
         transform: rotateY(1260deg) rotateX(0deg);
-        background-color: rgba(101, 238, 170, 0.9);
       }
       50% {
         transform: rotateY(1260deg) rotateX(-1260deg);
-        background-color: rgba(249, 173, 7, 0.9);
       }
       65% {
         transform: rotateY(1260deg) rotateX(-1260deg);
-        background-color: rgba(249, 173, 7, 0.9);
       }
       75% {
         transform: rotateY(0deg) rotateX(-1260deg);
-        background-color: rgba(243, 39, 36, 0.9);
       }
       90% {
         transform: rotateY(0deg) rotateX(-1260deg);
-        background-color: rgba(243, 39, 36, 0.9);
       }
     }
   }

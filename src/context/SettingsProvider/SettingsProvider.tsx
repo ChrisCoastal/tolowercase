@@ -16,9 +16,9 @@ const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     INITIAL_SETTINGS_STATE
   );
 
-  const { mode, systemMode } = useColorScheme();
-  console.log(mode); // "system"
-  console.log(systemMode); // "light" | "dark" based on the user's preference.
+  // const { mode, systemMode, setMode } = useColorScheme();
+  // console.log(mode); // "system"
+  // console.log(systemMode); // "light" | "dark" based on the user's preference.
 
   return (
     <SettingsContext.Provider value={{ settingsState, dispatchSettings }}>

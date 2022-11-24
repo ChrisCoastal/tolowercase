@@ -82,15 +82,6 @@ const LengthSetting: FC<LengthSettingProps> = ({
           onChange={(event) =>
             toggleIsActive(outputSetting.id, event.target.checked)
           }
-          color={outputSetting.isActive ? 'success' : 'neutral'}
-          variant="outlined"
-          componentsProps={{
-            endDecorator: {
-              sx: {
-                minWidth: 10,
-              },
-            },
-          }}
           sx={switchSx}
         />
       </FormControl>

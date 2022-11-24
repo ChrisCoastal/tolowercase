@@ -19,7 +19,7 @@ export const AppContainer = styled.main<MuiProps>`
     rgba(2, 35, 65, 1) 100%
   ); */
   background-color: ${(props) =>
-    props.theme.vars.palette.primary[500]}; // this works
+    props.theme.vars.palette.background.body}; // this works
   overflow-x: hidden;
   /* z-index: -1000; */
 `;
