@@ -11,8 +11,8 @@ export const IconWrapper = styled.span<IconWrapperProps>`
   margin: 0;
   .svg {
     fill: ${({ theme }) => {
-      const { mode } = useColorScheme();
-      return mode === ThemeSetting.LIGHT
+      const { mode, systemMode } = useColorScheme();
+      return mode === ThemeSetting.LIGHT || systemMode === ThemeSetting.LIGHT
         ? theme.vars.palette.neutral[800]
         : '#fff';
     }};

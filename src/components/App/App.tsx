@@ -1,5 +1,6 @@
+import { useColorScheme } from '@mui/joy';
 import React, { useEffect, useState } from 'react';
-import { SettingsReducerTypes } from 'src/@types/types';
+import { SettingsReducerTypes, ThemeSetting } from 'src/@types/types';
 import FieldsContainer from 'src/components/FieldsContainer/FieldsContainer';
 import Hero from 'src/components/Hero/Hero';
 import InputField from 'src/components/InputField/InputField';
@@ -17,6 +18,7 @@ function App() {
   const [copyOutput, setCopyOutput] = useState<boolean>(false);
   const { dispatchSettings } = useSettingsContext();
   const { isVisible, setIsVisible } = useDrawer();
+  const { systemMode, setMode } = useColorScheme();
 
   useEffect(() => {
     const userAgent = getUserAgent();

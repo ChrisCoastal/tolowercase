@@ -13,8 +13,8 @@ export const Spinner = styled.div<SpinnerProps>`
   .svg {
     border-radius: 6px;
     fill: ${({ theme }) => {
-      const { mode } = useColorScheme();
-      return mode === ThemeSetting.LIGHT
+      const { mode, systemMode } = useColorScheme();
+      return mode === ThemeSetting.LIGHT || systemMode === ThemeSetting.LIGHT
         ? theme.vars.palette.neutral[800]
         : '#fff';
     }};
