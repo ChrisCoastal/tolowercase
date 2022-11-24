@@ -8,7 +8,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { SettingId, SettingsReducerTypes } from 'src/@types/types';
 import useSettingsContext from 'src/hooks/useSettingsContext';
 import { isSliderRange } from 'src/utils/helpers';
-import { sliderSx } from 'src/utils/muiSx';
+import { switchSx } from 'src/utils/muiSx';
 
 const marks = [
   { label: '1', value: 1 },
@@ -91,7 +91,7 @@ const LengthSetting: FC<LengthSettingProps> = ({
               },
             },
           }}
-          sx={sliderSx}
+          sx={switchSx}
         />
       </FormControl>
       {outputSetting.isActive && (
@@ -106,13 +106,13 @@ const LengthSetting: FC<LengthSettingProps> = ({
               width: '100%',
               borderRadius: '8px',
               backgroundColor: '#fff',
-              padding: '1rem 0rem 1rem 1rem',
+              padding: '1rem 0rem 1rem 0.8rem',
             }}
           >
             <FormControl
               sx={{
                 width: '100%',
-                padding: '0',
+                padding: '1rem 0 0 0',
               }}
             >
               <Slider
@@ -154,7 +154,7 @@ const LengthSetting: FC<LengthSettingProps> = ({
                   },
                 },
               }}
-              sx={{ ...sliderSx, position: 'relative', alignSelf: 'bottom' }}
+              sx={{ ...switchSx, position: 'relative', alignSelf: 'bottom' }}
             />
           </Box>
         </Box>

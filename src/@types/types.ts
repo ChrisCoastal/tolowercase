@@ -138,9 +138,10 @@ export enum ThemeSetting {
 }
 
 export enum SettingsReducerTypes {
+  THEME_MODE = 'mode',
   IS_ACTIVE = 'isActive',
   ACTION = 'actionType',
-  MODIFIER = 'modifier',
+  // MODIFIER = 'modifier',
   VALUE = 'value',
   UPDATE_SETTING = 'updateSetting',
   INVISIBLE = 'invisible',
@@ -148,14 +149,19 @@ export enum SettingsReducerTypes {
   URI_UNSAFE = 'uirUnsafe',
   LENGTH_SLIDER = 'length',
   TRIM = 'trim',
-  FIND = 'find',
+  // FIND = 'find',
   SET_USER_AGENT = 'setUserAgent',
-  SET_MODIFIER_KEY = 'setModifier',
-  SET_COPY = 'setCopy',
-  SET_CLEAR = 'setClear',
-  SET_SAVE = 'setSave',
-  SET_OPEN_DRAWER = 'setOpen',
+  // SET_MODIFIER_KEY = 'setModifier',
+  // SET_COPY = 'setCopy',
+  // SET_CLEAR = 'setClear',
+  // SET_SAVE = 'setSave',
+  // SET_OPEN_DRAWER = 'setOpen',
 }
+
+export type ThemeModeSettingsAction = {
+  type: SettingsReducerTypes.THEME_MODE;
+  payload: { mode: ThemeSetting };
+};
 
 export type UserAgentSettingsAction = {
   type: SettingsReducerTypes.SET_USER_AGENT;
@@ -192,6 +198,7 @@ export type SettingsReducerAction =
   | IsActiveSettingsAction
   | LengthSettingsAction
   // | ModifierSettingsAction
+  | ThemeModeSettingsAction
   | UserAgentSettingsAction
   | ValueSettingsAction;
 

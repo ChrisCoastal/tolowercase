@@ -31,6 +31,13 @@ const reducer = (
       };
     }
 
+    case SettingsReducerTypes.THEME_MODE: {
+      return {
+        ...state,
+        theme: payload.mode,
+      };
+    }
+
     case SettingsReducerTypes.ACTION: {
       const index = state.outputValidation.findIndex(
         (setting) => setting.id === payload.id

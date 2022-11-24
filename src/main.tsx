@@ -11,6 +11,7 @@ import App from './components/App/App';
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <CssVarsProvider theme={globalTheme} defaultMode="system">
+      {/* <CssVarsProvider> */}
       <CssBaseline />
       <InputsProvider>
         <SettingsProvider>

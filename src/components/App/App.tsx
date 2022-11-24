@@ -11,7 +11,7 @@ import useSettingsContext from 'src/hooks/useSettingsContext';
 import { getUserAgent } from 'src/utils/helpers';
 
 import Floaters from '../Floaters/Floaters';
-import { AppContainer } from './App.styles';
+import { AppContainer, Div } from './App.styles';
 
 function App() {
   const [copyOutput, setCopyOutput] = useState<boolean>(false);

@@ -5,11 +5,11 @@ export const inputBoxSx = {
   maxWidth: '48rem',
 };
 
-export const sliderSx = {
+export const switchSx = {
   justifySelf: 'end',
   alignSelf: 'start',
   '--Switch-thumb-size': '14px',
-  '--Switch-track-height': '14px',
+  '--Switch-track-height': '18px',
   '--Switch-gap': '8px',
   '--Switch-track-radius': '14px',
   '--Switch-track-width': '36px',

@@ -9,7 +9,7 @@ type VerifiedIconProps = {
 const VerifiedIcon: FC<VerifiedIconProps> = ({
   height,
   width,
-  color = '#fff',
+  color = '#6cf5a7',
 }) => {
   return (
     <>

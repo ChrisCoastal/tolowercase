@@ -5,7 +5,7 @@ import FormLabel from '@mui/joy/FormLabel';
 import Switch from '@mui/joy/Switch';
 import React, { FC, ReactNode } from 'react';
 import { SettingId, ValidationSetting } from 'src/@types/types';
-import { sliderSx } from 'src/utils/muiSx';
+import { switchSx } from 'src/utils/muiSx';
 
 type SettingItemProps = {
   setting: ValidationSetting;
@@ -49,7 +49,7 @@ const SettingItem: FC<SettingItemProps> = ({
               },
             },
           }}
-          sx={sliderSx}
+          sx={switchSx}
         />
       </FormControl>
       {setting.isActive && children}

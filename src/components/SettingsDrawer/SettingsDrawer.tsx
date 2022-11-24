@@ -5,7 +5,13 @@ import SettingsList from 'src/components/SettingsList/SettingsList';
 // import useSettingsContext from 'src/hooks/useSettingsContext';
 import CloseIcon from 'src/icons/ClearIcon/ClearIcon';
 
-import { CloseDrawer, Drawer, DrawerBackground } from './SettingsDrawer.styles';
+import DarkModeSwitch from '../DarkModeSwitch/DarkModeSwitch';
+import {
+  CloseDrawer,
+  Drawer,
+  DrawerActions,
+  DrawerBackground,
+} from './SettingsDrawer.styles';
 
 type SettingsDrawerProps = {
   isVisible: boolean;
@@ -24,18 +30,21 @@ const SettingsDrawer: FC<SettingsDrawerProps> = ({
     //TODO: focus lock
     <>
       <Drawer isVisible={isVisible}>
-        <CloseDrawer>
-          <Tooltip title="close" size="sm" placement="top">
-            <IconButton
-              variant="plain"
-              color="neutral"
-              size="sm"
-              onClick={toggleDrawer}
-            >
-              <CloseIcon height="24px" width="24px" />
-            </IconButton>
-          </Tooltip>
-        </CloseDrawer>
+        <DrawerActions>
+          <DarkModeSwitch />
+          <CloseDrawer>
+            <Tooltip title="close" size="sm" placement="top">
+              <IconButton
+                variant="plain"
+                color="neutral"
+                size="sm"
+                onClick={toggleDrawer}
+              >
+                <CloseIcon height="24px" width="24px" />
+              </IconButton>
+            </Tooltip>
+          </CloseDrawer>
+        </DrawerActions>
         <SettingsList />
       </Drawer>
       <DrawerBackground isVisible={isVisible} onClick={toggleDrawer} />
