@@ -30,8 +30,6 @@ export const Drawer = styled.div<DrawerProps>`
     isVisible &&
     css`
       right: 0;
-      height: 100%;
-      width: 100%;
     `}
 
   @media screen and (min-width: 600px) {
@@ -71,10 +69,10 @@ export const DrawerBackground = styled.div`
   opacity: 0.6;
   z-index: 1000;
 
-  /* ${({ isVisible }: DrawerProps) =>
+  ${({ isVisible }: DrawerProps) =>
     isVisible &&
     css`
       height: 100%;
       width: 100%;
-    `} */
+    `}
 `;
