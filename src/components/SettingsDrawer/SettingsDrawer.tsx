@@ -29,6 +29,7 @@ const SettingsDrawer: FC<SettingsDrawerProps> = ({
   return (
     //TODO: focus lock
     <>
+      {/* @ts-expect-error theme passed by cssvarsprovider*/}
       <Drawer isVisible={isVisible}>
         <DrawerActions>
           <DarkModeSwitch />
@@ -47,6 +48,7 @@ const SettingsDrawer: FC<SettingsDrawerProps> = ({
         </DrawerActions>
         <SettingsList />
       </Drawer>
+      {/* @ts-expect-error theme passed by cssvarsprovider*/}
       <DrawerBackground isVisible={isVisible} onClick={toggleDrawer} />
     </>
   );

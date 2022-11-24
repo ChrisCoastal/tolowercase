@@ -10,7 +10,7 @@ type SaveIconProps = {
 
 const SaveIcon: FC<SaveIconProps> = ({ height, width, color = '#fff' }) => {
   return (
-    //@ts-expect-error component has access to theme; does not need to be passed as props
+    // @ts-expect-error theme passed by cssvarsprovider
     <IconWrapper>
       <svg
         xmlns="http://www.w3.org/2000/svg"

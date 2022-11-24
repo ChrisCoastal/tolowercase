@@ -10,7 +10,7 @@ type LogoIconProps = {
 
 const LogoIcon: FC<LogoIconProps> = ({ height, width, color = '#fff' }) => {
   return (
-    //@ts-expect-error component has access to theme; does not need to be passed as props
+    // @ts-expect-error theme passed by cssvarsprovider
     <Spinner>
       <svg
         xmlns="http://www.w3.org/2000/svg"
