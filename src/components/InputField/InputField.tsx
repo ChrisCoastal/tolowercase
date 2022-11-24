@@ -34,9 +34,7 @@ const InputField = () => {
             justifyContent: 'space-between',
           }}
         >
-          <FormLabel
-            sx={{ alignSelf: 'center', paddingLeft: '0.5rem', color: '#fff' }}
-          >
+          <FormLabel sx={{ alignSelf: 'center', paddingLeft: '0.5rem' }}>
             input
           </FormLabel>
           <InputActions />

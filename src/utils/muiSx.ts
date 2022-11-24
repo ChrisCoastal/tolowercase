@@ -8,6 +8,7 @@ export const inputBoxSx = {
 export const switchSx = {
   justifySelf: 'end',
   alignSelf: 'start',
+  paddingRight: '1rem',
   '--Switch-thumb-size': '14px',
   '--Switch-track-height': '18px',
   '--Switch-gap': '8px',

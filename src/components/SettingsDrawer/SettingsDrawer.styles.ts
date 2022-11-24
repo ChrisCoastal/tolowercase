@@ -17,7 +17,7 @@ export const Drawer = styled.div<DrawerProps>`
   width: 100vw;
   height: 100vh;
   margin-top: 0;
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
   overflow-y: scroll;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
@@ -48,7 +48,7 @@ export const Drawer = styled.div<DrawerProps>`
 export const DrawerActions = styled.ul`
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.4rem;
   justify-content: right;
   margin: 0;
 `;

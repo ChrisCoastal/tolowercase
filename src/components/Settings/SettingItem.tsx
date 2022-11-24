@@ -26,6 +26,7 @@ const SettingItem: FC<SettingItemProps> = ({
           display: 'grid',
           gridTemplateColumns: '3fr 1fr',
           justifyContent: 'space-between',
+          marginBottom: '1rem',
         }}
       >
         <Box>

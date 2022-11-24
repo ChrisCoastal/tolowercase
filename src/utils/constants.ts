@@ -164,7 +164,10 @@ export const SETTINGS_TEXT = {
     label: 'uri reserved characters',
     helperText: 'optionally encode as UTF-8',
   },
-  outputLength: { label: 'length', helperText: 'specify output length' },
+  outputLength: {
+    label: 'length',
+    helperText: 'validation for output character length',
+  },
   findReplace: { label: 'find', helperText: '' },
 };
 
@@ -201,11 +204,7 @@ export const INITIAL_SETTINGS_STATE = {
       helperText: SETTINGS_TEXT.trim.helperText,
       isActive: false,
       validate: validateTrim,
-      validActions: [
-        SettingActionType.WARN,
-        SettingActionType.REMOVE,
-        SettingActionType.REPLACE,
-      ],
+      validActions: [SettingActionType.WARN, SettingActionType.REMOVE],
       curAction: SettingActionType.WARN,
       replaceValue: '',
     },

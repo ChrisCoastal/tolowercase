@@ -66,6 +66,7 @@ const LengthSetting: FC<LengthSettingProps> = ({
           display: 'grid',
           gridTemplateColumns: '3fr 1fr',
           justifyContent: 'space-between',
+          marginBottom: '1rem',
         }}
       >
         <Box>
@@ -97,7 +98,7 @@ const LengthSetting: FC<LengthSettingProps> = ({
               width: '100%',
               borderRadius: '8px',
               backgroundColor: '#fff',
-              padding: '1rem 0rem 1rem 0.8rem',
+              padding: '1rem 0rem 1rem 2rem',
             }}
           >
             <FormControl
@@ -113,7 +114,7 @@ const LengthSetting: FC<LengthSettingProps> = ({
                 max={100}
                 marks={marks}
                 disabled={!outputSetting.isActive}
-                color="neutral"
+                color="primary"
                 onChange={handleChange}
                 valueLabelDisplay="on"
                 getAriaLabel={() => 'check output length'}
@@ -121,9 +122,9 @@ const LengthSetting: FC<LengthSettingProps> = ({
                   `${outputSetting.targetLength} characters`
                 }
                 sx={{
-                  paddingBottom: '0',
+                  paddingBottom: '3rem',
                   fontSize: 'sm',
-                  maxWidth: '90%',
+                  maxWidth: '96%',
                 }}
               />
             </FormControl>
@@ -131,21 +132,24 @@ const LengthSetting: FC<LengthSettingProps> = ({
             <Switch
               checked={isSliderRange(sliderValue)}
               onChange={(event) => toggleRange(event.target.checked)}
-              color={isSliderRange(sliderValue) ? 'success' : 'neutral'}
-              variant="outlined"
               endDecorator={'range'}
               componentsProps={{
                 endDecorator: {
                   sx: {
                     position: 'absolute',
                     fontSize: '0.8rem',
-                    color: '#777',
-                    top: 18,
-                    right: 1,
+                    color: '#9DA1AC',
+                    top: 36,
+                    right: 17,
                   },
                 },
               }}
-              sx={{ ...switchSx, position: 'relative', alignSelf: 'bottom' }}
+              sx={{
+                ...switchSx,
+                position: 'relative',
+                paddingTop: '1rem',
+                alignSelf: 'bottom',
+              }}
             />
           </Box>
         </Box>

@@ -73,8 +73,8 @@ const SettingsList: FC = () => {
 
   return (
     <ListContainer>
-      <Typography fontSize="sm" sx={{ paddingBottom: '0.5rem' }}>
-        output validation
+      <Typography fontSize="sm" sx={{ paddingBottom: '0' }}>
+        validation
       </Typography>
       <Box>
         <List>

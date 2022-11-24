@@ -5,7 +5,7 @@ import SettingsList from 'src/components/SettingsList/SettingsList';
 // import useSettingsContext from 'src/hooks/useSettingsContext';
 import CloseIcon from 'src/icons/ClearIcon/ClearIcon';
 
-import DarkModeSwitch from '../DarkModeSwitch/DarkModeSwitch';
+import DarkModeSwitch from './DarkModeSwitch/DarkModeSwitch';
 import {
   CloseDrawer,
   Drawer,

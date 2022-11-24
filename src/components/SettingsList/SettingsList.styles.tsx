@@ -8,7 +8,7 @@ export const List = styled.ul`
 
 export const ListItem = styled.li`
   padding: 1rem;
-  margin: 1rem;
+  margin: 0.2rem 0 1rem 0;
   border-radius: 8px;
   border: solid 1px #ddd;
 `;

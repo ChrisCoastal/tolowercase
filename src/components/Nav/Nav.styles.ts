@@ -16,7 +16,7 @@ export const NavItemsList = styled.ul`
   justify-content: space-between;
   width: 100%;
   margin: 0 auto;
-  padding: 0 3rem;
+  padding: 0 2rem;
   list-style: none;
 `;
 

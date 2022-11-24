@@ -28,7 +28,7 @@ const SettingActionSlider: FC<SettingActionSliderProps> = ({
   setting,
   updateSetting,
 }) => {
-  const sliderWidth = setting.validActions.length - 1 === 2 ? '90%' : '45%';
+  const sliderWidth = setting.validActions.length - 1 === 2 ? '100%' : '50%';
 
   return (
     <Box
@@ -37,7 +37,7 @@ const SettingActionSlider: FC<SettingActionSliderProps> = ({
         width: '100%',
         borderRadius: '8px',
         backgroundColor: '#fff',
-        padding: '1rem 2rem 1rem 1rem',
+        padding: '1rem 3rem 1.6rem 3rem',
       }}
     >
       <Slider
