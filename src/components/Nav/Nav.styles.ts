@@ -5,7 +5,7 @@ export const NavBar = styled.nav`
   align-items: center;
   width: 100vw;
   height: 4rem;
-  border-bottom: solid 1px var(--tolowercase-palette-neutral-200);
+  border-bottom: solid 1px var(--tolowercase-palette-neutral-400);
   backdrop-filter: blur(0.5rem);
   /* box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.1); */
 `;
