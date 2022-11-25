@@ -70,7 +70,12 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
   }, [copyOutput]);
 
   function checkWarningTip() {
-    return `not passing: ${inputsState.output.warnDetail.join(', ')}`;
+    return inputsState.output.warn
+      ? `not passing: ${inputsState.output.warnDetail.join(', ')}`
+      : `passing: ${settingsState.outputValidation
+          .filter((setting) => setting.isActive === true)
+          .map((setting) => setting.label)
+          .join(', ')}`;
   }
 
   const checks = (
