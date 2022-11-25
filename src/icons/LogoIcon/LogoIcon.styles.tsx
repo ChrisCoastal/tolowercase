@@ -9,7 +9,7 @@ export type SpinnerProps = {
 export const Spinner = styled.div<SpinnerProps>`
   padding: 0;
   margin: 0;
-  height: 30px;
+  height: 2rem;
   .svg {
     border-radius: 6px;
     fill: ${({ theme }) => {
