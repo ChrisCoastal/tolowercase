@@ -21,7 +21,7 @@ const InputField = () => {
 
   const inputFocusHighlight = inputsState.output.warn
     ? '#fba61d'
-    : 'var(--tolowercase-palette-primary-500';
+    : 'var(--tolowercase-palette-primary-500)';
 
   return (
     <Box sx={{ py: 2, flexWrap: 'wrap', width: '100%', maxWidth: '48rem' }}>

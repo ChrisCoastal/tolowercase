@@ -5,5 +5,5 @@ export const Wrapper = styled.div`
   justify-items: center;
   max-width: 48rem;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 3rem 2rem;
 `;
