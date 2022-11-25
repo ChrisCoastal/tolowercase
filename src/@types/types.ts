@@ -77,7 +77,6 @@ export type ValidationSetting = {
   targetLength?: number | number[];
   sliderSetting?: SliderSetting;
   replaceValue?: ReplaceValue;
-  // modifier: SettingModifier;
 };
 
 export type ReplaceValue = [string, string];
@@ -90,17 +89,6 @@ export type SliderSetting = {
   marks?: Mark;
   sliderWidth?: number;
 };
-
-// export type SettingModifier = {
-//   inputType: SettingModifierInputType | null;
-//   value: SettingModifierValue | null;
-// };
-
-// export enum SettingModifierInputType {
-//   CHECKBOX = 'checkbox',
-// }
-
-// export type SettingModifierValue = boolean | string | string[];
 
 export type Mark = boolean | { value: number; label?: string | number }[];
 
@@ -135,13 +123,13 @@ export type FindReplace = {
 export enum ThemeSetting {
   LIGHT = 'light',
   DARK = 'dark',
+  SYSTEM = 'system',
 }
 
 export enum SettingsReducerTypes {
   THEME_MODE = 'mode',
   IS_ACTIVE = 'isActive',
   ACTION = 'actionType',
-  // MODIFIER = 'modifier',
   VALUE = 'value',
   UPDATE_SETTING = 'updateSetting',
   INVISIBLE = 'invisible',
@@ -151,11 +139,6 @@ export enum SettingsReducerTypes {
   TRIM = 'trim',
   // FIND = 'find',
   SET_USER_AGENT = 'setUserAgent',
-  // SET_MODIFIER_KEY = 'setModifier',
-  // SET_COPY = 'setCopy',
-  // SET_CLEAR = 'setClear',
-  // SET_SAVE = 'setSave',
-  // SET_OPEN_DRAWER = 'setOpen',
 }
 
 export type ThemeModeSettingsAction = {
@@ -183,11 +166,6 @@ export type LengthSettingsAction = {
   payload: { id: SettingId; targetLength: number | number[] };
 };
 
-// export type ModifierSettingsAction = {
-//   type: SettingsReducerTypes.MODIFIER;
-//   payload: { id: SettingId; modifierValue: SettingModifierValue };
-// };
-
 export type ActionTypeSettingsAction = {
   type: SettingsReducerTypes.ACTION;
   payload: { id: SettingId; curAction: SettingActionType };
@@ -197,7 +175,6 @@ export type SettingsReducerAction =
   | ActionTypeSettingsAction
   | IsActiveSettingsAction
   | LengthSettingsAction
-  // | ModifierSettingsAction
   | ThemeModeSettingsAction
   | UserAgentSettingsAction
   | ValueSettingsAction;
@@ -206,5 +183,3 @@ export type SettingsContextType = {
   settingsState: SettingsState;
   dispatchSettings: Dispatch<SettingsReducerAction>;
 };
-
-// Theme

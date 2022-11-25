@@ -1,3 +1,4 @@
+import { useColorScheme } from '@mui/joy';
 import Box from '@mui/joy/Box';
 import FormControl from '@mui/joy/FormControl';
 import FormHelperText from '@mui/joy/FormHelperText';
@@ -5,7 +6,11 @@ import FormLabel from '@mui/joy/FormLabel';
 import Slider from '@mui/joy/Slider';
 import Switch from '@mui/joy/Switch';
 import React, { FC, useEffect, useState } from 'react';
-import { SettingId, SettingsReducerTypes } from 'src/@types/types';
+import {
+  SettingId,
+  SettingsReducerTypes,
+  ThemeSetting,
+} from 'src/@types/types';
 import useSettingsContext from 'src/hooks/useSettingsContext';
 import { isSliderRange } from 'src/utils/helpers';
 import { switchSx } from 'src/utils/muiSx';
@@ -26,13 +31,19 @@ const LengthSetting: FC<LengthSettingProps> = ({
   revalidateOutput,
 }) => {
   const { settingsState, dispatchSettings } = useSettingsContext();
+
   const outputSetting = settingsState.outputValidation.find(
     (setting) => setting.id === SettingId.LENGTH
   )!;
-
   const [sliderValue, setSliderValue] = useState<number | number[]>(
     outputSetting.targetLength!
   );
+
+  const { mode, systemMode } = useColorScheme();
+  const isDarkMode: boolean =
+    mode === ThemeSetting.SYSTEM
+      ? systemMode === ThemeSetting.DARK
+      : mode === ThemeSetting.DARK;
 
   function handleChange(_: Event, newValue: number | number[]) {
     if (typeof newValue === 'number') setSliderValue(newValue);
@@ -57,6 +68,13 @@ const LengthSetting: FC<LengthSettingProps> = ({
 
     return () => clearTimeout(timer);
   }, [sliderValue]);
+
+  const boxBackground = isDarkMode
+    ? 'var(--tolowercase-palette-neutral-800)'
+    : '#fff';
+  const markLabelColor = isDarkMode
+    ? 'var(--tolowercase-palette-neutral-200)'
+    : 'var(--tolowercase-palette-neutral-700)';
 
   return (
     <Box>
@@ -96,7 +114,7 @@ const LengthSetting: FC<LengthSettingProps> = ({
             justifyItems: 'space-between',
             width: '100%',
             borderRadius: '8px',
-            backgroundColor: '#fff',
+            backgroundColor: boxBackground,
             padding: '0 0 1rem 2rem',
           }}
         >
@@ -124,6 +142,19 @@ const LengthSetting: FC<LengthSettingProps> = ({
                 paddingBottom: '3rem',
                 fontSize: 'sm',
                 maxWidth: '96%',
+                '--Slider-track-size': '0.6rem',
+                '--Slider-thumb-size': '1.1rem',
+              }}
+              componentsProps={{
+                markLabel: {
+                  sx: {
+                    color: markLabelColor,
+                    ':hover': {
+                      color: 'var(--tolowercase-palette-primary-500)',
+                    },
+                    transition: 'all 0.2s ease-in-out',
+                  },
+                },
               }}
             />
           </FormControl>
@@ -137,8 +168,8 @@ const LengthSetting: FC<LengthSettingProps> = ({
                 sx: {
                   position: 'absolute',
                   fontSize: '0.8rem',
-                  color: '#9DA1AC',
-                  top: 36,
+                  color: markLabelColor,
+                  top: 40,
                   right: 17,
                 },
               },

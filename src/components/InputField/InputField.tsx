@@ -48,6 +48,7 @@ const InputField = () => {
             value={inputsState.input}
             minRows={3}
             maxRows={3}
+            variant="soft"
             sx={{
               '--Textarea-focusedHighlight': inputFocusHighlight,
             }}

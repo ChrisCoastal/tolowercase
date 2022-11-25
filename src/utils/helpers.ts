@@ -1,6 +1,6 @@
 import { OutputType, ReplaceValue, SettingActionType } from 'src/@types/types';
 
-import { INVISIBLE, URI_RESERVED, URI_UNSAFE } from './constants';
+import { INVISIBLE } from './constants';
 
 export function checkEmoji(input: string): boolean {
   return /\p{Extended_Pictographic}/u.test(input);
@@ -138,7 +138,6 @@ export function validateLength(
 ) {
   const validatedOutput = output;
   const isRange = isSliderRange(targetLength);
-  console.log(isRange, targetLength);
 
   if (actionType === SettingActionType.WARN) {
     const validLength = isRange

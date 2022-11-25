@@ -19,10 +19,8 @@ const reducer = (
       const index = state.outputValidation.findIndex(
         (setting) => setting.id === payload.id
       );
-      if (index === -1) {
-        console.error('no index found');
-        return state;
-      }
+      if (index === -1) return state;
+
       const updatedState = state.outputValidation;
       updatedState[index].isActive = payload.isActive;
       return {
@@ -42,10 +40,8 @@ const reducer = (
       const index = state.outputValidation.findIndex(
         (setting) => setting.id === payload.id
       );
-      if (index === -1) {
-        console.error('no index found');
-        return state;
-      }
+      if (index === -1) return state;
+
       const updatedState = state.outputValidation;
       updatedState[index].curAction = payload.curAction;
       return {
@@ -58,12 +54,9 @@ const reducer = (
       const index = state.outputValidation.findIndex(
         (setting) => setting.id === payload.id
       );
-      console.log(payload);
 
-      if (index === -1) {
-        console.error('no index found');
-        return state;
-      }
+      if (index === -1) return state;
+
       const updatedState = state.outputValidation;
       updatedState[index].targetLength = payload.targetLength;
       return {

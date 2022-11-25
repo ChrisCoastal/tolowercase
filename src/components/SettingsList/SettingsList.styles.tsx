@@ -14,5 +14,5 @@ export const ListItem = styled.li`
 `;
 
 export const ListContainer = styled.div`
-  /* align-self: start; */
+  //
 `;

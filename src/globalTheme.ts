@@ -16,19 +16,6 @@ export const globalTheme = extendTheme({
           '700': '#89f7b9',
           '800': '#98f8c1',
           '900': '#b6fad3',
-          // '50': '#4c241e',
-          // '100': '#663028',
-          // '200': '#99493c', // slider background
-          // '300': '#b35546',
-          // '400': '#e66d5a',
-          // '500': '#ff7964', // slider pip
-          // '600': '#ff8674',
-          // '700': '#ff9483',
-          // '800': '#ffa193',
-          // '900': '#ffafa2',
-          // base: '#66deb4',
-          // light: '#84E4C3',
-          // dark: '#479B7D',
         },
         info: {},
         warning: {
@@ -64,19 +51,6 @@ export const globalTheme = extendTheme({
           '700': '#89f7b9',
           '800': '#98f8c1',
           '900': '#b6fad3',
-          // '50': '#4c241e',
-          // '100': '#663028',
-          // '200': '#99493c', // slider background
-          // '300': '#b35546',
-          // '400': '#e66d5a',
-          // '500': '#ff7964', // slider pip
-          // '600': '#ff8674',
-          // '700': '#ff9483',
-          // '800': '#ffa193',
-          // '900': '#ffafa2',
-          // base: '#66deb4',
-          // light: '#84E4C3',
-          // dark: '#479B7D',
         },
         // background: {
         //   backdrop: '#666',

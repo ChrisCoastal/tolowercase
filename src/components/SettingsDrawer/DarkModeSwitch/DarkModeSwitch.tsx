@@ -1,39 +1,35 @@
 import { useColorScheme } from '@mui/joy';
 import Switch from '@mui/joy/Switch';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ThemeSetting } from 'src/@types/types';
 import DarkIcon from 'src/icons/DarkIcon/DarkIcon';
 import LightIcon from 'src/icons/LightIcon/LightIcon';
-import { switchSx } from 'src/utils/muiSx';
 
 const DarkModeSwitch = () => {
-  const [checked, setChecked] = useState<boolean>(true);
-  const { mode, setMode } = useColorScheme();
+  const { mode, systemMode, setMode } = useColorScheme();
+
+  const isDarkMode: boolean =
+    mode === ThemeSetting.SYSTEM
+      ? systemMode === ThemeSetting.DARK
+      : mode === ThemeSetting.DARK;
 
   function toggleMode() {
-    setMode(
-      mode === ThemeSetting.DARK ? ThemeSetting.LIGHT : ThemeSetting.DARK
-    );
+    const changeMode = isDarkMode ? ThemeSetting.LIGHT : ThemeSetting.DARK;
+    setMode(changeMode);
   }
-
-  useEffect(() => {
-    if (mode === ThemeSetting.DARK) setChecked(true);
-    else setChecked(false);
-  }, [mode]);
 
   return (
     <Switch
-      checked={checked}
+      checked={isDarkMode}
       onChange={toggleMode}
       componentsProps={{
         input: { 'aria-label': 'Dark mode' },
         thumb: {
-          children:
-            mode === ThemeSetting.DARK ? (
-              <DarkIcon height="24px" width="24px" color="primary" />
-            ) : (
-              <LightIcon height="16px" width="16px" color="primary" />
-            ),
+          children: isDarkMode ? (
+            <DarkIcon height="24px" width="24px" color="primary" />
+          ) : (
+            <LightIcon height="16px" width="16px" color="primary" />
+          ),
         },
       }}
       sx={{

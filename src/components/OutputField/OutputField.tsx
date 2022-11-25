@@ -48,7 +48,6 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
 
   function inputChangeHandler() {
     const output = validateOutput(inputsState.input);
-    console.log(output);
 
     dispatchInputs({ type: InputsReducerTypes.OUTPUT, payload: output });
   }
@@ -112,6 +111,7 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
         <Textarea
           value={inputsState.output.value}
           readOnly={true}
+          variant="soft"
           minRows={3}
           maxRows={3}
           endDecorator={
@@ -151,9 +151,13 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
                   onClick={copyOutputHandler}
                 >
                   {!copyOutput ? (
-                    <CopyIcon height="24" width="24" />
+                    <CopyIcon height="26" width="26" />
                   ) : (
-                    <CheckIcon height="24" width="24" color="#6cf5a7" />
+                    <CheckIcon
+                      height="24"
+                      width="24"
+                      color="var(--tolowercase-palette-primary-500)"
+                    />
                   )}
                 </IconButton>
               </Tooltip>

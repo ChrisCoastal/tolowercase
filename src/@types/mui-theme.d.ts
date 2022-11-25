@@ -1,4 +1,3 @@
-import * as styles from '@mui/joy/styles';
 import * as colorSystem from '@mui/joy/styles/types/colorSystem';
 
 declare module '@mui/joy/Button' {
