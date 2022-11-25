@@ -1,13 +1,11 @@
-import { Typography } from '@mui/joy';
+import { useColorScheme } from '@mui/joy';
 import Box from '@mui/joy/Box';
 import FormControl from '@mui/joy/FormControl';
 import FormHelperText from '@mui/joy/FormHelperText';
 import FormLabel from '@mui/joy/FormLabel';
 import Switch from '@mui/joy/Switch';
-import Tooltip from '@mui/joy/Tooltip';
 import React, { FC, ReactNode } from 'react';
-import { SettingId, ValidationSetting } from 'src/@types/types';
-import CloseIcon from 'src/icons/ClearIcon/ClearIcon';
+import { SettingId, ThemeSetting, ValidationSetting } from 'src/@types/types';
 import { switchSx } from 'src/utils/muiSx';
 
 type SettingItemProps = {
@@ -21,6 +19,17 @@ const SettingItem: FC<SettingItemProps> = ({
   toggleIsActive,
   children,
 }) => {
+  const { mode, systemMode } = useColorScheme();
+
+  const isDarkMode: boolean =
+    mode === ThemeSetting.SYSTEM
+      ? systemMode === ThemeSetting.DARK
+      : mode === ThemeSetting.DARK;
+
+  const thumbColor = isDarkMode
+    ? 'var(--tolowercase-palette-neutral-900)'
+    : '#fff';
+
   return (
     <Box
       sx={{
@@ -43,6 +52,14 @@ const SettingItem: FC<SettingItemProps> = ({
           checked={setting.isActive}
           onChange={(event) => toggleIsActive(setting.id, event.target.checked)}
           sx={switchSx}
+          componentsProps={{
+            input: { 'aria-label': `toggle ${setting.label}` },
+            thumb: {
+              sx: {
+                '--Switch-thumb-background': thumbColor,
+              },
+            },
+          }}
         />
       </FormControl>
       {setting.isActive && children}

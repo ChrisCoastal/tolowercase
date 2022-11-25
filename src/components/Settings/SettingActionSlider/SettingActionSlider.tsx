@@ -43,6 +43,9 @@ const SettingActionSlider: FC<SettingActionSliderProps> = ({
   const markLabelColor = isDarkMode
     ? 'var(--tolowercase-palette-neutral-200)'
     : 'var(--tolowercase-palette-neutral-700)';
+  const thumbColor = isDarkMode
+    ? 'var(--tolowercase-palette-neutral-900)'
+    : '#fff';
 
   return (
     <Box
@@ -74,6 +77,11 @@ const SettingActionSlider: FC<SettingActionSliderProps> = ({
           '--Slider-thumb-size': '1.1rem',
         }}
         componentsProps={{
+          thumb: {
+            sx: {
+              '--Slider-thumb-background': thumbColor,
+            },
+          },
           markLabel: {
             sx: {
               color: markLabelColor,

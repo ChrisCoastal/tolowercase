@@ -7,7 +7,7 @@ export const NavBar = styled.nav`
   height: 4rem;
   border-bottom: solid 1px var(--tolowercase-palette-neutral-200);
   backdrop-filter: blur(0.5rem);
-  box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.1); */
 `;
 
 export const NavItemsList = styled.ul`

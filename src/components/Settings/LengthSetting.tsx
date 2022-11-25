@@ -32,11 +32,11 @@ const LengthSetting: FC<LengthSettingProps> = ({
 }) => {
   const { settingsState, dispatchSettings } = useSettingsContext();
 
-  const outputSetting = settingsState.outputValidation.find(
+  const lengthSetting = settingsState.outputValidation.find(
     (setting) => setting.id === SettingId.LENGTH
   )!;
   const [sliderValue, setSliderValue] = useState<number | number[]>(
-    outputSetting.targetLength!
+    lengthSetting.targetLength!
   );
 
   const { mode, systemMode } = useColorScheme();
@@ -59,7 +59,7 @@ const LengthSetting: FC<LengthSettingProps> = ({
   useEffect(() => {
     dispatchSettings({
       type: SettingsReducerTypes.LENGTH_SLIDER,
-      payload: { id: outputSetting.id, targetLength: sliderValue },
+      payload: { id: lengthSetting.id, targetLength: sliderValue },
     });
 
     const timer = setTimeout(() => {
@@ -75,6 +75,9 @@ const LengthSetting: FC<LengthSettingProps> = ({
   const markLabelColor = isDarkMode
     ? 'var(--tolowercase-palette-neutral-200)'
     : 'var(--tolowercase-palette-neutral-700)';
+  const thumbColor = isDarkMode
+    ? 'var(--tolowercase-palette-neutral-900)'
+    : '#fff';
 
   return (
     <Box>
@@ -88,23 +91,31 @@ const LengthSetting: FC<LengthSettingProps> = ({
         }}
       >
         <Box>
-          <FormLabel>{outputSetting.label}</FormLabel>
-          {outputSetting.helperText && (
+          <FormLabel>{lengthSetting.label}</FormLabel>
+          {lengthSetting.helperText && (
             <FormHelperText sx={{ mt: 0, fontSize: 10 }}>
-              {outputSetting.helperText}
+              {lengthSetting.helperText}
             </FormHelperText>
           )}
         </Box>
 
         <Switch
-          checked={outputSetting.isActive}
+          checked={lengthSetting.isActive}
           onChange={(event) =>
-            toggleIsActive(outputSetting.id, event.target.checked)
+            toggleIsActive(lengthSetting.id, event.target.checked)
           }
+          componentsProps={{
+            input: { 'aria-label': `toggle ${lengthSetting.label}` },
+            thumb: {
+              sx: {
+                '--Switch-thumb-background': thumbColor,
+              },
+            },
+          }}
           sx={switchSx}
         />
       </FormControl>
-      {outputSetting.isActive && (
+      {lengthSetting.isActive && (
         <Box
           sx={{
             display: 'grid',
@@ -126,17 +137,17 @@ const LengthSetting: FC<LengthSettingProps> = ({
           >
             <Slider
               // controlled slider must use value (not defaultValue)
-              value={outputSetting.targetLength}
+              value={lengthSetting.targetLength}
               min={1}
               max={100}
               marks={marks}
-              disabled={!outputSetting.isActive}
+              disabled={!lengthSetting.isActive}
               color="primary"
               onChange={handleChange}
               valueLabelDisplay="on"
               getAriaLabel={() => 'check output length'}
               getAriaValueText={() =>
-                `${outputSetting.targetLength} characters`
+                `${lengthSetting.targetLength} characters`
               }
               sx={{
                 paddingBottom: '3rem',
@@ -146,6 +157,11 @@ const LengthSetting: FC<LengthSettingProps> = ({
                 '--Slider-thumb-size': '1.1rem',
               }}
               componentsProps={{
+                thumb: {
+                  sx: {
+                    '--Slider-thumb-background': thumbColor,
+                  },
+                },
                 markLabel: {
                   sx: {
                     color: markLabelColor,
@@ -164,6 +180,12 @@ const LengthSetting: FC<LengthSettingProps> = ({
             onChange={(event) => toggleRange(event.target.checked)}
             endDecorator={'range'}
             componentsProps={{
+              input: { 'aria-label': `toggle range` },
+              thumb: {
+                sx: {
+                  '--Switch-thumb-background': thumbColor,
+                },
+              },
               endDecorator: {
                 sx: {
                   position: 'absolute',

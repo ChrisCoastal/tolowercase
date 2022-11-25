@@ -18,6 +18,10 @@ const DarkModeSwitch = () => {
     setMode(changeMode);
   }
 
+  const switchThumbColor = isDarkMode
+    ? 'var(--tolowercase-palette-neutral-900)'
+    : '#fff';
+
   return (
     <Switch
       checked={isDarkMode}
@@ -26,10 +30,13 @@ const DarkModeSwitch = () => {
         input: { 'aria-label': 'Dark mode' },
         thumb: {
           children: isDarkMode ? (
-            <DarkIcon height="24px" width="24px" color="primary" />
+            <DarkIcon height="22px" width="22px" color="#fff" />
           ) : (
             <LightIcon height="16px" width="16px" color="primary" />
           ),
+          sx: {
+            '--Switch-thumb-background': switchThumbColor,
+          },
         },
       }}
       sx={{
