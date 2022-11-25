@@ -82,7 +82,6 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
       <Typography
         color="neutral"
         level="body3"
-        sx={{ mr: '4px' }}
         startDecorator={
           inputsState.output.warn ? (
             <WarnIcon height="18" width="18" />
@@ -91,7 +90,7 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
           )
         }
       >
-        {inputsState.output.warn ? 'validation warning' : 'validation passing '}
+        {inputsState.output.warn ? 'validation warning' : 'passing'}
       </Typography>
     </Tooltip>
   );
@@ -118,7 +117,7 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
             <Box
               sx={{
                 display: 'flex',
-                alignItems: 'baseline',
+                alignItems: 'flex-end',
                 justifyContent: 'space-between',
                 width: '100%',
                 gap: 0.2,
@@ -136,7 +135,7 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
                   {inputsState.output.value?.length} character
                   {inputsState.output.value?.length !== 1 ? 's' : ' '}
                 </Typography>
-                <Typography color="neutral" level="body3" sx={{ mr: '4px' }}>
+                <Typography color="neutral" level="body3">
                   {charDiff <= 0
                     ? `${Math.abs(charDiff)} removed`
                     : `${Math.abs(charDiff)} added`}
