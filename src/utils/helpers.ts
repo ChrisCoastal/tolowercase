@@ -107,7 +107,10 @@ export function validateUriReserved(
   actionType: SettingActionType
 ) {
   const validatedOutput = output;
-  const regexUriReserved = new RegExp('gi');
+  const regexUriReserved = new RegExp(
+    /:|\/|\?|#|\[|\]|@|!|\$|&|'|\(|\)|\*|\+||,|;|=|"|<|>|%|\{|\}|\||\\|\^|`/,
+    'gi'
+  );
 
   if (actionType === SettingActionType.WARN) {
     validatedOutput.warn =

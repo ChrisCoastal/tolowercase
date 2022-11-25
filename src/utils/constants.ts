@@ -70,83 +70,6 @@ export const INVISIBLE = [
   '1D17A',
 ];
 
-export const URI_RESERVED = [
-  ':',
-  '/',
-  '?',
-  '#',
-  '[',
-  ']',
-  '@',
-  '!',
-  '$',
-  '&',
-  "'",
-  '(',
-  ')',
-  '*',
-  '+',
-  ',',
-  ';',
-  '=',
-];
-
-export const URI_UNSAFE = ['"', '<', '>', '%', '{', '}', '|', '\\', '^', '`'];
-
-export const BAD_WORDS = [
-  'disobedient',
-  'annoying',
-  'misbehaved',
-  'wayward',
-  'defiant',
-  'unruly',
-  'insubordinate',
-  'delinquent',
-  'disorderly',
-  'mutinous',
-  'fractious',
-  'recalcitrant',
-  'errant',
-  'wild',
-  'wicked',
-  'obstreperous',
-  'troublesome',
-  'attention-seeking',
-  'exasperating',
-  'incorrigible',
-  'rude',
-  'impolite',
-  'mischievous',
-  'rascally',
-  'brattish',
-  'scampish',
-  'crude',
-  'obscene',
-  'rude',
-  'bawdy',
-  'dirty',
-  'filthy',
-  'indecent',
-  'improper',
-  'unseemly',
-  'offensive',
-  'naughty',
-  'saucy',
-  'boorish',
-  'loutish',
-  'oafish',
-  'brutish',
-  'uncouth',
-  'unsavory',
-  'crass',
-  'unrefined',
-  'unsophisticated',
-  'tasteless',
-  'cloddish',
-  'slobbish',
-  'yobbish',
-];
-
 export const SETTINGS_TEXT = {
   toLowerCase: {
     label: 'uppercase',
@@ -170,16 +93,6 @@ export const SETTINGS_TEXT = {
   },
   findReplace: { label: 'find', helperText: '' },
 };
-
-// export const SETTINGS_REPLACE = {
-//   characterCase: {},
-//   invisibleChar: {},
-//   uriReserved: {},
-//   uriUnsafe: {},
-//   outputLength: {},
-//   trim: {},
-//   findReplace: {},
-// };
 
 export const INITIAL_SETTINGS_STATE = {
   userAgent: '',
@@ -231,8 +144,6 @@ export const INITIAL_SETTINGS_STATE = {
       curAction: SettingActionType.WARN,
     },
     {
-      // length setting keeps curAction constant
-      // only targetLength is updated
       id: SettingId.LENGTH,
       label: SETTINGS_TEXT.outputLength.label,
       helperText: SETTINGS_TEXT.outputLength.helperText,
@@ -241,20 +152,7 @@ export const INITIAL_SETTINGS_STATE = {
       validActions: [SettingActionType.WARN],
       curAction: SettingActionType.WARN,
       targetLength: 33,
-      sliderSetting: {
-        min: 1,
-        max: 100,
-        step: 1,
-        labelDisplay: 'on',
-        marks: [
-          { label: '1', value: 1 },
-          { label: '50', value: 50 },
-          { label: '100', value: 100 },
-        ],
-        sliderWidth: 90,
-      },
     },
-
     // {
     //   id: SettingId.FIND,
     //   label: SETTINGS_TEXT.findReplace.label,
