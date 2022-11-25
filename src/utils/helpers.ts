@@ -108,7 +108,7 @@ export function validateUriReserved(
 ) {
   const validatedOutput = output;
   const regexUriReserved = new RegExp(
-    /:|\/|\?|#|\[|\]|@|!|\$|&|'|\(|\)|\*|\+||,|;|=|"|<|>|%|\{|\}|\||\\|\^|`/,
+    /:|\/|\?|#|\[|\]|@|!|\$|&|'|\(|\)|\*|\+| |,|;|=|"|<|>|%|\{|\}|\||\\|\^|`/,
     'gi'
   );
 
