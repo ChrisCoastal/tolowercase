@@ -18,7 +18,7 @@ function App() {
   const [copyOutput, setCopyOutput] = useState<boolean>(false);
   const { dispatchSettings } = useSettingsContext();
   const { isVisible, setIsVisible } = useDrawer();
-  const { systemMode, setMode } = useColorScheme();
+  const { mode, systemMode, setMode } = useColorScheme();
 
   useEffect(() => {
     const userAgent = getUserAgent();
@@ -26,6 +26,11 @@ function App() {
       type: SettingsReducerTypes.SET_USER_AGENT,
       payload: { userAgent },
     });
+  }, []);
+
+  useEffect(() => {
+    if (systemMode === ThemeSetting.DARK) setMode(ThemeSetting.DARK);
+    else setMode(ThemeSetting.LIGHT);
   }, []);
 
   return (

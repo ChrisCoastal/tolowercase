@@ -87,71 +87,69 @@ const LengthSetting: FC<LengthSettingProps> = ({
         />
       </FormControl>
       {outputSetting.isActive && (
-        <Box>
-          <Box
+        <Box
+          sx={{
+            display: 'grid',
+            gridColumn: '1 / span 2',
+            gridTemplateColumns: '3fr 1fr',
+            justifySelf: 'center',
+            justifyItems: 'space-between',
+            width: '100%',
+            borderRadius: '8px',
+            backgroundColor: '#fff',
+            padding: '0 0 1rem 2rem',
+          }}
+        >
+          <FormControl
             sx={{
-              display: 'grid',
-              gridColumn: '1 / span 2',
-              gridTemplateColumns: '3fr 1fr',
-              justifySelf: 'center',
-              justifyItems: 'space-between',
               width: '100%',
-              borderRadius: '8px',
-              backgroundColor: '#fff',
-              padding: '1rem 0rem 1rem 2rem',
+              padding: '1rem 0 0 0',
             }}
           >
-            <FormControl
+            <Slider
+              // controlled slider must use value (not defaultValue)
+              value={outputSetting.targetLength}
+              min={1}
+              max={100}
+              marks={marks}
+              disabled={!outputSetting.isActive}
+              color="primary"
+              onChange={handleChange}
+              valueLabelDisplay="on"
+              getAriaLabel={() => 'check output length'}
+              getAriaValueText={() =>
+                `${outputSetting.targetLength} characters`
+              }
               sx={{
-                width: '100%',
-                padding: '1rem 0 0 0',
-              }}
-            >
-              <Slider
-                // controlled slider must use value (not defaultValue)
-                value={outputSetting.targetLength}
-                min={1}
-                max={100}
-                marks={marks}
-                disabled={!outputSetting.isActive}
-                color="primary"
-                onChange={handleChange}
-                valueLabelDisplay="on"
-                getAriaLabel={() => 'check output length'}
-                getAriaValueText={() =>
-                  `${outputSetting.targetLength} characters`
-                }
-                sx={{
-                  paddingBottom: '3rem',
-                  fontSize: 'sm',
-                  maxWidth: '96%',
-                }}
-              />
-            </FormControl>
-
-            <Switch
-              checked={isSliderRange(sliderValue)}
-              onChange={(event) => toggleRange(event.target.checked)}
-              endDecorator={'range'}
-              componentsProps={{
-                endDecorator: {
-                  sx: {
-                    position: 'absolute',
-                    fontSize: '0.8rem',
-                    color: '#9DA1AC',
-                    top: 36,
-                    right: 17,
-                  },
-                },
-              }}
-              sx={{
-                ...switchSx,
-                position: 'relative',
-                paddingTop: '1rem',
-                alignSelf: 'bottom',
+                paddingBottom: '3rem',
+                fontSize: 'sm',
+                maxWidth: '96%',
               }}
             />
-          </Box>
+          </FormControl>
+
+          <Switch
+            checked={isSliderRange(sliderValue)}
+            onChange={(event) => toggleRange(event.target.checked)}
+            endDecorator={'range'}
+            componentsProps={{
+              endDecorator: {
+                sx: {
+                  position: 'absolute',
+                  fontSize: '0.8rem',
+                  color: '#9DA1AC',
+                  top: 36,
+                  right: 17,
+                },
+              },
+            }}
+            sx={{
+              ...switchSx,
+              position: 'relative',
+              paddingTop: '1rem',
+              alignSelf: 'bottom',
+            }}
+          />
         </Box>
       )}
     </Box>

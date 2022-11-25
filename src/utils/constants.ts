@@ -166,7 +166,7 @@ export const SETTINGS_TEXT = {
   },
   outputLength: {
     label: 'length',
-    helperText: 'validation for output character length',
+    helperText: 'validation for output character count',
   },
   findReplace: { label: 'find', helperText: '' },
 };
