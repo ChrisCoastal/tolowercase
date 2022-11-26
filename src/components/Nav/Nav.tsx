@@ -19,8 +19,11 @@ const Nav: FC<NavProps> = ({ setIsVisible }) => {
     <NavBar>
       <NavItemsList>
         <NavItem>
-          <LogoIcon height="2rem" width="2rem" />
-          <Typography color="neutral">tolowercase</Typography>
+          <LogoIcon height="2.6rem" width="2.6rem" />
+          {/* <Typography fontFamily="Numans" fontSize="xl"> */}
+          <Typography fontFamily="Montserrat Alternates" fontSize="xl">
+            tolowercase
+          </Typography>
         </NavItem>
         <NavItem>
           <IconButton
