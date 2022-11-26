@@ -32,22 +32,22 @@ export const Spinner = styled.div<SpinnerProps>`
         transform: rotateY(0deg) rotateX(0deg);
       }
       25% {
-        transform: rotateY(1260deg) rotateX(0deg);
+        transform: rotateY(900deg) rotateX(0deg);
       }
       40% {
-        transform: rotateY(1260deg) rotateX(0deg);
+        transform: rotateY(900deg) rotateX(0deg);
       }
       50% {
-        transform: rotateY(1260deg) rotateX(-1260deg);
+        transform: rotateY(900deg) rotateX(-900deg);
       }
       65% {
-        transform: rotateY(1260deg) rotateX(-1260deg);
+        transform: rotateY(900deg) rotateX(-900deg);
       }
       75% {
-        transform: rotateY(0deg) rotateX(-1260deg);
+        transform: rotateY(0deg) rotateX(-900deg);
       }
       90% {
-        transform: rotateY(0deg) rotateX(-1260deg);
+        transform: rotateY(0deg) rotateX(-900deg);
       }
     }
   }
