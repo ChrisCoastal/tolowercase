@@ -13,14 +13,12 @@ export const Drawer = styled.div<DrawerProps>`
   grid-auto-rows: min-content;
   align-items: flex-start;
   top: 0;
-  right: -104vw;
+  right: -108vw;
   width: 100vw;
   height: 100vh;
   margin-top: 0;
   padding: 1rem 2rem;
   overflow-y: scroll;
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
   background-color: ${({ theme }) => theme.vars.palette.background.body};
   box-shadow: 0 0 2rem 0.5rem rgba(0, 0, 0, 0.4);
   transition: all 0.3s;
@@ -33,6 +31,8 @@ export const Drawer = styled.div<DrawerProps>`
     `}
 
   @media screen and (min-width: 600px) {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
     right: -64vw;
     width: 60vw;
     max-width: 32rem;

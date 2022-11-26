@@ -9,7 +9,7 @@ type MuiProps = {
 
 export const AppContainer = styled.main<MuiProps>`
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
   background: rgb(7, 52, 92);
   background-color: ${(props) =>
     props.theme.vars.palette.background.body}; // this works
