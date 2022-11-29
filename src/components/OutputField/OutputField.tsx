@@ -106,7 +106,11 @@ const OutputField: FC<OutputFieldProps> = ({ copyOutput, setCopyOutput }) => {
       }}
     >
       <FormControl>
-        <FormLabel sx={{ paddingLeft: '0.5rem' }}>output</FormLabel>
+        <FormLabel
+          sx={{ paddingLeft: '0.5rem', fontFamily: 'Montserrat Alternates' }}
+        >
+          output
+        </FormLabel>
         <Textarea
           value={inputsState.output.value}
           readOnly={true}
