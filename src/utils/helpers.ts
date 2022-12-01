@@ -27,16 +27,20 @@ export function validateToLowerCase(
   actionType: SettingActionType
 ) {
   const validatedOutput = output;
-  if (actionType === SettingActionType.WARN)
-    validatedOutput.warn =
-      validatedOutput.value.toLowerCase() !== validatedOutput.value;
-  validatedOutput.warn && validatedOutput.warnDetail.push('uppercase');
+  let isWarn = false;
+  if (actionType === SettingActionType.WARN) {
+    isWarn = validatedOutput.value.toLowerCase() !== validatedOutput.value;
+    if (isWarn) {
+      validatedOutput.warn = isWarn;
+      validatedOutput.warnDetail.push('uppercase');
+    }
+  }
   if (actionType === SettingActionType.REMOVE) {
     validatedOutput.value = validatedOutput.value.replaceAll(/[A-Z]/g, '');
   }
-  if (actionType === SettingActionType.REPLACE)
+  if (actionType === SettingActionType.REPLACE) {
     validatedOutput.value = validatedOutput.value.toLowerCase();
-
+  }
   return validatedOutput;
 }
 
@@ -46,11 +50,14 @@ export function validateTrim(
   replaceValue: ReplaceValue = ['', '']
 ) {
   const validatedOutput = output;
+  let isWarn = false;
 
   if (actionType === SettingActionType.WARN) {
-    validatedOutput.warn =
-      validatedOutput.value.trim() !== validatedOutput.value;
-    validatedOutput.warn && validatedOutput.warnDetail.push('outer whitespace');
+    isWarn = validatedOutput.value.trim() !== validatedOutput.value;
+    if (isWarn) {
+      validatedOutput.warn = isWarn;
+      validatedOutput.warnDetail.push('outer whitespace');
+    }
   }
   if (actionType === SettingActionType.REMOVE) {
     validatedOutput.value = validatedOutput.value.trim();
@@ -68,6 +75,7 @@ export function validateInvisible(
   actionType: SettingActionType
 ) {
   const validatedOutput = output;
+  let isWarn = false;
   const regexInvisible = new RegExp(INVISIBLE.join('|'), 'i');
 
   if (actionType === SettingActionType.WARN) {
@@ -78,11 +86,14 @@ export function validateInvisible(
         .padStart(4, '0');
 
       if (code && regexInvisible.test(code)) {
-        validatedOutput.warn = true;
+        isWarn = true;
       }
     }
-    validatedOutput.warn &&
+
+    if (isWarn) {
+      validatedOutput.warn = isWarn;
       validatedOutput.warnDetail.push('invisible characters');
+    }
   }
   if (actionType === SettingActionType.REMOVE) {
     let validChar = '';
@@ -107,16 +118,20 @@ export function validateUriReserved(
   actionType: SettingActionType
 ) {
   const validatedOutput = output;
+  let isWarn = false;
   const regexUriReserved = new RegExp(
     /:|\/|\?|#|\[|\]|@|!|\$|&|'|\(|\)|\*|\+| |,|;|=|"|<|>|%|\{|\}|\||\\|\^|`/,
     'gi'
   );
 
   if (actionType === SettingActionType.WARN) {
-    validatedOutput.warn =
+    isWarn =
       validatedOutput.value !== encodeURIComponent(validatedOutput.value);
 
-    validatedOutput.warn && validatedOutput.warnDetail.push('uri reserved');
+    if (isWarn) {
+      validatedOutput.warn = isWarn;
+      validatedOutput.warn && validatedOutput.warnDetail.push('uri reserved');
+    }
   }
   if (actionType === SettingActionType.REMOVE) {
     validatedOutput.value = validatedOutput.value.replaceAll(
@@ -137,6 +152,7 @@ export function validateLength(
   targetLength: number | number[]
 ) {
   const validatedOutput = output;
+  let isWarn = false;
   const isRange = isSliderRange(targetLength);
 
   if (actionType === SettingActionType.WARN) {
@@ -146,9 +162,11 @@ export function validateLength(
     if (
       validatedOutput.value.length < validLength[0] ||
       validatedOutput.value.length > validLength[1]
-    )
-      validatedOutput.warn = true;
-    validatedOutput.warn && validatedOutput.warnDetail.push('invalid length');
+    ) {
+      isWarn = true;
+      validatedOutput.warn = isWarn;
+      isWarn && validatedOutput.warnDetail.push('invalid length');
+    }
   }
   if (actionType === SettingActionType.REMOVE) {
     isRange
